@@ -67,6 +67,13 @@ namespace Unit1
 	}
 }
 ```
+This is how it will look on iOS
+![iOS](https://cloud.githubusercontent.com/assets/18068729/14943254/ebd3b146-0fd3-11e6-8288-3247af57a204.png)
+
+
+And this is for Android
+![Android](https://cloud.githubusercontent.com/assets/18068729/14943253/ebbd60d0-0fd3-11e6-99ff-bd814400e368.png)
+
 ## Globals
 In order to replicate the global variables and functions, we are using a partial class named "_", so you can define static members on this class at any time. 
 
