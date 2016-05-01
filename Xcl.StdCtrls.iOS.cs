@@ -90,6 +90,12 @@ namespace Xcl.StdCtrls
 			handle.Text = Value;
 
 		}
+
+		public override string GetText()
+		{
+			return(handle.Text);
+		}
+
 	}
 
 	public partial class TLabel:TGraphicControl

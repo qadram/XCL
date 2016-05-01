@@ -340,6 +340,20 @@ namespace Xcl.Controls
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets the caption.
+		/// </summary>
+		/// <value>The caption.</value>
+		public string Text
+		{
+			get {
+				return(GetText());
+			}
+			set{
+				SetText (value);
+			}
+		}
+
 		private bool CheckNewSize(ref float NewWidth, ref float NewHeight)
 		{
 			/*
