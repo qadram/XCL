@@ -356,12 +356,7 @@ namespace Xcl.Controls
 
 		private bool CheckNewSize(ref float NewWidth, ref float NewHeight)
 		{
-			/*
-			float W = NewWidth;
-			float H = NewHeight;
-			NewWidth = W;
-			NewHeight = H;
-			*/
+			//TODO:
 			return(true);
 		}
 
@@ -391,11 +386,8 @@ namespace Xcl.Controls
 				FWidth = AWidth;
 				FHeight = AHeight;
 				UpdateAnchorRules ();
-				//UpdateExplicitBounds ();
+				//TODO:
 				Invalidate ();
-				// Perform(WM_WINDOWPOSCHANGED, 0, 0);
-				//RequestAlign();
-				// if ((TComponentState.csLoading & ComponentState)!=TComponentState.csLoading) Resize();
 			}
 		}
 
@@ -594,8 +586,7 @@ namespace Xcl.Controls
 			if ((!FAnchorMove) && (!(ComponentState.isin(TComponentState.csLoading))))
 			{
 				TAnchors Anchors = FAnchors;
-				//FAnchorOrigin = Point(
-
+				//TODO:
 			}
 		}
 
@@ -722,16 +713,14 @@ namespace Xcl.Controls
 
 		public void RemoveFocus(bool Removing)
 		{
-			/*
-			TCustomForm Form = GetParentForm (this);
-			if (Form != null)
-				Form.DefocusControl (this, Removing);
-			*/
+			//TODO:
 		}
 
 		public void DestroyHandle()
 		{
-			//Destroy here the handle to the actual object 
+			//TODO: Destroy here the handle to the actual object if needed
+			//TODO: Review Dispose()
+
 		}
 
 
@@ -782,7 +771,7 @@ namespace Xcl.Controls
 						FPerformingShowingChanged = true;
 						try{
 							FShowing = false;
-							//Perform();
+							//TODO:
 						}
 						finally{
 							FPerformingShowingChanged = false;
@@ -791,36 +780,8 @@ namespace Xcl.Controls
 					return;	
 				}
 			}
-			// if (Control is TCustomForm) ||
+			//TODO:
 		}
-		/*
-		procedure TWinControl.UpdateControlState;
-		var
-		Control: TWinControl;
-		begin
-		Control := Self;
-		while Control.Parent <> nil do
-			begin
-			Control := Control.Parent;
-		if not Control.Showing then
-			begin
-		if FShowing and not FPerformingShowingChanged then
-			begin
-			FPerformingShowingChanged := True;
-		try
-		FShowing := False;
-		Perform(CM_SHOWINGCHANGED, 0, 0);
-		finally
-		FPerformingShowingChanged := False;
-		end;
-		end;
-		Exit;
-		end;
-		end;
-		if (Control is TCustomForm) or
-			(not (csDestroying in ComponentState) and (Control.FParentWindow <> 0)) then UpdateShowing;
-		end;
-		*/
 
 		public virtual void NativeSetParent(TControl AControl)
 		{
@@ -830,10 +791,9 @@ namespace Xcl.Controls
 		{
 			if (AControl != null) {
 				if (AControl is TFocusControl) {
-					// ListAdd (FWinControls, AControl);
-					// ListAdd (FTabList, AControl);
+					//TODO:
 				} else {
-					// ListAdd (FControls, AControl);
+					//TODO:
 				}
 				AControl.FParent = this;
 				NativeSetParent (AControl);
@@ -844,13 +804,12 @@ namespace Xcl.Controls
 		{
 			if (AControl != null) {
 				if (AControl is TFocusControl) {
-					// ListRemove(FTabList, AControl);
-					// ListRemove(FWinControls, AControl);
+					//TODO:
 				} else {
-					// ListRemove(FControls, AControl);
+					//TODO:
 				}
 				AControl.FParent = null;
-				//InternalRemoveParent (AControl);
+				//TODO:
 			}					
 		}
 
@@ -868,7 +827,7 @@ namespace Xcl.Controls
 
 			if (!(AControl.ComponentState.isin(TComponentState.csReading))) {
 				if (AControl is TFocusControl) {
-					// AControl.Perform
+					//TODO:
 					UpdateControlState ();
 				} else {
 					if (HandleAllocated ())
@@ -877,46 +836,6 @@ namespace Xcl.Controls
 				AlignControl (AControl);
 
 			}
-			/*
-			var
-			Item: TControlListItem;
-			begin
-			AControl.ValidateContainer(Self);
-			Item.Control := AControl;
-			Item.Parent := Self;
-			{$IF DEFINED(CLR)}
-			ControlListChanging(True, Item);
-			if Item.Parent <> Self then Exit;
-			ControlListChange(True, AControl);
-			{$ELSE}
-			Perform(CM_CONTROLLISTCHANGING, Winapi.Windows.WPARAM(@Item), Winapi.Windows.LPARAM(True));
-			if Item.Parent <> Self then Exit;
-			Perform(CM_CONTROLLISTCHANGE, Winapi.Windows.WPARAM(AControl), Winapi.Windows.LPARAM(True));
-			{$ENDIF}
-			Insert(AControl);
-			if not (csReading in AControl.ComponentState) then
-				begin
-				AControl.Perform(CM_PARENTCOLORCHANGED, 0, 0);
-			AControl.Perform(CM_PARENTFONTCHANGED, 0, 0);
-			AControl.Perform(CM_PARENTSHOWHINTCHANGED, 0, 0);
-			AControl.Perform(CM_PARENTBIDIMODECHANGED, 0, 0);
-			AControl.Perform(CM_PARENTDOUBLEBUFFEREDCHANGED, 0, 0);
-			AControl.Perform(CM_PARENTTABLETOPTIONSCHANGED, 0, 0);
-			if AControl is TWinControl then
-				begin
-				AControl.Perform(CM_PARENTCTL3DCHANGED, 0, 0);
-			UpdateControlState;
-			end else
-				if HandleAllocated then AControl.Invalidate;
-			AlignControl(AControl);
-			end;
-			{$IF DEFINED(CLR)}
-			ControlChange(True, AControl);
-			{$ELSE}
-			Perform(CM_CONTROLCHANGE, Winapi.Windows.WPARAM(AControl), Winapi.Windows.LPARAM(True));
-			{$ENDIF}
-			*/
-
 		}
 	}
 }

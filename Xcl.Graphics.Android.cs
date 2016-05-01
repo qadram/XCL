@@ -90,15 +90,9 @@ namespace Xcl.Graphics
 		partial void NativeLoadFromResource(string ResourceName)
 		{
 			//TODO: notify the owner of this TPicture that the image has changed
-			// handle = UIImage.FromBundle(ResourceName);
 			var imageStream = Assembly.GetCallingAssembly().GetManifestResourceStream(ResourceName);
 
 			handle = BitmapFactory.DecodeStream(imageStream);
-
-			//using (var imageStream = Assembly.GetAssembly (typeof(TApplication)).GetManifestResourceStream (ResourceName))
-			//{
-			//	handle = BitmapFactory.DecodeStream(imageStream);
-			//}
 
 			Handle = handle;
 			NotifyChanged();

@@ -63,26 +63,6 @@ namespace Xcl.Forms
 		{
 			base.ViewDidLoad ();
 			View.BackgroundColor = UIColor.White;
-/*
-
-			
-			View.BackgroundColor = UIColor.Red;
-			Title = "My Custom View Controller";
-
-			var btn = UIButton.FromType (UIButtonType.System);
-			btn.Frame = new CGRect (20, 200, 280, 44);
-			btn.SetTitle ("Click Me", UIControlState.Normal);
-
-			var user = new UIViewController ();
-			user.View.BackgroundColor = UIColor.Magenta;
-
-			btn.TouchUpInside += (sender, e) => {
-				this.NavigationController.PushViewController (user, true);
-			};
-
-			View.AddSubview (btn);
-*/			
-
 		}		
 	}
 
@@ -105,7 +85,7 @@ namespace Xcl.Forms
 			
 		public override void UpdateBounds()
 		{
-			// handle.Frame = new RectangleF (FLeft, FTop, FWidth, FHeight); 
+
 		}
 	}
 
@@ -135,7 +115,6 @@ namespace Xcl.Forms
 			
 			ParentViewController.ShowViewController (handle, null);
 			TApplication.LastViewController = handle;
-			//handle.ShowViewController (handle, null);
 		}
 	}
 	#endif

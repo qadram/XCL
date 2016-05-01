@@ -112,24 +112,6 @@ namespace System.UITypes
 				handle = UIColor.Clear;
 				break;				
 			}
-			/*
-			Black	UIColor. A color with grayscale 0.0 and alpha 1.0.
-			Blue	UIColor. A color with RGBA of (0,0,1,1).
-			Brown	UIColor. A color with RGBA of (0.6, 0.4, 0.2, 1.0).
-			Cyan	UIColor. A color with RGBA of (0, 1, 1, 1).
-			DarkGray	UIColor. A color with grayscale 1/3 and alpha 1.
-			Gray	UIColor. A color object with grayscale 0.5 and alpha 1.0.
-			Green	UIColor. A color with RGBA of (0,1,0,1).
-			LightGray	UIColor. A color with grayscale 2/3 and alpha 1.
-			Magenta	UIColor. A color with RGBA of (1,0,1,1).
-			Orange	UIColor. A color with RGBA of (1.0, 0.5, 0.0, 1.0).
-			Purple	UIColor. A color with RGBA of (0.5, 0.0, 0.5, 1.0).
-			Red	UIColor. A color with RGBA of (1,0,0,1).
-			White	UIColor. A color with grayscale 1 and alpha 1.
-			Yellow	UIColor. A color with RGBA of (1, 1, 0, 1).
-
-			handle = UIColor.Red;
-			*/
 		}
 	}
 	#endif

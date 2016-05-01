@@ -119,12 +119,6 @@ namespace Xcl.Forms
 				this.SetContentView (View);
 				Form.Loaded ();
 			}
-
-			/*
-			var LayoutParams = new ViewGroup.LayoutParams (ViewGroup.LayoutParams.MatchParent,
-				                   ViewGroup.LayoutParams.MatchParent);
-			this.AddContentView (View, LayoutParams);
-			*/
 		}
 		
 	}
@@ -147,24 +141,15 @@ namespace Xcl.Forms
 
 		public override void UpdateBounds()
 		{
-			// handle.Frame = new RectangleF (FLeft, FTop, FWidth, FHeight); 
+			
 		}
 	}
 
 	public partial class TForm:TCustomForm
 	{
-		//public UIViewController ParentViewController = null;
-
 		public override void Close()
 		{
 			handle.Finish ();
-			/*
-			TApplication.LastViewController = ParentViewController;			
-			if (TApplication.LastViewController == null)
-			TApplication.LastViewController = _.Application.MainForm.handle;
-			handle.DismissViewController (true, null);
-			ParentViewController = null;
-			*/
 		}
 
 		public override void Show()
@@ -172,16 +157,6 @@ namespace Xcl.Forms
 			TFormActivity.FormStack.Add (this);
 			Intent intent = new Intent (TApplication.context, typeof(TFormActivity));
 			TApplication.MainActivity.StartActivity (intent);
-
-			//Intent intent2 = new Intent (TApplication.context, typeof(FormActivity));
-			//TApplication.MainActivity.StartActivity (intent2);
-			/*
-			if (ParentViewController == null)
-			ParentViewController = TApplication.LastViewController;
-
-			ParentViewController.ShowViewController (handle, null);
-			TApplication.LastViewController = handle;
-			*/
 		}	
 	}
 	#endif
