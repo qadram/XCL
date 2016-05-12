@@ -36,7 +36,7 @@ namespace Xcl.ExtCtrls
 	#if __IOS__
 	public partial class TImage:TGraphicControl
 	{
-		public UIImageView handle;
+		public UIImageView imageview;
 
 		protected UIImage FImage;
 
@@ -45,15 +45,15 @@ namespace Xcl.ExtCtrls
 		protected override void CreateHandle()
 		{
 			FImage = new UIImage();
-			handle = new UIImageView ();
-			Handle = handle;
+			imageview = new UIImageView ();
+			Handle = imageview;
 		}
 
 
 		//TODO: Move this to the portable class
 		partial void NativeAnimate()
 		{
-			UIView.Transition(handle,5.0f,UIViewAnimationOptions.TransitionCrossDissolve,delegate {
+			UIView.Transition(imageview,5.0f,UIViewAnimationOptions.TransitionCrossDissolve,delegate {
 				Picture.Assign(Images.Items[CurrentImage]);
 			}, delegate {
 				CurrentImage++;
@@ -65,7 +65,7 @@ namespace Xcl.ExtCtrls
 
 		public override void NativeChanged()
 		{
-			handle.Image=FPicture.handle;
+			imageview.Image=FPicture.handle;
 		}
 
 	}

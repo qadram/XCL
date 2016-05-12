@@ -63,7 +63,12 @@ namespace Xcl.Forms
 		{
 			base.ViewDidLoad ();
 			View.BackgroundColor = UIColor.White;
-		}		
+		}	
+
+		public override bool PrefersStatusBarHidden()
+		{
+			return(true);
+		}
 	}
 
 	public partial class TCustomForm: TScrollingControl
@@ -73,7 +78,7 @@ namespace Xcl.Forms
 		protected override void CreateHandle()
 		{
 			handle = new FormViewController ();
-			Handle = handle;
+			Handle = handle.View;
 		}
 
 

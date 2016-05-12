@@ -34,6 +34,25 @@ using System.Drawing;
 namespace Xcl.Controls
 {
 	#if __IOS__
+	public partial class TFocusControl:TControl
+	{
+		public UIControl control
+		{
+			get{
+				return(Handle as UIControl);
+			}
+		}
+
+		protected override void NativeOnClickAdd(EventHandler value)
+		{
+			control.TouchUpInside+=value;
+		}
+		protected override void NativeOnClickRemove(EventHandler value)
+		{
+			control.TouchUpInside-=value;
+		}
+	}
+
 	public partial class TControl:TComponent
 	{
 		public UIView view
@@ -45,7 +64,7 @@ namespace Xcl.Controls
 
 		partial void NativeSetColor(TColor AColor)
 		{
-			(Handle as UIView).BackgroundColor = AColor.handle as UIColor;
+			view.BackgroundColor = AColor.handle as UIColor;
 		}
 
 		partial void NativeSetVisible(bool value)

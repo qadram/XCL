@@ -38,15 +38,6 @@ namespace Xcl.StdCtrls
 	{
 		public UIKit.UIButton uibutton;
 
-		protected override void NativeOnClickAdd(EventHandler value)
-		{
-			uibutton.TouchUpInside+=value;
-		}
-		protected override void NativeOnClickRemove(EventHandler value)
-		{
-			uibutton.TouchUpInside-=value;
-		}
-
 		protected override void CreateHandle()
 		{
 			//Creates the native handle
