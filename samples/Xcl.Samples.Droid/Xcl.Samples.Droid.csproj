@@ -70,7 +70,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Xcl.Android\Xcl.Android.csproj">
+    <ProjectReference Include="..\..\src\Xcl.Android\Xcl.Android.csproj">
       <Project>{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}</Project>
       <Name>Xcl.Android</Name>
     </ProjectReference>

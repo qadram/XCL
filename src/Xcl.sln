@@ -16,13 +16,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.iOS", "iOS\Xcl.Samples.iOS.csproj", "{DD6580F8-B14F-4E99-A35A-180CD8874173}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples", "..\samples\Xcl.Samples\Xcl.Samples.csproj", "{5779B855-84D9-4775-A0A4-85BA52E29E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.Droid", "Droid\Xcl.Samples.Droid.csproj", "{B15EA990-8904-4303-AEC6-5521AE01457C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.iOS", "..\samples\Xcl.Samples.iOS\Xcl.Samples.iOS.csproj", "{DD6580F8-B14F-4E99-A35A-180CD8874173}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples", "Xcl.Samples\Xcl.Samples.csproj", "{5779B855-84D9-4775-A0A4-85BA52E29E99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.Droid", "..\samples\Xcl.Samples.Droid\Xcl.Samples.Droid.csproj", "{B15EA990-8904-4303-AEC6-5521AE01457C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.UITests", "UITests\Xcl.Samples.UITests.csproj", "{14515E37-5425-4454-AE28-6FE60AFFDF32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Samples.UITests", "..\samples\Xcl.Samples.UITests\Xcl.Samples.UITests.csproj", "{14515E37-5425-4454-AE28-6FE60AFFDF32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
