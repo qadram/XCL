@@ -1,0 +1,14 @@
+version: 0.1
+name: radx
+id: rax
+publisher: RadX software
+publisher-url: https://github.com/radxdev/radx
+summary: VCL-like cross-platform framework for Xamarin.
+details: Details.md
+license: License.md
+getting-started: GettingStarted.md
+monodocs: docs
+no_build: true
+libraries:
+  ios-unified: src/Xcl.iOS/bin/Release/Xcl.iOS.dll
+  android: src/Xcl.Android/bin/Release/Xcl.Android.dll
