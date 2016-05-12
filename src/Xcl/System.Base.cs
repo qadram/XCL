@@ -24,6 +24,8 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 
+using Xcl.Forms;
+
 namespace System.Base
 {
 	/// <summary>
@@ -106,6 +108,20 @@ namespace System.Base
 		{
 			get {
 				return(this);
+			}
+		}
+
+		public TApplication Application
+		{
+			get{
+				return (_.Application);
+			}
+		}
+
+		public TScreen Screen
+		{
+			get{
+				return(_.Screen);
 			}
 		}
 

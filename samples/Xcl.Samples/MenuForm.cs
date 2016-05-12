@@ -23,7 +23,7 @@ namespace MenuForm
 			btnButtons.Top = 20;
 			btnButtons.Left = 10;
 			btnButtons.Height = 50;
-			btnButtons.Width = _.Screen.Width - 20;
+			btnButtons.Width = Screen.Width - 20;
 			btnButtons.Caption = "Buttons";
 			btnButtons.OnClick += Button1Click;
 		}
