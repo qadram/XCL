@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl", "Xcl\Xcl.csproj", "{747755CF-E91C-4CD4-9FAE-0BA5DB468596}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.iOS", "Xcl.iOS\Xcl.iOS.csproj", "{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcl.Android", "Xcl.Android\Xcl.Android.csproj", "{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3E6C334B-849F-4B66-9D60-3C6121A4E786}"
+	ProjectSection(SolutionItems) = preProject
+		..\component.yaml = ..\component.yaml
+		..\Details.md = ..\Details.md
+		..\GettingStarted.md = ..\GettingStarted.md
+		..\License.md = ..\License.md
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D535232-7F23-4EB4-8A40-CCDFEEC83B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{747755CF-E91C-4CD4-9FAE-0BA5DB468596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{747755CF-E91C-4CD4-9FAE-0BA5DB468596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{747755CF-E91C-4CD4-9FAE-0BA5DB468596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{747755CF-E91C-4CD4-9FAE-0BA5DB468596}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

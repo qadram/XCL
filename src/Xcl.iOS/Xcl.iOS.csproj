@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{4DCA485B-1CB4-46AF-97AB-3F524681CD3A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Xcl.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Xcl.iOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Xcl\RTLConsts.Designer.cs">
+      <Link>RTLConsts.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Base.cs">
+      <Link>System.Base.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Classes.cs">
+      <Link>System.Classes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Generics.Collections.cs">
+      <Link>System.Generics.Collections.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.ImageList.cs">
+      <Link>System.ImageList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.SysUtils.cs">
+      <Link>System.SysUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.UITypes.Android.cs">
+      <Link>System.UITypes.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.UITypes.cs">
+      <Link>System.UITypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.UITypes.iOS.cs">
+      <Link>System.UITypes.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.Android.cs">
+      <Link>Xcl.Controls.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.cs">
+      <Link>Xcl.Controls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.iOS.cs">
+      <Link>Xcl.Controls.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ExtCtrls.Android.cs">
+      <Link>Xcl.ExtCtrls.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ExtCtrls.cs">
+      <Link>Xcl.ExtCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ExtCtrls.iOS.cs">
+      <Link>Xcl.ExtCtrls.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Forms.Android.cs">
+      <Link>Xcl.Forms.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Forms.cs">
+      <Link>Xcl.Forms.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Forms.iOS.cs">
+      <Link>Xcl.Forms.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Graphics.Android.cs">
+      <Link>Xcl.Graphics.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Graphics.cs">
+      <Link>Xcl.Graphics.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Graphics.iOS.cs">
+      <Link>Xcl.Graphics.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ImgList.cs">
+      <Link>Xcl.ImgList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.StdCtrls.Android.cs">
+      <Link>Xcl.StdCtrls.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.StdCtrls.cs">
+      <Link>Xcl.StdCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.StdCtrls.iOS.cs">
+      <Link>Xcl.StdCtrls.iOS.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <None Include="..\Xcl\RTLConsts.resx">
+      <Link>RTLConsts.resx</Link>
+    </None>
+  </ItemGroup>
+</Project>
