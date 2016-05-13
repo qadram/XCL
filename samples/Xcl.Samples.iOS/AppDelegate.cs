@@ -1,5 +1,8 @@
 ﻿using Foundation;
 using UIKit;
+
+using System.Base;
+using Xcl.Forms;
 using Xcl.Samples;
 
 namespace Xcl.Samples.iOS
@@ -16,19 +19,13 @@ namespace Xcl.Samples.iOS
 			set;
 		}
 
-		public TSampleApplication SampleApplication;
-
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
-			Window = new UIWindow(UIScreen.MainScreen.Bounds);
-			SampleApplication = new TSampleApplication (null);
-			TSampleApplication.LastViewController = TSampleApplication.MenuForm.handle;
-			Window.RootViewController = TSampleApplication.MenuForm.handle;
+			_.CreateApplication<App> ();
+			TApplication.Initialize (null);
+			TApplication.CreateForms ();
+			TApplication.Run ();
 
-			// make the window visible
-			Window.MakeKeyAndVisible();
 			// Code to start the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start();

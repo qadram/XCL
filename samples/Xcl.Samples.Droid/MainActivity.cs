@@ -12,19 +12,14 @@ namespace Xcl.Samples.Droid
 	[Activity (Label = "Xcl.Samples", MainLauncher = true, Icon = "@mipmap/icon")]
 	public class MainActivity : Activity
 	{
-		public TSampleApplication SampleApplication;
-
-
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
 
-			TApplication.context = this.BaseContext;
-			TApplication.MainActivity = this;
-
-			SampleApplication = new TSampleApplication (null); 
-			TSampleApplication.MenuForm.Show ();
-
+			_.CreateApplication<App> ();
+			TApplication.Initialize (this);
+			TApplication.CreateForms ();
+			TApplication.Run ();
 		}
 	}
 }

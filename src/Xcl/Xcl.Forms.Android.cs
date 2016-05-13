@@ -44,6 +44,17 @@ namespace Xcl.Forms
 	{
 		public static Context context = null;
 		public static Activity MainActivity = null;
+
+		partial void NativeInitialize(object param)
+		{
+			TApplication.MainActivity = (Activity)param;
+			TApplication.context = TApplication.MainActivity.BaseContext;
+		}
+
+		partial void NativeRun()
+		{
+			MainForm.Show();
+		}
 	}
 
 	public partial class TScreen:TComponent

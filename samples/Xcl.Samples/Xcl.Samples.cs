@@ -1,18 +1,23 @@
-﻿using Xcl.Forms;
+﻿using System.Base;
 using System.Classes;
+using Xcl.Forms;
 using MenuForm;
 
 namespace Xcl.Samples
 {
-	public partial class TSampleApplication:TApplication
+	//Samples Application Class
+	public partial class App: TApplication
 	{
 		public static TMenuForm MenuForm;
 
-		public TSampleApplication(TComponent AOwner):base(AOwner)
+		public App (TComponent AOwner) : base (AOwner)
 		{
-			MenuForm = new TMenuForm (this);
-			MainForm = MenuForm;
+		}
 
-		}	
+		public override void DoCreateForms()
+		{
+			MenuForm = new TMenuForm (_.Application);
+			_.Application.MainForm = MenuForm;
+		}
 	}
 }

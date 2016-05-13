@@ -38,6 +38,19 @@ namespace Xcl.Forms
 	public partial class TApplication:TComponent
 	{
 		public static UIViewController LastViewController=null;
+		public static UIWindow Window=null;
+
+		partial void NativeInitialize(object param)
+		{
+			Window = new UIWindow(UIScreen.MainScreen.Bounds);
+		}
+
+		partial void NativeRun()
+		{
+			TApplication.LastViewController = _.Application.MainForm.handle;
+			Window.RootViewController = TApplication.LastViewController;
+			Window.MakeKeyAndVisible();
+		}
 	}
 
 
