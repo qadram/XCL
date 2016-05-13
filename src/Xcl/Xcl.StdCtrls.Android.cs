@@ -62,7 +62,7 @@ namespace Xcl.StdCtrls
 			button.SetTextColor ((Color)FFont.Color.handle);
 			button.TextSize = FFont.Size;
 			//TODO: Manage exception here
-			Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, _.LowerCase(FFont.Name)+".ttf");
+			Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, "fonts/"+_.LowerCase(FFont.Name)+".ttf");
 			button.SetTypeface(tf,TypefaceStyle.Normal);
 		}
 

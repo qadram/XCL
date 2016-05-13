@@ -60,5 +60,8 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <None Include="RTLConsts.resx" />
+    <None Include="fonts\gillsans-light.ttf" />
+    <None Include="fonts\gillsans.ttf" />
+    <None Include="fonts\helvetica.ttf" />
   </ItemGroup>
 </Project>

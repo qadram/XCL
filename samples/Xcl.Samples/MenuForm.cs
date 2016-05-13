@@ -5,6 +5,8 @@ using System.UITypes;
 using Xcl.StdCtrls;
 using Xcl.Forms;
 
+using Xcl.Samples;
+
 namespace MenuForm
 {
 	public class TMenuForm: TForm
@@ -30,6 +32,7 @@ namespace MenuForm
 
 		void Button1Click (object sender, EventArgs e)
 		{
+			App.ButtonSamples.Show ();
 			
 		}
 	}

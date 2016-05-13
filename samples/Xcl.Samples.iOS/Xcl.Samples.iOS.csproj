@@ -101,6 +101,9 @@
     <Compile Include="..\Xcl.Samples\MenuForm.cs">
       <Link>MenuForm.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\ButtonSamples.cs">
+      <Link>ButtonSamples.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

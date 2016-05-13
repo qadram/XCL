@@ -53,6 +53,9 @@
     <Compile Include="..\Xcl.Samples\MenuForm.cs">
       <Link>MenuForm.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\ButtonSamples.cs">
+      <Link>ButtonSamples.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

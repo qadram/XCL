@@ -121,4 +121,15 @@
       <Link>RTLConsts.resx</Link>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Xcl\fonts\gillsans-light.ttf">
+      <Link>fonts\gillsans-light.ttf</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Xcl\fonts\gillsans.ttf">
+      <Link>fonts\gillsans.ttf</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Xcl\fonts\helvetica.ttf">
+      <Link>fonts\helvetica.ttf</Link>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
