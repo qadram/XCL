@@ -6,6 +6,7 @@ using System.Base;
 using Xcl.Forms;
 using Xcl.Samples;
 using MenuForm;
+using ButtonSamples;
 
 namespace Xcl.Samples.Droid
 {
@@ -16,9 +17,9 @@ namespace Xcl.Samples.Droid
 		{
 			base.OnCreate (savedInstanceState);
 
-			_.CreateApplication<App> ();
 			TApplication.Initialize (this);
-			TApplication.CreateForms ();
+			TApplication.CreateForm<TMenuForm> (ref App.MenuForm);
+			TApplication.CreateForm<TButtonSamples> (ref App.ButtonSamples);
 			TApplication.Run ();
 		}
 	}

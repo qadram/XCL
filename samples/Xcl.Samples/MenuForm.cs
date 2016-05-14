@@ -4,7 +4,6 @@ using System.Classes;
 using System.UITypes;
 using Xcl.StdCtrls;
 using Xcl.Forms;
-
 using Xcl.Samples;
 
 namespace MenuForm

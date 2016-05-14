@@ -38,12 +38,6 @@ namespace System.Base
 
 		private static TScreen FScreen=null;
 
-		public static void CreateApplication<T>()
-		{
-			object a = null;
-			FApplication = (TApplication)Activator.CreateInstance(typeof(T),a);
-		}
-
 		/// <summary>
 		/// The global application variable
 		/// </summary>
@@ -51,6 +45,9 @@ namespace System.Base
 		public static TApplication Application
 		{
 			get{
+				if (FApplication == null)
+					FApplication = new TApplication (null);
+				
 				return(FApplication);
 			}
 		}
@@ -79,20 +76,23 @@ namespace Xcl.Forms
 	{
 		public TCustomForm MainForm = null;
 
+		public static void CreateForm<T>(ref T Form)
+		{
+			Form = (T)Activator.CreateInstance (typeof(T), _.Application);
+
+			//First form created is considered the main form
+			if (_.Application.MainForm == null) {
+				_.Application.MainForm = (Form as TCustomForm);
+			}
+		}
+
+
+
 		partial void NativeInitialize(object param);
 
 		public static void Initialize(object param)
 		{
 			_.Application.NativeInitialize(param);
-		}
-
-		public virtual void DoCreateForms()
-		{
-		}
-
-		public static void CreateForms()
-		{
-			_.Application.DoCreateForms();
 		}
 
 		partial void NativeRun();

@@ -4,6 +4,8 @@ using UIKit;
 using System.Base;
 using Xcl.Forms;
 using Xcl.Samples;
+using MenuForm;
+using ButtonSamples;
 
 namespace Xcl.Samples.iOS
 {
@@ -21,9 +23,9 @@ namespace Xcl.Samples.iOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			_.CreateApplication<App> ();
 			TApplication.Initialize (null);
-			TApplication.CreateForms ();
+			TApplication.CreateForm<TMenuForm> (ref App.MenuForm);
+			TApplication.CreateForm<TButtonSamples> (ref App.ButtonSamples);
 			TApplication.Run ();
 
 			// Code to start the Xamarin Test Cloud Agent
