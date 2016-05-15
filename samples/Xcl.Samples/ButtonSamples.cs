@@ -11,7 +11,10 @@ namespace ButtonSamples
 	{
 		public TButton btnDefault;
 
-		public TButton btnColors;
+		public TButton btnBkColors;
+		public TButton btnFontColors;
+
+		public TButton btnEvents;
 
 		public TButtonSamples (TComponent AOwner):base(AOwner)
 		{
@@ -28,21 +31,40 @@ namespace ButtonSamples
 			btnDefault.Width = Screen.Width - 20;
 			btnDefault.Caption = "Default Button";
 
-			btnColors = TButton.Create (self);
-			btnColors.Parent = self;
+			btnBkColors = TButton.Create (self);
+			btnBkColors.Parent = self;
 
-			btnColors.Top = 90;
-			btnColors.Left = 10;
-			btnColors.Height = 50;
-			btnColors.Width = Screen.Width - 20;
-			btnColors.Color = TColor.clBlue;
-			btnColors.Font.Color = TColor.clRed;
-			btnColors.Caption = "Button with Colors";		
+			btnBkColors.Top = 90;
+			btnBkColors.Left = 10;
+			btnBkColors.Height = 50;
+			btnBkColors.Width = Screen.Width - 20;
+			btnBkColors.Color = TColor.clBlue;
+			btnBkColors.Caption = "Button with Background Color";	
+
+			btnFontColors = TButton.Create (self);
+			btnFontColors.Parent = self;
+
+			btnFontColors.Top = 170;
+			btnFontColors.Left = 10;
+			btnFontColors.Height = 50;
+			btnFontColors.Width = Screen.Width - 20;
+			btnFontColors.Font.Color = TColor.clRed;
+			btnFontColors.Caption = "Button with Font Color";		
+
+			btnEvents = TButton.Create (self);
+			btnEvents.Parent = self;
+
+			btnEvents.Top = 250;
+			btnEvents.Left = 10;
+			btnEvents.Height = 50;
+			btnEvents.Width = Screen.Width - 20;
+			btnEvents.Caption = "Button with Events";		
+			btnEvents.OnClick += Button1Click;
 		}
 
 		void Button1Click (object sender, EventArgs e)
 		{
-
+			(sender as TButton).Caption = "OnClick!";
 		}
 	}
 }
