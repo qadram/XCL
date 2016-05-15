@@ -28,6 +28,7 @@ using System.Classes;
 using System.UITypes;
 using Xcl.ImgList;
 using Xcl.Graphics;
+using System.Linq;
 
 
 
@@ -203,18 +204,39 @@ namespace Xcl.Controls
 		{
 		}
 
+		private void DoEvent(EventHandler AnEvent, object sender, EventArgs e)
+		{
+			var eventList = AnEvent.GetInvocationList().ToList();
+			foreach (var item in eventList) {
+				(item as EventHandler).Invoke (this, e);
+			}			
+		}
+			
+		private void DoClick (object sender, EventArgs e)
+		{
+			DoEvent (FOnClick, sender, e);
+		}
+
+		private event EventHandler FOnClick;
 		/// <summary>
 		/// Occurs when the control is clicked.
 		/// </summary>
 		public event EventHandler OnClick
 		{
 			add
-			{
-				NativeOnClickAdd(value);
+			{				
+				//DoClick is just added once to the native control
+				if (FOnClick==null)	{
+					NativeOnClickAdd(DoClick);
+				}
+
+				//And the event is added internally, so it's fired along with the others
+				FOnClick+=value;
 			}
 			remove
 			{
-				NativeOnClickRemove(value);
+				NativeOnClickRemove (DoClick);
+				FOnClick-=value;
 			}
 		}
 
