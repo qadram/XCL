@@ -45,9 +45,27 @@ namespace Xcl.Controls
 			}
 		}
 
+		public TextView textview
+		{
+			get{
+				return(Handle as TextView);
+			}
+		}
+
 		partial void NativeSetColor(TColor AColor)
 		{
 			view.SetBackgroundColor((Color)AColor.handle);
+		}
+
+		public virtual void NativeApplyFontChanges()
+		{
+			textview.SetTextColor ((Color)FFont.Color.handle);
+			textview.TextSize = FFont.Size;
+			//TODO: Manage exception here
+			if (FFont.Name != "sans-serif") {
+				Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, "fonts/" + _.LowerCase (FFont.Name) + ".ttf");
+				textview.SetTypeface (tf, TypefaceStyle.Normal);
+			}
 		}
 
 		partial void NativeSetVisible(bool value)

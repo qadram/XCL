@@ -12,6 +12,7 @@ namespace MenuForm
 	{
 		public TButton btnButtons;
 		public TButton btnFontSizes;
+		public TButton btnLabelAlignment;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -37,7 +38,22 @@ namespace MenuForm
 			btnFontSizes.Height = 50;
 			btnFontSizes.Width = Screen.Width - 20;
 			btnFontSizes.Caption = "Font Sizes";
-			btnFontSizes.OnClick += BtnFontSizesClick;;
+			btnFontSizes.OnClick += BtnFontSizesClick;
+
+			btnLabelAlignment = TButton.Create (self);
+			btnLabelAlignment.Parent = self;
+
+			btnLabelAlignment.Top = 150;
+			btnLabelAlignment.Left = 10;
+			btnLabelAlignment.Height = 50;
+			btnLabelAlignment.Width = Screen.Width - 20;
+			btnLabelAlignment.Caption = "Label Alignments";
+			btnLabelAlignment.OnClick += BtnLabelAlignmentClick;
+		}
+
+		void BtnLabelAlignmentClick (object sender, EventArgs e)
+		{
+			App.LabelAlignment.Show ();
 		}
 
 		void BtnFontSizesClick (object sender, EventArgs e)

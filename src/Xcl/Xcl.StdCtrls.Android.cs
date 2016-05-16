@@ -59,13 +59,7 @@ namespace Xcl.StdCtrls
 
 		public override void NativeChanged()
 		{
-			button.SetTextColor ((Color)FFont.Color.handle);
-			button.TextSize = FFont.Size;
-			//TODO: Manage exception here
-			if (FFont.Name != "sans-serif") {
-				Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, "fonts/" + _.LowerCase (FFont.Name) + ".ttf");
-				button.SetTypeface (tf, TypefaceStyle.Normal);
-			}
+			NativeApplyFontChanges ();
 		}
 
 
@@ -102,27 +96,19 @@ namespace Xcl.StdCtrls
 
 	public partial class TLabel:TGraphicControl
 	{
-		public TextView handle;
+		public TextView textview;
 
 		protected override void CreateHandle()
 		{
-			handle = new TextView (TApplication.context);
+			textview = new TextView (TApplication.context);
 			//FFont.handle = handle.Font;
 			//handle.SetBackgroundColor(Android.Graphics.Color.Aqua);
-			Handle = handle;
+			Handle = textview;
 		}
 
 		public override void NativeChanged()
 		{
-			handle.SetTextColor ((Color)FFont.Color.handle);
-			handle.TextSize = FFont.Size;
-			//TODO: Manage exception here
-			if (FFont.Name != "sans-serif") {
-				Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, _.LowerCase (FFont.Name) + ".ttf");
-				handle.SetTypeface (tf, TypefaceStyle.Normal);
-			}
-			//handle.Font = FFont.handle;
-			//handle.TextColor = (UIColor)FFont.Color.handle;
+			NativeApplyFontChanges ();
 		}
 
 		partial void NativeSetTextAlignment()
@@ -130,16 +116,16 @@ namespace Xcl.StdCtrls
 			switch (FAlignment)
 			{
 			case TAlignment.taCenter:
-				handle.Gravity = GravityFlags.Center;
+				textview.Gravity = GravityFlags.Center;
 				break;
 			case TAlignment.taLeftJustify:
-				handle.Gravity = GravityFlags.Left;				
+				textview.Gravity = GravityFlags.Left;				
 				break;
 			case TAlignment.taRightJustify:
-				handle.Gravity = GravityFlags.Right;
+				textview.Gravity = GravityFlags.Right;
 				break;
 			default:
-				handle.Gravity = GravityFlags.Left;
+				textview.Gravity = GravityFlags.Left;
 				break;
 			}
 		}
@@ -147,7 +133,7 @@ namespace Xcl.StdCtrls
 		public override void SetText(string Value)
 		{
 			base.SetText(Value);
-			handle.Text = Value;
+			textview.Text = Value;
 		}
 	}
 
