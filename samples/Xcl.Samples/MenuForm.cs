@@ -12,7 +12,7 @@ namespace MenuForm
 	{
 		public TButton btnButtons;
 		public TButton btnFontSizes;
-		public TButton btnLabelAlignment;
+		public TButton btnLabelTest;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -38,25 +38,25 @@ namespace MenuForm
 			btnFontSizes.Height = 50;
 			btnFontSizes.Width = Screen.Width - 20;
 			btnFontSizes.Caption = "Font Sizes";
-			btnFontSizes.OnClick += BtnFontSizesClick;
+			btnFontSizes.OnClick += btnFontSizesClick;
 
-			btnLabelAlignment = TButton.Create (self);
-			btnLabelAlignment.Parent = self;
+			btnLabelTest = TButton.Create (self);
+			btnLabelTest.Parent = self;
 
-			btnLabelAlignment.Top = 150;
-			btnLabelAlignment.Left = 10;
-			btnLabelAlignment.Height = 50;
-			btnLabelAlignment.Width = Screen.Width - 20;
-			btnLabelAlignment.Caption = "Label Alignments";
-			btnLabelAlignment.OnClick += BtnLabelAlignmentClick;
+			btnLabelTest.Top = 150;
+			btnLabelTest.Left = 10;
+			btnLabelTest.Height = 50;
+			btnLabelTest.Width = Screen.Width - 20;
+			btnLabelTest.Caption = "Label Test";
+			btnLabelTest.OnClick += btnLabelTestClick;
 		}
 
-		void BtnLabelAlignmentClick (object sender, EventArgs e)
+		void btnLabelTestClick (object sender, EventArgs e)
 		{
-			App.LabelAlignment.Show ();
+			App.LabelTest.Show ();
 		}
 
-		void BtnFontSizesClick (object sender, EventArgs e)
+		void btnFontSizesClick (object sender, EventArgs e)
 		{
 			App.FontSizes.Show ();	
 		}
