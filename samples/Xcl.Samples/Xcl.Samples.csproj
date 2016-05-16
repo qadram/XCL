@@ -34,6 +34,7 @@
     <Compile Include="Xcl.Samples.cs" />
     <Compile Include="MenuForm.cs" />
     <Compile Include="ButtonSamples.cs" />
+    <Compile Include="FontSizes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

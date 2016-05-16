@@ -76,6 +76,13 @@ namespace Xcl.Graphics
 	{
 		public UIFont handle;
 
+		partial void NativeInitializeFont()
+		{
+			FName = "Helvetica";
+			FSize = 10;
+			FColor = new TColor (TColors.clBlack);
+		}
+
 		public void NotifyChanged()
 		{
 			if (Notifier!=null) Notifier.Changed();

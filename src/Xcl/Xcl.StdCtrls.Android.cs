@@ -62,8 +62,10 @@ namespace Xcl.StdCtrls
 			button.SetTextColor ((Color)FFont.Color.handle);
 			button.TextSize = FFont.Size;
 			//TODO: Manage exception here
-			Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, "fonts/"+_.LowerCase(FFont.Name)+".ttf");
-			button.SetTypeface(tf,TypefaceStyle.Normal);
+			if (FFont.Name != "sans-serif") {
+				Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, "fonts/" + _.LowerCase (FFont.Name) + ".ttf");
+				button.SetTypeface (tf, TypefaceStyle.Normal);
+			}
 		}
 
 
@@ -115,8 +117,10 @@ namespace Xcl.StdCtrls
 			handle.SetTextColor ((Color)FFont.Color.handle);
 			handle.TextSize = FFont.Size;
 			//TODO: Manage exception here
-			Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, _.LowerCase(FFont.Name)+".ttf");
-			handle.SetTypeface(tf,TypefaceStyle.Normal);
+			if (FFont.Name != "sans-serif") {
+				Typeface tf = Typeface.CreateFromAsset (TApplication.context.Assets, _.LowerCase (FFont.Name) + ".ttf");
+				handle.SetTypeface (tf, TypefaceStyle.Normal);
+			}
 			//handle.Font = FFont.handle;
 			//handle.TextColor = (UIColor)FFont.Color.handle;
 		}

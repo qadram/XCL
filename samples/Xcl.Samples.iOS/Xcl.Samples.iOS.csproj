@@ -104,6 +104,9 @@
     <Compile Include="..\Xcl.Samples\ButtonSamples.cs">
       <Link>ButtonSamples.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\FontSizes.cs">
+      <Link>FontSizes.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

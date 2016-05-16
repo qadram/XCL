@@ -11,6 +11,7 @@ namespace MenuForm
 	public class TMenuForm: TForm
 	{
 		public TButton btnButtons;
+		public TButton btnFontSizes;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -27,6 +28,21 @@ namespace MenuForm
 			btnButtons.Width = Screen.Width - 20;
 			btnButtons.Caption = "Buttons";
 			btnButtons.OnClick += Button1Click;
+
+			btnFontSizes = TButton.Create (self);
+			btnFontSizes.Parent = self;
+
+			btnFontSizes.Top = 80;
+			btnFontSizes.Left = 10;
+			btnFontSizes.Height = 50;
+			btnFontSizes.Width = Screen.Width - 20;
+			btnFontSizes.Caption = "Font Sizes";
+			btnFontSizes.OnClick += BtnFontSizesClick;;
+		}
+
+		void BtnFontSizesClick (object sender, EventArgs e)
+		{
+			App.FontSizes.Show ();	
 		}
 
 		void Button1Click (object sender, EventArgs e)

@@ -2,11 +2,7 @@
 using Android.Widget;
 using Android.OS;
 
-using System.Base;
-using Xcl.Forms;
 using Xcl.Samples;
-using MenuForm;
-using ButtonSamples;
 
 namespace Xcl.Samples.Droid
 {
@@ -17,10 +13,7 @@ namespace Xcl.Samples.Droid
 		{
 			base.OnCreate (savedInstanceState);
 
-			TApplication.Initialize (this);
-			TApplication.CreateForm<TMenuForm> (ref App.MenuForm);
-			TApplication.CreateForm<TButtonSamples> (ref App.ButtonSamples);
-			TApplication.Run ();
+			App.Run (this);
 		}
 	}
 }

@@ -104,6 +104,13 @@ namespace Xcl.Graphics
 	{
 		//public UIFont handle;
 
+		partial void NativeInitializeFont()
+		{
+			FName = "sans-serif";
+			FSize = 18;
+			FColor = new TColor (TColors.clWhite);
+		}
+
 		public void NotifyChanged()
 		{
 			if (Notifier!=null) Notifier.Changed();

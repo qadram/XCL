@@ -74,12 +74,12 @@ namespace Xcl.Graphics
 		protected float FSize;
 		protected TColor FColor;
 
+		partial void NativeInitializeFont();
+
 		public TFont():base()
 		{
 			//TODO: Check default values for these properties
-			FName = "Helvetica";
-			FSize = 10;
-			FColor = new TColor (TColors.clBlack);
+			NativeInitializeFont();
 		}
 
 		partial void SetName(string AName);
