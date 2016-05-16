@@ -169,6 +169,8 @@ namespace Xcl.Forms
 			TFormActivity.FormStack.Add (this);
 			Intent intent = new Intent (TApplication.context, typeof(TFormActivity));
 			TApplication.MainActivity.StartActivity (intent);
+			TApplication.MainActivity.Finish ();
+
 		}	
 	}
 	#endif
