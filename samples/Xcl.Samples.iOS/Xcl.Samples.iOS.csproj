@@ -107,8 +107,8 @@
     <Compile Include="..\Xcl.Samples\FontSizes.cs">
       <Link>FontSizes.cs</Link>
     </Compile>
-    <Compile Include="..\Xcl.Samples\LabelAlignment.cs">
-      <Link>LabelAlignment.cs</Link>
+    <Compile Include="..\Xcl.Samples\LabelTest.cs">
+      <Link>LabelTest.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
