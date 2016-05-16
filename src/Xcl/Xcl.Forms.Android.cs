@@ -47,6 +47,7 @@ namespace Xcl.Forms
 
 		partial void NativeInitialize(object param)
 		{
+			TApplication.MainAssembly = param.GetType().Assembly;
 			TApplication.MainActivity = (Activity)param;
 			TApplication.context = TApplication.MainActivity.BaseContext;
 		}

@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Base;
 using System.SysUtils;
+using System.Reflection;
 using System.Classes;
 using System.UITypes;
 using Xcl.Controls;
@@ -75,6 +76,7 @@ namespace Xcl.Forms
 	public partial class TApplication:TComponent
 	{
 		public TCustomForm MainForm = null;
+		public static Assembly MainAssembly = null;
 
 		public static void CreateForm<T>(ref T Form)
 		{

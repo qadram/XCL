@@ -42,6 +42,7 @@ namespace Xcl.Forms
 
 		partial void NativeInitialize(object param)
 		{
+			TApplication.MainAssembly = param.GetType().Assembly;		
 			Window = new UIWindow(UIScreen.MainScreen.Bounds);
 		}
 

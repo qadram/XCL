@@ -29,6 +29,7 @@ using System.UITypes;
 using Xcl.Controls;
 using Xcl.Forms;
 using System.IO;
+using System.Diagnostics;
 using System.Reflection;
 using System.Linq;
 #if __ANDROID__
@@ -89,8 +90,8 @@ namespace Xcl.Graphics
 
 		partial void NativeLoadFromResource(string ResourceName)
 		{
-			//TODO: notify the owner of this TPicture that the image has changed
-			var imageStream = Assembly.GetCallingAssembly().GetManifestResourceStream(ResourceName);
+			var assembly = TApplication.MainAssembly;
+			var imageStream = assembly.GetManifestResourceStream(ResourceName);
 
 			handle = BitmapFactory.DecodeStream(imageStream);
 
