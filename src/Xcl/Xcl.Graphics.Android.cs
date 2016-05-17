@@ -108,7 +108,7 @@ namespace Xcl.Graphics
 		partial void NativeInitializeFont()
 		{
 			FName = "sans-serif";
-			FSize = 18;
+			FSize = 16;
 			FColor = new TColor (TColors.clWhite);
 		}
 
