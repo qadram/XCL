@@ -67,25 +67,41 @@ namespace Xcl.StdCtrls
 
 	public partial class TEdit: TCustomEdit
 	{
-		public UIKit.UITextField handle;
+		public UITextField textfield;
 
 		protected override void CreateHandle()
 		{
-			handle = new UITextField ();
-			Handle = handle;
+			textfield = new UITextField ();
+			Handle = textfield;
 		}
 
 		public override void SetText(string Value)
 		{
 			base.SetText(Value);
-			handle.Text = Value;
+			textfield.Text = Value;
 
 		}
 
 		public override string GetText()
 		{
-			return(handle.Text);
+			return(textfield.Text);
 		}
+
+		partial void NativeSetPlaceHolder(string value)
+		{
+			textfield.Placeholder = value;
+		}
+
+		protected override void NativeOnChangeAdd(EventHandler value)
+		{
+			textfield.EditingChanged += value;
+		}
+
+		protected override void NativeOnChangeRemove(EventHandler value)
+		{
+			textfield.EditingChanged -= value;
+		}
+
 
 	}
 

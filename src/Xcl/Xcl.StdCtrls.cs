@@ -82,6 +82,33 @@ namespace Xcl.StdCtrls
 		{
 		}	
 
+		private void DoChange (object sender, EventArgs e)
+		{
+			DoEvent (FOnChange, sender, e);
+		}
+
+		private event EventHandler FOnChange;
+
+		public event EventHandler OnChange
+		{
+			add
+			{				
+				//DoClick is just added once to the native control
+				if (FOnChange==null)	{
+					NativeOnChangeAdd(DoChange);
+				}
+
+				//And the event is added internally, so it's fired along with the others
+				FOnChange+=value;
+			}
+			remove
+			{
+				NativeOnChangeRemove (DoChange);
+				FOnChange-=value;
+			}
+		}
+
+
 	}
 
 	/// <summary>
@@ -105,6 +132,18 @@ namespace Xcl.StdCtrls
 
 		}	
 
+		partial void NativeSetPlaceHolder(string value);
+
+		private string FPlaceHolder="";
+		public string PlaceHolder {
+			get {
+				return(FPlaceHolder);
+			}
+			set {
+				FPlaceHolder = value;
+				NativeSetPlaceHolder (FPlaceHolder);
+			}
+		}
 	}
 
 	/// <summary>

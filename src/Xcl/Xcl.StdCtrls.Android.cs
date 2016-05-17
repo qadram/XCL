@@ -31,6 +31,7 @@ using Android.Widget;
 using Java.IO;
 using Android.Graphics;
 using Android.Views;
+using Android.Text;
 #endif
 
 namespace Xcl.StdCtrls
@@ -72,24 +73,51 @@ namespace Xcl.StdCtrls
 		
 	public partial class TEdit: TCustomEdit
 	{
-		public EditText handle;
+		public EditText edittext;
+
+		private EventHandler FOnChanged;
+
+		protected void OnChange(object sender, TextChangedEventArgs args)
+		{
+			//TODO: Review how to pass args in the right way
+			FOnChanged (sender, args);
+		}
+
+		protected override void NativeOnChangeAdd(EventHandler value)
+		{
+			FOnChanged += value;
+			edittext.TextChanged += OnChange;
+		}
+
+		protected override void NativeOnChangeRemove(EventHandler value)
+		{
+			FOnChanged -= value;
+			edittext.TextChanged -= OnChange;
+		}
+
 
 		protected override void CreateHandle()
 		{
-			handle = new EditText (TApplication.context);
-			Handle = handle;
+			edittext = new EditText (TApplication.context);
+			Handle = edittext;
 		}
 
 		public override void SetText(string Value)
 		{
 			base.SetText(Value);
-			handle.Text = Value;
+			edittext.Text = Value;
 
 		}
 
+		partial void NativeSetPlaceHolder(string value)
+		{
+			edittext.Hint = value;
+		}
+
+
 		public override string GetText()
 		{
-			return(handle.Text);
+			return(edittext.Text);
 		}
 
 	}

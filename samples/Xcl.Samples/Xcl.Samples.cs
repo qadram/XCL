@@ -3,7 +3,7 @@ using MenuForm;
 using ButtonSamples;
 using FontSizeSamples;
 using LabelSamples;
-using PageControlTest;
+using EditSamples;
 
 namespace Xcl.Samples
 {
@@ -13,7 +13,7 @@ namespace Xcl.Samples
 		public static TButtonSamples ButtonSamples;
 		public static TFontSizeSamples FontSizeSamples;
 		public static TLabelSamples LabelSamples;
-		public static TPageControlTest PageControlTest;
+		public static TEditSamples EditSamples;
 
 		public static void Run(object param)
 		{
@@ -22,7 +22,7 @@ namespace Xcl.Samples
 			TApplication.CreateForm<TButtonSamples> (ref ButtonSamples);
 			TApplication.CreateForm<TFontSizeSamples> (ref FontSizeSamples);
 			TApplication.CreateForm<TLabelSamples> (ref LabelSamples);
-			TApplication.CreateForm<TPageControlTest> (ref PageControlTest);
+			TApplication.CreateForm<TEditSamples> (ref EditSamples);
 			TApplication.Run ();
 		}
 	}

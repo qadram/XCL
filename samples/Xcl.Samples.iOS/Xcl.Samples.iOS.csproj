@@ -106,9 +106,6 @@
     <Compile Include="..\Xcl.Samples\ButtonSamples.cs">
       <Link>ButtonSamples.cs</Link>
     </Compile>
-    <Compile Include="..\Xcl.Samples\PageControlTest.cs">
-      <Link>PageControlTest.cs</Link>
-    </Compile>
     <Compile Include="..\Xcl.Samples\SampleBaseForm.cs">
       <Link>SampleBaseForm.cs</Link>
     </Compile>
@@ -117,6 +114,9 @@
     </Compile>
     <Compile Include="..\Xcl.Samples\LabelSamples.cs">
       <Link>LabelSamples.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\EditSamples.cs">
+      <Link>EditSamples.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

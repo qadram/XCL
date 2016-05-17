@@ -188,6 +188,14 @@ namespace Xcl.Controls
 
 		}
 
+		protected virtual void NativeOnChangeAdd(EventHandler value)
+		{
+		}
+
+		protected virtual void NativeOnChangeRemove(EventHandler value)
+		{
+		}
+
 		/// <summary>
 		/// Override to implement the attachment of the event
 		/// </summary>
