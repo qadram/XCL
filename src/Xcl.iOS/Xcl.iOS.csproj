@@ -114,6 +114,15 @@
     <Compile Include="..\Xcl\Xcl.StdCtrls.iOS.cs">
       <Link>Xcl.StdCtrls.iOS.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl\Xcl.ComCtrls.cs">
+      <Link>Xcl.ComCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ComCtrls.iOS.cs">
+      <Link>Xcl.ComCtrls.iOS.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ComCtrls.Android.cs">
+      <Link>Xcl.ComCtrls.Android.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
