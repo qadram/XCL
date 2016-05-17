@@ -71,6 +71,8 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchUseSGen>true</MtouchUseSGen>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -104,11 +106,17 @@
     <Compile Include="..\Xcl.Samples\ButtonSamples.cs">
       <Link>ButtonSamples.cs</Link>
     </Compile>
-    <Compile Include="..\Xcl.Samples\FontSizes.cs">
-      <Link>FontSizes.cs</Link>
+    <Compile Include="..\Xcl.Samples\PageControlTest.cs">
+      <Link>PageControlTest.cs</Link>
     </Compile>
-    <Compile Include="..\Xcl.Samples\LabelTest.cs">
-      <Link>LabelTest.cs</Link>
+    <Compile Include="..\Xcl.Samples\SampleBaseForm.cs">
+      <Link>SampleBaseForm.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\FontSizeSamples.cs">
+      <Link>FontSizeSamples.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\LabelSamples.cs">
+      <Link>LabelSamples.cs</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

@@ -4,10 +4,11 @@ using System.Classes;
 using System.UITypes;
 using Xcl.StdCtrls;
 using Xcl.Forms;
+using SampleBaseForm;
 
 namespace ButtonSamples
 {
-	public class TButtonSamples: TForm
+	public class TButtonSamples: TSampleBaseForm
 	{
 		public TButton btnDefault;
 
@@ -22,10 +23,12 @@ namespace ButtonSamples
 
 		public override void Loaded()
 		{
+			base.Loaded ();
+
 			btnDefault = TButton.Create (self);
 			btnDefault.Parent = self;
 
-			btnDefault.Top = 20;
+			btnDefault.Top = 60;
 			btnDefault.Left = 10;
 			btnDefault.Height = 50;
 			btnDefault.Width = Screen.Width - 20;
@@ -34,7 +37,7 @@ namespace ButtonSamples
 			btnBkColors = TButton.Create (self);
 			btnBkColors.Parent = self;
 
-			btnBkColors.Top = 90;
+			btnBkColors.Top = 130;
 			btnBkColors.Left = 10;
 			btnBkColors.Height = 50;
 			btnBkColors.Width = Screen.Width - 20;
@@ -44,7 +47,7 @@ namespace ButtonSamples
 			btnFontColors = TButton.Create (self);
 			btnFontColors.Parent = self;
 
-			btnFontColors.Top = 170;
+			btnFontColors.Top = 210;
 			btnFontColors.Left = 10;
 			btnFontColors.Height = 50;
 			btnFontColors.Width = Screen.Width - 20;
@@ -54,7 +57,7 @@ namespace ButtonSamples
 			btnEvents = TButton.Create (self);
 			btnEvents.Parent = self;
 
-			btnEvents.Top = 250;
+			btnEvents.Top = 290;
 			btnEvents.Left = 10;
 			btnEvents.Height = 50;
 			btnEvents.Width = Screen.Width - 20;

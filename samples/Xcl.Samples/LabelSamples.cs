@@ -5,23 +5,26 @@ using System.UITypes;
 using Xcl.StdCtrls;
 using Xcl.Forms;
 using Xcl.Samples;
+using SampleBaseForm;
 
-namespace LabelTest
+namespace LabelSamples
 {
-	public class TLabelTest: TForm
+	public class TLabelSamples: TSampleBaseForm
 	{
 
-		public TLabelTest (TComponent AOwner):base(AOwner)
+		public TLabelSamples (TComponent AOwner):base(AOwner)
 		{
 		}
 
 		public override void Loaded()
 		{
+			base.Loaded ();
+
 			int alignment = 0;
 			for (int i = 0; i <= 16; i++) {
 				TLabel label = TLabel.Create (self);
 				label.Parent = self;
-				label.Top = i * 35;
+				label.Top = (i * 30)+45;
 				label.Left = 10;
 				label.Color = new TColor((TColors)(16-i));
 				label.Font.Color = new TColor((TColors)i);

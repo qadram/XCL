@@ -1,8 +1,9 @@
 ﻿using Xcl.Forms;
 using MenuForm;
 using ButtonSamples;
-using FontSizes;
-using LabelTest;
+using FontSizeSamples;
+using LabelSamples;
+using PageControlTest;
 
 namespace Xcl.Samples
 {
@@ -10,16 +11,18 @@ namespace Xcl.Samples
 	{
 		public static TMenuForm MenuForm;
 		public static TButtonSamples ButtonSamples;
-		public static TFontSizes FontSizes;
-		public static TLabelTest LabelTest;
+		public static TFontSizeSamples FontSizeSamples;
+		public static TLabelSamples LabelSamples;
+		public static TPageControlTest PageControlTest;
 
 		public static void Run(object param)
 		{
 			TApplication.Initialize (param);
 			TApplication.CreateForm<TMenuForm> (ref MenuForm);
 			TApplication.CreateForm<TButtonSamples> (ref ButtonSamples);
-			TApplication.CreateForm<TFontSizes> (ref FontSizes);
-			TApplication.CreateForm<TLabelTest> (ref LabelTest);
+			TApplication.CreateForm<TFontSizeSamples> (ref FontSizeSamples);
+			TApplication.CreateForm<TLabelSamples> (ref LabelSamples);
+			TApplication.CreateForm<TPageControlTest> (ref PageControlTest);
 			TApplication.Run ();
 		}
 	}

@@ -5,22 +5,25 @@ using System.UITypes;
 using Xcl.StdCtrls;
 using Xcl.Forms;
 using Xcl.Samples;
+using SampleBaseForm;
 
-namespace FontSizes
+namespace FontSizeSamples
 {
-	public class TFontSizes: TForm
+	public class TFontSizeSamples: TSampleBaseForm
 	{
 
-		public TFontSizes (TComponent AOwner):base(AOwner)
+		public TFontSizeSamples (TComponent AOwner):base(AOwner)
 		{
 		}
 
 		public override void Loaded()
 		{
-			for (int i = 0; i <= 15; i++) {
+			base.Loaded ();
+
+			for (int i = 0; i <= 12; i++) {
 				TLabel label = TLabel.Create (self);
 				label.Parent = self;
-				label.Top = i * 35;
+				label.Top = (i * 35)+45;
 				label.Left = 10;
 				label.Width = Screen.Width - 20;
 				label.Height = 30;

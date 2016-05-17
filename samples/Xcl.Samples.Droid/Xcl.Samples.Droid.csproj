@@ -62,6 +62,12 @@
     <Compile Include="..\Xcl.Samples\LabelTest.cs">
       <Link>LabelTest.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\ToolbarSamples.cs">
+      <Link>ToolbarSamples.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\PageControlTest.cs">
+      <Link>PageControlTest.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

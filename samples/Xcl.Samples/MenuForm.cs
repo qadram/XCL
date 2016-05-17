@@ -13,6 +13,7 @@ namespace MenuForm
 		public TButton btnButtons;
 		public TButton btnFontSizes;
 		public TButton btnLabelTest;
+		public TButton btnPageControlTest;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -49,16 +50,32 @@ namespace MenuForm
 			btnLabelTest.Width = Screen.Width - 20;
 			btnLabelTest.Caption = "Label Test";
 			btnLabelTest.OnClick += btnLabelTestClick;
+
+			btnPageControlTest = TButton.Create (self);
+			btnPageControlTest.Parent = self;
+
+			btnPageControlTest.Top = 220;
+			btnPageControlTest.Left = 10;
+			btnPageControlTest.Height = 50;
+			btnPageControlTest.Width = Screen.Width - 20;
+			btnPageControlTest.Caption = "PageControl Test";
+			btnPageControlTest.OnClick +=  btnPageControlTestClick;
+
+		}
+
+		void btnPageControlTestClick (object sender, EventArgs e)
+		{
+			App.PageControlTest.Show ();
 		}
 
 		void btnLabelTestClick (object sender, EventArgs e)
 		{
-			App.LabelTest.Show ();
+			App.LabelSamples.Show ();
 		}
 
 		void btnFontSizesClick (object sender, EventArgs e)
 		{
-			App.FontSizes.Show ();	
+			App.FontSizeSamples.Show ();	
 		}
 
 		void Button1Click (object sender, EventArgs e)
