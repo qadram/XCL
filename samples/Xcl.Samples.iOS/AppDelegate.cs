@@ -19,7 +19,7 @@ namespace Xcl.Samples.iOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			App.Run (null);
+			App.Run (this);
 
 			// Code to start the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD
