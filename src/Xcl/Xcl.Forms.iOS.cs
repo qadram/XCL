@@ -96,7 +96,7 @@ namespace Xcl.Forms
 		}
 
 
-		public override void NativeSetParent(TControl AControl)
+		public override void SetParent(TControl AControl)
 		{
 			handle.View.AddSubview (AControl.Handle as UIView);
 		}

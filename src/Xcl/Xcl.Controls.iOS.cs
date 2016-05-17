@@ -78,5 +78,14 @@ namespace Xcl.Controls
 		}
 
 	}
+
+	public partial class TFocusControl:TControl{
+
+		partial void NativeSetParent(TControl AControl)
+		{
+			view.AddSubview (AControl.view);
+		}
+	}
+
 	#endif
 }

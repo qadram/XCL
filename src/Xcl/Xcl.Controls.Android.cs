@@ -45,13 +45,20 @@ namespace Xcl.Controls
 			}
 		}
 
+		public ViewGroup viewgroup
+		{
+			get{
+				return(Handle as ViewGroup);
+			}
+		}
+
 		public TextView textview
 		{
 			get{
 				return(Handle as TextView);
 			}
 		}
-
+			
 		partial void NativeSetColor(TColor AColor)
 		{
 			view.SetBackgroundColor((Color)AColor.handle);
@@ -85,6 +92,15 @@ namespace Xcl.Controls
 			view.LayoutParameters = new AbsoluteLayout.LayoutParams((int)_.Screen.ToPixels(FWidth), (int)_.Screen.ToPixels(FHeight), (int)_.Screen.ToPixels(FLeft), (int)_.Screen.ToPixels(FTop));			
 		}
 	}
+
+	public partial class TFocusControl:TControl{
+
+		partial void NativeSetParent(TControl AControl)
+		{
+			viewgroup.AddView (AControl.view);
+		}
+	}
+
 	#endif
 }
 

@@ -24,6 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Base;
 using System.SysUtils;
+using System.Linq;
 using System.Generics.Collections;
 
 
@@ -267,9 +268,23 @@ namespace System.Classes
 			}
 		}
 
+		protected void DoEvent(EventHandler AnEvent, object sender, EventArgs e)
+		{
+			var eventList = AnEvent.GetInvocationList().ToList();
+			foreach (var item in eventList) {
+				(item as EventHandler).Invoke (this, e);
+			}			
+		}
+
+
+		protected virtual void CreateNonVisualHandle()
+		{
+		}
+
 		//Done
 		public TComponent(TComponent AOwner)
 		{
+			CreateNonVisualHandle ();
 			FComparer = new TComponentComparer ();
 			FComponentState = new TComponentState (0);
 			FComponentStyle = TComponentStyle.csInheritable;

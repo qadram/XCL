@@ -204,14 +204,7 @@ namespace Xcl.Controls
 		{
 		}
 
-		private void DoEvent(EventHandler AnEvent, object sender, EventArgs e)
-		{
-			var eventList = AnEvent.GetInvocationList().ToList();
-			foreach (var item in eventList) {
-				(item as EventHandler).Invoke (this, e);
-			}			
-		}
-			
+
 		private void DoClick (object sender, EventArgs e)
 		{
 			DoEvent (FOnClick, sender, e);
@@ -805,8 +798,11 @@ namespace Xcl.Controls
 			//TODO:
 		}
 
-		public virtual void NativeSetParent(TControl AControl)
+		partial void NativeSetParent(TControl AControl);
+
+		public virtual void SetParent(TControl AControl)
 		{
+			NativeSetParent (AControl);		
 		}
 
 		private void Insert(TControl AControl)
@@ -818,7 +814,7 @@ namespace Xcl.Controls
 					//TODO:
 				}
 				AControl.FParent = this;
-				NativeSetParent (AControl);
+				SetParent (AControl);
 			}					
 		}
 
