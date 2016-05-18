@@ -81,6 +81,7 @@ namespace Xcl.Controls
 			{
 				view.Visibility=ViewStates.Visible;
 			}
+			else
 			{
 				view.Visibility=ViewStates.Gone;
 			}
