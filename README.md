@@ -5,6 +5,10 @@ The goal of this library is to mimmic VCL-style of development in Xamarin, provi
 
 It's in a very early stage, the basics are committed and allows you to create basic forms, show and close them, and include buttons, edits and labels.
 
+| iOS  | Android |
+| ------------- | ------------- |
+| ![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/samples_ios.gif)  | ![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/samples_android.gif)  |
+
 ## Hello World
 This is a sample Hello World, in which:
 * A Button, an Edit and a Label are created, and put on the Form
