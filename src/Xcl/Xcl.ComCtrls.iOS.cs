@@ -38,7 +38,7 @@ namespace Xcl.ComCtrls
 	{		
 		public UIToolbar toolbar;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			//Creates the native handle
 			toolbar = new UIToolbar ();

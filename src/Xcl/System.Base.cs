@@ -215,7 +215,7 @@ namespace System.Base
 		/// <returns>The scope.</returns>
 		public string UnitScope()
 		{
-			//TODO: Review differences in Delphi, if any
+			//In Delphi, UnitScope is used in a slight different way than UnitName, but here it doesn't make sense
 			return UnitName ();
 		}
 	}

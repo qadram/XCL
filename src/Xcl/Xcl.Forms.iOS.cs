@@ -89,7 +89,7 @@ namespace Xcl.Forms
 	{
 		public FormViewController handle;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			handle = new FormViewController ();
 			Handle = handle.View;

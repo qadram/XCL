@@ -62,8 +62,12 @@ namespace System.Base
 			return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || (c >= '0' && c <= '9') || char.IsLetter(c);
 		}
 
+		internal static bool is_identifier_part_character_dot(char c)
+		{
+			return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_' || c=='.' || (c >= '0' && c <= '9') || char.IsLetter(c);
+		}
 
-		//TODO: AllowDots
+
 		/// <summary>
 		/// Determines if Ident is a valid identifier
 		/// </summary>
@@ -78,9 +82,16 @@ namespace System.Base
 			if (!is_identifier_start_character(Ident[0]))
 				return false;
 
-			for (int i = 1; i < Ident.Length; i++)
-				if (!is_identifier_part_character(Ident[i]))
-					return false;
+			if (AllowDots) {
+				for (int i = 1; i < Ident.Length; i++)
+					if (!is_identifier_part_character_dot (Ident [i]))
+						return false;
+				
+			} else {
+				for (int i = 1; i < Ident.Length; i++)
+					if (!is_identifier_part_character (Ident [i]))
+						return false;
+			}
 
 			return true;
 		}

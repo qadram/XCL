@@ -78,7 +78,6 @@ namespace Xcl.Graphics
 
 		public TFont():base()
 		{
-			//TODO: Check default values for these properties
 			NativeInitializeFont();
 		}
 

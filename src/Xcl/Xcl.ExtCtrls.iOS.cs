@@ -42,7 +42,7 @@ namespace Xcl.ExtCtrls
 
 		private int CurrentImage=0;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			FImage = new UIImage();
 			imageview = new UIImageView ();

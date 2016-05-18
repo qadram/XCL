@@ -46,7 +46,7 @@ namespace Xcl.ExtCtrls
 		private int CurrentImage=0;
 		private int BackgroundImage=0;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			handle = new ImageView (TApplication.context);
 			handle.SetScaleType (ImageView.ScaleType.FitXy);
@@ -63,7 +63,7 @@ namespace Xcl.ExtCtrls
 
 				//Set the one on the background to the next image
 				var pic2 = Images.Items[BackgroundImage];
-				var bmd = new BitmapDrawable (pic2.handle);
+				var bmd = new BitmapDrawable (pic2.bitmap);
 				handle.Background = bmd;
 			}
 			else
@@ -94,7 +94,7 @@ namespace Xcl.ExtCtrls
 				{
 					//Set the one on the background to the next image
 					var pic2 = Images.Items[BackgroundImage];
-					var bmd = new BitmapDrawable (pic2.handle);
+					var bmd = new BitmapDrawable (pic2.bitmap);
 					handle.Background = bmd;
 
 				}
@@ -109,7 +109,7 @@ namespace Xcl.ExtCtrls
 
 		public override void NativeChanged()
 		{
-			handle.SetImageBitmap(FPicture.handle);
+			handle.SetImageBitmap(FPicture.bitmap);
 		}
 
 

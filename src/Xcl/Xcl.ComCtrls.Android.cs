@@ -41,7 +41,7 @@ namespace Xcl.ComCtrls
 	{		
 		public Toolbar toolbar;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			//Creates the native handle
 			toolbar = new Toolbar (TApplication.context);

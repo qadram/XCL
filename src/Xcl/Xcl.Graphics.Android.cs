@@ -42,18 +42,17 @@ namespace Xcl.Graphics
 	#if __ANDROID__
 	public partial class TPicture:TPersistent
 	{
-		//TODO: Change this to Bitmap
-		public Bitmap handle;
+		public Bitmap bitmap;
 		public TPicture():base()
 		{
-			handle = null;
-			Handle = handle;
+			bitmap = null;
+			Handle = bitmap;
 		}
 
 		protected override void AssignTo(TPersistent Dest)
 		{
 			if (Dest is TPicture) {
-				(Dest as TPicture).handle = Bitmap.CreateBitmap (handle);
+				(Dest as TPicture).bitmap = Bitmap.CreateBitmap (bitmap);
 				(Dest as TPicture).NotifyChanged();
 			} else {
 				base.AssignTo (Dest);
@@ -93,9 +92,9 @@ namespace Xcl.Graphics
 			var assembly = TApplication.MainAssembly;
 			var imageStream = assembly.GetManifestResourceStream(ResourceName);
 
-			handle = BitmapFactory.DecodeStream(imageStream);
+			bitmap = BitmapFactory.DecodeStream(imageStream);
 
-			Handle = handle;
+			Handle = bitmap;
 			NotifyChanged();
 		}
 	}
