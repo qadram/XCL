@@ -27,12 +27,14 @@ using System.Generics.Collections;
 using Xcl.Controls;
 using Xcl.StdCtrls;
 using Xcl.Forms;
+using System.UITypes;
 #if __ANDROID__
 using Android.App;
 using Android.OS;
 using Android.Content;
 using Android.Views;
 using Android.Widget;
+using Android.Graphics;
 using Android.Util;
 #endif
 
@@ -139,15 +141,19 @@ namespace Xcl.Forms
 	{
 		public TFormActivity handle;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			//To be created by the activity when invoked
 		}
 
-
 		public override void SetParent(TControl AControl)
 		{
 			handle.View.AddView (AControl.Handle as View);
+		}
+
+		public override void SetColor(TColor AColor)
+		{
+			handle.View.SetBackgroundColor((Color)AColor.handle);
 		}
 
 
