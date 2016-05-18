@@ -8,6 +8,7 @@ It's in a very early stage, the basics are committed and allows you to create ba
 | iOS  | Android |
 | ------------- | ------------- |
 | ![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/samples_ios.gif)  | ![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/samples_android.gif)  |
+| ![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/login_ios.gif)  | ![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/login_android.gif)  |
 
 ## Hello World
 This is a sample Hello World, in which:
