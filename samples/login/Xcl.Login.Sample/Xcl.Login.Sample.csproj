@@ -4,10 +4,10 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{5779B855-84D9-4775-A0A4-85BA52E29E99}</ProjectGuid>
+    <ProjectGuid>{2A7E4A98-9B64-4AF5-A591-211743598EB8}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Xcl.Samples</RootNamespace>
-    <AssemblyName>Xcl.Samples</AssemblyName>
+    <RootNamespace>Xcl.Login.Sample</RootNamespace>
+    <AssemblyName>Xcl.Login.Sample</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -31,17 +31,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Xcl.Samples.cs" />
-    <Compile Include="MenuForm.cs" />
-    <Compile Include="ButtonSamples.cs" />
-    <Compile Include="FontSizeSamples.cs" />
-    <Compile Include="LabelSamples.cs" />
-    <Compile Include="EditSamples.cs" />
-    <Compile Include="SampleBaseForm.cs" />
+    <Compile Include="Xcl.Login.Sample.cs" />
+    <Compile Include="LoginForm.cs" />
+    <Compile Include="EntryForm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Xcl\Xcl.csproj">
+    <ProjectReference Include="..\..\..\src\Xcl\Xcl.csproj">
       <Project>{747755CF-E91C-4CD4-9FAE-0BA5DB468596}</Project>
       <Name>Xcl</Name>
     </ProjectReference>

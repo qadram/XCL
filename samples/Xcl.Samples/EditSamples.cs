@@ -23,6 +23,11 @@ namespace EditSamples
 		{
 			base.Loaded ();
 
+			var edit2 = TButton.Create (self);
+			edit2.Parent = self;
+			edit2.Caption = "Button1";
+			edit2.Color = TColor.clRed;
+
 			edit = TEdit.Create (self);
 			edit.Parent = self;
 			edit.Left = 10;
