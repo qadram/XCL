@@ -73,50 +73,13 @@ namespace Unit1
 }
 ```
 This is how it will look on iOS
-![iOS](https://cloud.githubusercontent.com/assets/18068729/14943254/ebd3b146-0fd3-11e6-8288-3247af57a204.png)
+![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/ios1.png)
 
-
-And this is for Android
-![Android](https://cloud.githubusercontent.com/assets/18068729/14943253/ebbd60d0-0fd3-11e6-99ff-bd814400e368.png)
+And this is on Android
+![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/android1.png)
 
 ## Globals
 In order to replicate the global variables and functions, we are using a partial class named "_", so you can define static members on this class at any time. 
 
 ## Project structure
 If you create a cross-platform app on Xamarin, you will get a solution with three projects, the portable one, one for iOS and another for Android.
-
-## Creating forms on iOS
-To create your forms, be sure to delete the storyboard that is added to the iOS project, and put this code on the AppDelegate
-
-```
-			Window = new UIWindow(UIScreen.MainScreen.Bounds);
-			
-			_.Form1 = new TForm1 (_.Application);
-
-			TApplication.LastViewController = _.Form1.handle;
-			_.Application.MainForm = _.Form1;
-			Window.RootViewController = _.Form1.handle;
-
-			// make the window visible
-			Window.MakeKeyAndVisible();
-```
-We will optimize this step so you have to write less code.
-
-## Creating forms on Android
-In Android, replace the OnCreate event handler of your MainActivity with this code
-
-```
-			TApplication.context = this.BaseContext;
-			TApplication.MainActivity = this;
-
-			_.Form1 = new TForm1 (_.Application);
-			_.Application.MainForm = _.Form1;
-
-			_.Form1.Show ();
-```
-We will optimize this step so you have to write less code.
-
-
-
-
-
