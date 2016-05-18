@@ -102,7 +102,9 @@ namespace System.UITypes
 			case 
 				TColors.clWhite: handle = Color.White; 
 				break;
-
+			case 
+				TColors.clNone: handle = Color.Transparent; 
+				break;
 			default:
 				handle = Color.Transparent;
 				break;				

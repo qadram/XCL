@@ -91,6 +91,12 @@ namespace System.UITypes
 			return(new TColor (R, G, B));
 		}
 
+		public static TColor clNone { 
+			get { 
+				return(new TColor(TColors.clNone));
+			}
+		}
+
 		public static TColor clBlack { 
 			get { 
 				return(new TColor(TColors.clBlack));
