@@ -120,6 +120,30 @@ namespace Xcl.StdCtrls
 			edittext.Hint = value;
 		}
 
+		partial void NativeSetIsPassword()
+		{
+			if (FIsPassword)
+			{
+				edittext.InputType= InputTypes.ClassText | InputTypes.TextVariationPassword;
+			}
+			else
+			{
+				edittext.InputType = InputTypes.ClassText;
+			}
+		}
+
+		partial void NativeSetIsEmail()
+		{
+			if (FIsEmail)
+			{
+				edittext.InputType= InputTypes.ClassText | InputTypes.TextVariationWebEmailAddress;
+			}
+			else{
+				edittext.InputType = InputTypes.ClassText;
+			}
+		}
+
+
 
 		public override string GetText()
 		{
