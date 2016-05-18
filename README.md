@@ -72,11 +72,11 @@ namespace Unit1
 	}
 }
 ```
-This is how it will look on iOS
-![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/ios1.png)
+This is how it will look
 
-And this is on Android
-![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/android1.png)
+| iOS  | Android |
+| ------------- | ------------- |
+| ![iOS](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/ios1.png) | ![Android](https://raw.githubusercontent.com/radxdev/radx/master/screenshots/android1.png) |
 
 ## Globals
 In order to replicate the global variables and functions, we are using a partial class named "_", so you can define static members on this class at any time. 
