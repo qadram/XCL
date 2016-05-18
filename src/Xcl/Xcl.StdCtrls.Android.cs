@@ -50,8 +50,14 @@ namespace Xcl.StdCtrls
 			button.Click-=value;
 		}
 
+		public override void NativeSetEnabled()
+		{
+			button.Enabled = Enabled;
+		}
 
-		protected override void CreateHandle()
+
+
+		protected override void CreateNativeHandle()
 		{
 			button = new Button (TApplication.context);
 			button.SetAllCaps (false);
@@ -96,7 +102,7 @@ namespace Xcl.StdCtrls
 		}
 
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			edittext = new EditText (TApplication.context);
 			Handle = edittext;
@@ -126,7 +132,7 @@ namespace Xcl.StdCtrls
 	{
 		public TextView textview;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			textview = new TextView (TApplication.context);
 			//FFont.handle = handle.Font;
@@ -139,23 +145,50 @@ namespace Xcl.StdCtrls
 			NativeApplyFontChanges ();
 		}
 
-		partial void NativeSetTextAlignment()
+		private void UpdateGravity()
 		{
+			GravityFlags flags=GravityFlags.NoGravity;
+
+			switch(FLayout)
+			{
+			case TTextLayout.tlTop:
+				flags |= GravityFlags.Top;
+				break;
+			case TTextLayout.tlCenter:
+				flags |= GravityFlags.CenterVertical;
+				break;
+			case TTextLayout.tlBottom:
+				flags |= GravityFlags.Bottom;
+				break;
+			}
+
 			switch (FAlignment)
 			{
 			case TAlignment.taCenter:
-				textview.Gravity = GravityFlags.Center;
+				flags |= GravityFlags.CenterHorizontal;
 				break;
 			case TAlignment.taLeftJustify:
-				textview.Gravity = GravityFlags.Left;				
+				flags |= GravityFlags.Left;				
 				break;
 			case TAlignment.taRightJustify:
-				textview.Gravity = GravityFlags.Right;
+				flags |= GravityFlags.Right;
 				break;
 			default:
-				textview.Gravity = GravityFlags.Left;
+				flags |= GravityFlags.Left;
 				break;
 			}
+
+			textview.Gravity = flags;
+		}
+
+		partial void NativeSetTextLayout()
+		{
+			UpdateGravity();
+		}
+
+		partial void NativeSetTextAlignment()
+		{
+			UpdateGravity();			
 		}
 
 		public override void SetText(string Value)

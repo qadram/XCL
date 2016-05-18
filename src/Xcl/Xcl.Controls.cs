@@ -179,11 +179,10 @@ namespace Xcl.Controls
 	/// </summary>
 	public partial class TControl:TComponent,IChangeNotifier
 	{
-		//TODO: Rename to CreateNativeHandle
 		/// <summary>
 		/// Called to create the handle
 		/// </summary>
-		protected virtual void CreateHandle()
+		protected virtual void CreateNativeHandle()
 		{
 
 		}
@@ -294,8 +293,26 @@ namespace Xcl.Controls
 			FControlStyle = new TControlStyle (0);
 			FFont = new TFont ();
 			FFont.Notifier = this;
-			CreateHandle ();
+			CreateNativeHandle ();
 		}
+
+		public virtual void NativeSetEnabled()
+		{
+		}
+
+		private bool FEnabled=true;
+		public bool Enabled
+		{
+			get{
+				return(FEnabled);
+			}
+			set {
+				FEnabled = value;
+				NativeSetEnabled ();
+			}
+		}
+
+
 
 		
 		partial void NativeSetColor(TColor AColor);
@@ -312,6 +329,7 @@ namespace Xcl.Controls
 		public TColor Color
 		{
 			get{
+				//TODO: Return here the actual color
 				return(null);
 			}
 			set{

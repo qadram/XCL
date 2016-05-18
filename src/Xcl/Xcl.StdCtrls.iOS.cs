@@ -28,6 +28,7 @@ using Xcl.StdCtrls;
 using System.UITypes;
 #if __IOS__
 using UIKit;
+using Foundation;
 using System.Drawing;
 #endif
 
@@ -38,7 +39,7 @@ namespace Xcl.StdCtrls
 	{
 		public UIKit.UIButton uibutton;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			//Creates the native handle
 			uibutton = new UIButton ();
@@ -49,6 +50,10 @@ namespace Xcl.StdCtrls
 
 			NativeChanged ();
 			Handle = uibutton;
+		}
+		public override void NativeSetEnabled()
+		{
+			uibutton.Enabled = Enabled;
 		}
 
 		public override void NativeChanged()
@@ -69,10 +74,12 @@ namespace Xcl.StdCtrls
 	{
 		public UITextField textfield;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
 			textfield = new UITextField ();
 			Handle = textfield;
+			Font.Size = 16;
+			textfield.AutocapitalizationType = UITextAutocapitalizationType.None;
 		}
 
 		public override void SetText(string Value)
@@ -82,6 +89,34 @@ namespace Xcl.StdCtrls
 
 		}
 
+		public virtual void NativeSetEnabled()
+		{
+			textfield.Enabled = Enabled;
+		}
+
+		public override void NativeChanged()
+		{
+			textfield.Font = FFont.handle;
+			textfield.TextColor = (UIColor)FFont.Color.handle;
+		}
+
+		partial void NativeSetIsPassword()
+		{
+			textfield.SecureTextEntry=FIsPassword;
+		}
+
+		partial void NativeSetIsEmail()
+		{
+			if (FIsEmail)
+			{
+				textfield.KeyboardType = UIKeyboardType.EmailAddress;
+			}
+			else{
+				textfield.KeyboardType = UIKeyboardType.Default;
+			}
+		}
+
+
 		public override string GetText()
 		{
 			return(textfield.Text);
@@ -89,7 +124,14 @@ namespace Xcl.StdCtrls
 
 		partial void NativeSetPlaceHolder(string value)
 		{
-			textfield.Placeholder = value;
+			//textfield.Placeholder = value;
+			textfield.AttributedPlaceholder=new NSAttributedString (
+				value,
+				null,
+				FPlaceHolderColor.handle as UIColor,
+				null,
+				null
+			);
 		}
 
 		protected override void NativeOnChangeAdd(EventHandler value)
@@ -105,13 +147,38 @@ namespace Xcl.StdCtrls
 
 	}
 
+	public class Label:UILabel
+	{
+		//TODO: Redraw when the layout is changed
+		public TTextLayout Layout=TTextLayout.tlTop;
+
+		public override void DrawText (CoreGraphics.CGRect rect)
+		{
+			if (Layout == TTextLayout.tlTop) {
+				var size = rect.Size;
+				size.Height = SizeThatFits (size).Height;
+				rect.Size = size;
+			}		
+			else if (Layout == TTextLayout.tlBottom) {
+				var size = rect.Size;
+				var height = SizeThatFits (size).Height;
+				rect.Y += (rect.Size.Height - height);
+				size.Height = height;
+				rect.Size = size;
+			}
+
+			base.DrawText (rect);
+		}
+	}
+
 	public partial class TLabel:TGraphicControl
 	{
-		public UIKit.UILabel handle;
+		public Label handle;
 
-		protected override void CreateHandle()
+		protected override void CreateNativeHandle()
 		{
-			handle = new UILabel ();
+			handle = new Label ();
+			handle.Lines = 0;
 			FFont.handle = handle.Font;
 			Handle = handle;
 		}
@@ -120,6 +187,10 @@ namespace Xcl.StdCtrls
 		{
 			handle.Font = FFont.handle;
 			handle.TextColor = (UIColor)FFont.Color.handle;
+		}
+		partial void NativeSetTextLayout()
+		{
+			handle.Layout = FLayout;
 		}
 
 		partial void NativeSetTextAlignment()

@@ -63,11 +63,10 @@ namespace Xcl.StdCtrls
 		}
 		public TButton(TComponent AOwner):base(AOwner)
 		{
-			//TODO: Review these defaults
 			FLeft = 0;
 			FTop = 0;
-			FWidth = 200;
-			FHeight = 50;
+			FWidth = 75;
+			FHeight = 36;
 			UpdateBounds ();
 		}	
 	}
@@ -123,14 +122,59 @@ namespace Xcl.StdCtrls
 
 		public TEdit(TComponent AOwner):base(AOwner)
 		{
-			//TODO: Review these defaults
+			FPlaceHolderColor = new TColor (TColors.clSilver);			
 			FLeft = 0;
 			FTop = 0;
-			FWidth = 200;
-			FHeight = 50;
+			FWidth = 120;
+			FHeight = 40;
 			UpdateBounds ();
 
 		}	
+
+		partial void NativeSetIsPassword();
+
+		private bool FIsPassword=false;
+		public bool IsPassword
+		{
+			get{
+				return(FIsPassword);
+			}
+			set {
+				FIsPassword = value;
+				NativeSetIsPassword ();
+			}
+		}
+
+		partial void NativeSetIsEmail();
+
+		private bool FIsEmail=false;
+		public bool IsEmail
+		{
+			get{
+				return(FIsEmail);
+			}
+			set {
+				FIsEmail = value;
+				NativeSetIsEmail ();
+			}
+		}
+
+		public virtual void SetPlaceHolderColor(TColor AColor)
+		{
+			FPlaceHolderColor = AColor;
+			NativeSetPlaceHolder (FPlaceHolder);
+		}
+
+		private TColor FPlaceHolderColor;
+		public TColor PlaceHolderColor
+		{
+			get{
+				return(FPlaceHolderColor);
+			}
+			set{
+				SetPlaceHolderColor (value);	
+			}
+		}
 
 		partial void NativeSetPlaceHolder(string value);
 
@@ -150,6 +194,9 @@ namespace Xcl.StdCtrls
 	/// Alignment for the label
 	/// </summary>
 	public enum TAlignment {taCenter, taLeftJustify, taRightJustify};
+
+	public enum TTextLayout {tlTop, tlCenter, tlBottom};
+
 
 	/// <summary>
 	/// Label control
@@ -179,6 +226,26 @@ namespace Xcl.StdCtrls
 				NativeSetTextAlignment ();
 			}
 		}
+
+		private TTextLayout FLayout=TTextLayout.tlTop;
+
+		partial void NativeSetTextLayout();
+
+		/// <summary>
+		/// Gets or sets the alignment.
+		/// </summary>
+		/// <value>The alignment.</value>
+		public TTextLayout Layout
+		{
+			get {
+				return(FLayout);
+			}
+			set {
+				FLayout = value;
+				NativeSetTextLayout ();
+			}
+		}
+
 
 		public TLabel(TComponent AOwner):base(AOwner)
 		{
