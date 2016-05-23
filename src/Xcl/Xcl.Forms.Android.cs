@@ -151,7 +151,7 @@ namespace Xcl.Forms
 			handle.View.AddView (AControl.Handle as View);
 		}
 
-		public override void SetColor(TColor AColor)
+		protected override void SetColor(TColor AColor)
 		{
 			handle.View.SetBackgroundColor((Color)AColor.handle);
 		}

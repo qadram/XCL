@@ -59,6 +59,10 @@
     <Compile Include="Xcl.ComCtrls.cs" />
     <Compile Include="Xcl.ComCtrls.iOS.cs" />
     <Compile Include="Xcl.ComCtrls.Android.cs" />
+    <Compile Include="Xcl.Controls.Types.cs" />
+    <Compile Include="Xcl.Controls.ImageList.cs" />
+    <Compile Include="Xcl.Controls.GraphicControl.cs" />
+    <Compile Include="Xcl.Controls.FocusControl.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

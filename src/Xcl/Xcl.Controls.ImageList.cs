@@ -26,64 +26,25 @@ using System.Base;
 using System.SysUtils;
 using System.Classes;
 using System.UITypes;
-#if __IOS__
-using UIKit;
-using System.Drawing;
+using Xcl.ImgList;
+using Xcl.Graphics;
+using System.Linq;
 
 namespace Xcl.Controls
 {
-	public partial class TFocusControl:TControl
+	/// <summary>
+	/// This class holds a list of images
+	/// </summary>
+	public partial class TImageList:TCustomImageList
 	{
-		public UIControl control
+		public static TImageList Create(TComponent AOwner)
 		{
-			get{
-				return(Handle as UIControl);
-			}
+			return(new TImageList (AOwner));
 		}
 
-		protected override void NativeOnClickAdd(EventHandler value)
+		public TImageList(TComponent AOwner):base(AOwner)
 		{
-			control.TouchUpInside+=value;
-		}
-		protected override void NativeOnClickRemove(EventHandler value)
-		{
-			control.TouchUpInside-=value;
+
 		}
 	}
-
-	public partial class TControl:TComponent
-	{
-		public UIView view
-		{
-			get{
-				return(Handle as UIView);
-			}
-		}
-
-		partial void NativeSetColor(TColor AColor)
-		{
-			view.BackgroundColor = AColor.handle as UIColor;
-		}
-
-		partial void NativeSetVisible(bool value)
-		{
-			view.Hidden=!value;
-		}
-
-		partial void NativeUpdateBounds()
-		{
-			view.Frame = new RectangleF (FLeft, FTop, FWidth, FHeight); 
-		}
-
-	}
-
-	public partial class TFocusControl:TControl{
-
-		partial void NativeSetParent(TControl AControl)
-		{
-			view.AddSubview (AControl.view);
-		}
-	}
-
 }
-#endif

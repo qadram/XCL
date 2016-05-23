@@ -80,6 +80,7 @@ namespace Xcl.Forms
 
 		public static void CreateForm<T>(ref T Form)
 		{
+			//TODO: Find out how to get the right call stack when exceptions happen on Loaded()
 			Form = (T)Activator.CreateInstance (typeof(T), _.Application);
 
 			//First form created is considered the main form

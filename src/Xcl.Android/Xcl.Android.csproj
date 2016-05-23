@@ -128,6 +128,18 @@
     <Compile Include="..\Xcl\Xcl.ComCtrls.Android.cs">
       <Link>Xcl.ComCtrls.Android.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.FocusControl.cs">
+      <Link>Xcl.Controls.FocusControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.GraphicControl.cs">
+      <Link>Xcl.Controls.GraphicControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.ImageList.cs">
+      <Link>Xcl.Controls.ImageList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.Types.cs">
+      <Link>Xcl.Controls.Types.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
