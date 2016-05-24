@@ -41,15 +41,6 @@ namespace Xcl.StdCtrls
 	{
 		public Button button;
 
-		protected override void NativeOnClickAdd(EventHandler value)
-		{
-			button.Click+=value;
-		}
-		protected override void NativeOnClickRemove(EventHandler value)
-		{
-			button.Click-=value;
-		}
-
 		public override void NativeSetEnabled()
 		{
 			button.Enabled = Enabled;
@@ -81,26 +72,25 @@ namespace Xcl.StdCtrls
 	{
 		public EditText edittext;
 
-		private EventHandler FOnChanged;
-
-		protected void OnChange(object sender, TextChangedEventArgs args)
+		protected void DoNativeChange (object sender, TextChangedEventArgs e)
 		{
-			//TODO: Review how to pass args in the right way
-			FOnChanged (sender, args);
+			DoChange(sender, e);
 		}
 
-		protected override void NativeOnChangeAdd(EventHandler value)
-		{
-			FOnChanged += value;
-			edittext.TextChanged += OnChange;
-		}
 
-		protected override void NativeOnChangeRemove(EventHandler value)
+		protected override void NativeEvent (bool Add, string EventName, EventHandler value)
 		{
-			FOnChanged -= value;
-			edittext.TextChanged -= OnChange;
-		}
+			base.NativeEvent (Add, EventName, value);
 
+			if (Add) 
+			{
+				if (EventName == "OnChange") edittext.TextChanged += DoNativeChange;
+			} 
+			else 
+			{
+				if (EventName == "OnChange") edittext.TextChanged -= DoNativeChange;
+			}
+		}
 
 		protected override void CreateNativeHandle()
 		{

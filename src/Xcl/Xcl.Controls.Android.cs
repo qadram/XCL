@@ -58,7 +58,8 @@ namespace Xcl.Controls
 				return(Handle as TextView);
 			}
 		}
-			
+
+
 		partial void NativeSetColor(TColor AColor)
 		{
 			view.SetBackgroundColor((Color)AColor.handle);
@@ -100,6 +101,27 @@ namespace Xcl.Controls
 		{
 			viewgroup.AddView (AControl.view);
 		}
+
+		protected override void NativeEvent (bool Add, string EventName, EventHandler value)
+		{
+			//TODO: Review bubbling this or not through a boolean return
+			base.NativeEvent (Add, EventName, value);
+
+			if (Add) 
+			{
+				//if (EventName == "OnMouseDown") control.TouchDown += value;
+				//else 
+					if (EventName == "OnClick") view.Click += value;
+			} 
+			else 
+			{
+				//if (EventName == "OnMouseDown") control.TouchDown -= value;
+				//else 
+				if (EventName == "OnClick") view.Click -= value;
+			}
+		}
+
+
 	}
 
 	#endif

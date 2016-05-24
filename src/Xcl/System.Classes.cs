@@ -61,6 +61,9 @@ namespace System.Classes
 		}
 	}
 
+	public enum TShiftState {ssShift, ssAlt, ssCtrl,
+		ssLeft, ssRight, ssMiddle, ssDouble, ssTouch, ssPen, ssCommand, ssHorizontal};
+
 	//TODO
 	public class TFiler: TObject
 	{
@@ -268,11 +271,12 @@ namespace System.Classes
 			}
 		}
 
-		protected void DoEvent(EventHandler AnEvent, object sender, EventArgs e)
+		protected void DoEvent(Delegate AnEvent, object sender, EventArgs e)
 		{
 			var eventList = AnEvent.GetInvocationList().ToList();
+			object[] args = { this, e };
 			foreach (var item in eventList) {
-				(item as EventHandler).Invoke (this, e);
+				item.DynamicInvoke(args);
 			}			
 		}
 

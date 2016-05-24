@@ -63,6 +63,12 @@ namespace ButtonSamples
 			btnEvents.Width = Screen.Width - 20;
 			btnEvents.Caption = "Button with Events";		
 			btnEvents.OnClick += Button1Click;
+			btnEvents.OnMouseDown += Button1MouseDown;
+		}
+
+		void Button1MouseDown (object sender, Xcl.Controls.TMouseEventArgs e)
+		{
+			(sender as TButton).Caption = e.X.ToString();
 		}
 
 		void Button1Click (object sender, EventArgs e)

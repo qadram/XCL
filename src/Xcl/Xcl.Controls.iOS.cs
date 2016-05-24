@@ -41,13 +41,21 @@ namespace Xcl.Controls
 			}
 		}
 
-		protected override void NativeOnClickAdd(EventHandler value)
+		protected override void NativeEvent (bool Add, string EventName, EventHandler value)
 		{
-			control.TouchUpInside+=value;
-		}
-		protected override void NativeOnClickRemove(EventHandler value)
-		{
-			control.TouchUpInside-=value;
+			//TODO: Review bubbling this or not through a boolean return
+			base.NativeEvent (Add, EventName, value);
+
+			if (Add) 
+			{
+				if (EventName == "OnMouseDown") control.TouchDown += value;
+				else if (EventName == "OnClick") control.TouchUpInside += value;
+			} 
+			else 
+			{
+				if (EventName == "OnMouseDown") control.TouchDown -= value;
+				else if (EventName == "OnClick") control.TouchUpInside -= value;
+			}
 		}
 	}
 

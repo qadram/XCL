@@ -134,17 +134,19 @@ namespace Xcl.StdCtrls
 			);
 		}
 
-		protected override void NativeOnChangeAdd(EventHandler value)
+		protected override void NativeEvent (bool Add, string EventName, EventHandler value)
 		{
-			textfield.EditingChanged += value;
+			base.NativeEvent (Add, EventName, value);
+
+			if (Add) 
+			{
+				if (EventName == "OnChange") textfield.EditingChanged += value;
+			} 
+			else 
+			{
+				if (EventName == "OnChange") textfield.EditingChanged -= value;
+			}
 		}
-
-		protected override void NativeOnChangeRemove(EventHandler value)
-		{
-			textfield.EditingChanged -= value;
-		}
-
-
 	}
 
 	public class Label:UILabel

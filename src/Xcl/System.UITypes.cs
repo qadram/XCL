@@ -38,6 +38,7 @@ namespace System.UITypes
 	/// </summary>
 	public enum TColors {clNone, clBlack, clMaroon, clGreen, clOlive, clNavy, clPurple, clTeal, clGray, clSilver, clRed, clLime, clYellow, clBlue, clFuchsia, clAqua, clLtGray, clDkGray, clWhite};
 
+	public enum TMouseButton {mbLeft, mbRight, mbMiddle};
 
 	/// <summary>
 	/// Color wrapper

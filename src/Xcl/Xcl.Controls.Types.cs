@@ -32,7 +32,27 @@ using System.Linq;
 
 namespace Xcl.Controls
 {
+	public class TMouseEventArgs:EventArgs
+	{
+		public TMouseEventArgs(TMouseButton Button, TShiftState Shift, float X, float Y)
+		{
+			this.Button=Button;
+			this.Shift=Shift;
+			this.X = X;
+			this.Y = Y;
+		}
+
+		public TMouseButton Button;
+		public TShiftState Shift;
+		public float X;
+		public float Y;
+	}
+	public delegate void TMouseEvent(object sender, TMouseEventArgs e);
+	public delegate void TNotifyEvent(object sender, EventArgs e);
+
+
 	//TODO: Review the usage of this enum and convert it to a TSet
+
 	/// <summary>
 	/// Control State
 	/// </summary>

@@ -79,8 +79,31 @@ namespace Xcl.StdCtrls
 	{
 		public TCustomEdit(TComponent AOwner):base(AOwner)
 		{
-		}	
+		}
 
+		#region Events
+		//OnChangeEvent event
+		protected void DoChange (object sender, EventArgs e)
+		{
+			DoEvent (FOnChange, sender, e);
+		}
+
+		protected event TNotifyEvent FOnChange;
+		public event TNotifyEvent OnChange
+		{
+			add{
+				if (FOnChange==null) NativeEvent(true, "OnChange", DoChange);
+				FOnChange+=value;
+			}
+			remove{
+				NativeEvent(false, "OnChange", DoChange);
+				FOnChange -= value;
+			}
+		}
+
+		#endregion
+
+		/*
 		private void DoChange (object sender, EventArgs e)
 		{
 			DoEvent (FOnChange, sender, e);
@@ -106,6 +129,7 @@ namespace Xcl.StdCtrls
 				FOnChange-=value;
 			}
 		}
+		*/	
 
 
 	}

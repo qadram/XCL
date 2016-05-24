@@ -48,64 +48,72 @@ namespace Xcl.Controls
 
 		/// <summary>
 		/// Called to create the handle, override in the native implementations
+		/// to actually create the native object
 		/// </summary>
 		protected virtual void CreateNativeHandle()
 		{
 
 		}
 
-		protected virtual void NativeOnChangeAdd(EventHandler value)
-		{
-		}
-
-		protected virtual void NativeOnChangeRemove(EventHandler value)
-		{
-		}
-
 		/// <summary>
-		/// Override to implement the attachment of the event
+		/// Called to attach a native event, override in the native implementations
+		/// to attach/detach the EventHandler to the EventName
 		/// </summary>
+		/// <param name="Add">If set to <c>true</c> add.</param>
+		/// <param name="EventName">Event name.</param>
 		/// <param name="value">Value.</param>
-		protected virtual void NativeOnClickAdd(EventHandler value)
-		{
-		}
-
-		/// <summary>
-		/// Override to implement the detachment of the event
-		/// </summary>
-		/// <param name="value">Value.</param>
-		protected virtual void NativeOnClickRemove(EventHandler value)
+		protected virtual void NativeEvent (bool Add, string EventName, EventHandler value)
 		{
 		}
 
 
+		#region Events
+		protected virtual void NativeOnChangeAdd (EventHandler value) { } 
+		protected virtual void NativeOnChangeRemove(EventHandler value)	{ }
+
+
+		//OnMouseDown event
+		private void DoMouseDown (object sender, EventArgs e)
+		{
+			DoEvent (FOnMouseDown, sender, new TMouseEventArgs(TMouseButton.mbLeft, TShiftState.ssLeft, 0,0));
+		}
+
+		private event TMouseEvent FOnMouseDown;
+		public event TMouseEvent OnMouseDown
+		{
+			add{
+			    if (FOnMouseDown==null)	NativeEvent(true, "OnMouseDown", DoMouseDown);
+				FOnMouseDown+=value;
+			}
+			remove{
+				NativeEvent(false, "OnMouseDown", DoMouseDown);
+				FOnMouseDown -= value;
+			}
+		}
+
+		//OnClick event
 		private void DoClick (object sender, EventArgs e)
 		{
 			DoEvent (FOnClick, sender, e);
 		}
 
-		private event EventHandler FOnClick;
-		/// <summary>
-		/// Occurs when the control is clicked.
-		/// </summary>
-		public event EventHandler OnClick
+		private event TNotifyEvent FOnClick;
+		public event TNotifyEvent OnClick
 		{
-			add
-			{				
-				//DoClick is just added once to the native control
-				if (FOnClick==null)	{
-					NativeOnClickAdd(DoClick);
-				}
-
-				//And the event is added internally, so it's fired along with the others
+			add{
+				if (FOnClick==null)	NativeEvent(true, "OnClick", DoClick);
 				FOnClick+=value;
 			}
-			remove
-			{
-				NativeOnClickRemove (DoClick);
-				FOnClick-=value;
+			remove{
+				NativeEvent(false, "OnClick", DoClick);
+				FOnClick -= value;
 			}
 		}
+
+		#endregion
+
+
+
 
 		internal TFocusControl FParent;
 
