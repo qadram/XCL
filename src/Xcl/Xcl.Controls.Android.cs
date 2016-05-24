@@ -102,6 +102,107 @@ namespace Xcl.Controls
 			viewgroup.AddView (AControl.view);
 		}
 
+		private bool inside = false;
+		private long lastdown=0;
+
+		private bool IsInside(View.TouchEventArgs e)
+		{
+			Rect bounds = new Rect ();
+			view.GetLocalVisibleRect (bounds);
+			if (bounds.Contains ((int)e.Event.GetX (), (int)e.Event.GetY ())) {
+				return(true);
+			} else
+				return(false);
+		}
+
+		protected void DoNativeTouchDown (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Down) {
+				DoTouchDown (sender, e);
+			}
+		}
+
+		protected void DoNativeTouchDownRepeat (object sender, View.TouchEventArgs e)
+		{
+			//TODO:
+			if (e.Event.Action == MotionEventActions.Down) {
+				if (lastdown != 0) {
+					if (e.Event.EventTime - lastdown <= 500) {
+						DoTouchDownRepeat (sender, e);
+						lastdown = e.Event.EventTime;
+					}
+				}
+				lastdown = e.Event.EventTime;
+			}
+			
+		}
+
+		protected void DoNativeTouchDragEnter (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Move) {
+				if (IsInside(e)) {
+					if (!inside) {
+						DoTouchDragEnter (sender, e);
+						inside = true;
+					}
+				}
+			}
+
+		}
+
+
+		protected void DoNativeTouchDragExit (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Move) {
+				if (!IsInside(e)) {
+					if (inside) {
+						DoTouchDragExit (sender, e);
+						inside = false;
+					}
+				}
+			}
+		}
+
+		protected void DoNativeTouchDragInside (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Move) {
+				if (IsInside(e)) {
+					DoTouchDragInside (sender, e);
+				}
+			}
+		}
+
+
+		protected void DoNativeTouchDragOutside (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Move) {
+				if (!IsInside(e)) {
+					DoTouchDragOutside (sender, e);
+				}
+			}
+
+		}
+
+
+		protected void DoNativeTouchUpInside (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Up) {
+				if (IsInside(e)) {
+					DoTouchUpInside (sender, e);
+				}
+			}
+		}
+
+
+		protected void DoNativeTouchUpOutside (object sender, View.TouchEventArgs e)
+		{
+			if (e.Event.Action == MotionEventActions.Up) {
+				if (!IsInside(e)) {
+					DoTouchUpOutside (sender, e);
+				}
+			}
+		}
+
 		protected override void NativeEvent (bool Add, string EventName, EventHandler value)
 		{
 			//TODO: Review bubbling this or not through a boolean return
@@ -111,13 +212,47 @@ namespace Xcl.Controls
 			{
 				//if (EventName == "OnMouseDown") control.TouchDown += value;
 				//else 
-					if (EventName == "OnClick") view.Click += value;
+				if (EventName == "OnClick")
+					view.Click += value;
+				else if (EventName == "OnTouchDown")
+					view.Touch += DoNativeTouchDown;
+				else if (EventName == "OnTouchDownRepeat")
+					view.Touch += DoNativeTouchDownRepeat;
+				else if (EventName == "OnTouchDragEnter")
+					view.Touch += DoNativeTouchDragEnter;
+				else if (EventName == "OnTouchDragExit")
+					view.Touch += DoNativeTouchDragExit;
+				else if (EventName == "OnTouchDragInside")
+					view.Touch += DoNativeTouchDragInside;
+				else if (EventName == "OnTouchDragOutside")
+					view.Touch += DoNativeTouchDragOutside;
+				else if (EventName == "OnTouchUpInside")
+					view.Touch += DoNativeTouchUpInside;
+				else if (EventName == "OnTouchUpOutside")
+					view.Touch += DoNativeTouchUpOutside;
 			} 
 			else 
 			{
 				//if (EventName == "OnMouseDown") control.TouchDown -= value;
 				//else 
 				if (EventName == "OnClick") view.Click -= value;
+				else if (EventName == "OnTouchDown")
+					view.Touch -= DoNativeTouchDown;
+				else if (EventName == "OnTouchDownRepeat")
+					view.Touch -= DoNativeTouchDownRepeat;
+				else if (EventName == "OnTouchDragEnter")
+					view.Touch -= DoNativeTouchDragEnter;
+				else if (EventName == "OnTouchDragExit")
+					view.Touch -= DoNativeTouchDragExit;
+				else if (EventName == "OnTouchDragInside")
+					view.Touch -= DoNativeTouchDragInside;
+				else if (EventName == "OnTouchDragOutside")
+					view.Touch -= DoNativeTouchDragOutside;
+				else if (EventName == "OnTouchUpInside")
+					view.Touch -= DoNativeTouchUpInside;
+				else if (EventName == "OnTouchUpOutside")
+					view.Touch -= DoNativeTouchUpOutside;
+
 			}
 		}
 

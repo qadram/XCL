@@ -32,6 +32,23 @@ namespace System.UITypes
 	/// </summary>
 	public enum TAnchors {akLeft=1, akTop=2, akRight=4, akBottom=8};
 
+	public partial struct TRect
+	{
+		public TRect (float Left, float Top, float Width, float Height)
+		{
+			this.Left = Left;
+			this.Top = Top;
+			this.Width = Width;
+			this.Height = Height;
+		}
+
+		public float Left { get; set; }
+		public float Top { get; set; }
+		public float Width { get; set; }
+		public float Height { get; set; }
+
+	}
+
 
 	/// <summary>
 	/// Default colors

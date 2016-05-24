@@ -58,6 +58,10 @@ namespace Xcl.Controls
 		/// <summary>
 		/// Called to attach a native event, override in the native implementations
 		/// to attach/detach the EventHandler to the EventName
+		/// 
+		/// If the native event needs an event handler of different type, you should ignore
+		/// value and use your own handler to: process parameters and convert them to the 
+		/// xcl parameter types
 		/// </summary>
 		/// <param name="Add">If set to <c>true</c> add.</param>
 		/// <param name="EventName">Event name.</param>
@@ -68,12 +72,8 @@ namespace Xcl.Controls
 
 
 		#region Events
-		protected virtual void NativeOnChangeAdd (EventHandler value) { } 
-		protected virtual void NativeOnChangeRemove(EventHandler value)	{ }
-
-
 		//OnMouseDown event
-		private void DoMouseDown (object sender, EventArgs e)
+		protected void DoMouseDown (object sender, EventArgs e)
 		{
 			DoEvent (FOnMouseDown, sender, new TMouseEventArgs(TMouseButton.mbLeft, TShiftState.ssLeft, 0,0));
 		}
@@ -92,12 +92,12 @@ namespace Xcl.Controls
 		}
 
 		//OnClick event
-		private void DoClick (object sender, EventArgs e)
+		protected void DoClick (object sender, EventArgs e)
 		{
 			DoEvent (FOnClick, sender, e);
 		}
 
-		private event TNotifyEvent FOnClick;
+		protected event TNotifyEvent FOnClick;
 		public event TNotifyEvent OnClick
 		{
 			add{
@@ -107,6 +107,159 @@ namespace Xcl.Controls
 			remove{
 				NativeEvent(false, "OnClick", DoClick);
 				FOnClick -= value;
+			}
+		}
+
+		//OnTouchDown event
+		protected void DoTouchDown (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDown, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDown;
+		public event TNotifyEvent OnTouchDown
+		{
+			add{
+				if (FOnTouchDown==null)	NativeEvent(true, "OnTouchDown", DoTouchDown);
+				FOnTouchDown+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDown", DoTouchDown);
+				FOnTouchDown -= value;
+			}
+		}
+
+		//OnTouchDownRepeat event
+		protected void DoTouchDownRepeat (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDownRepeat, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDownRepeat;
+		public event TNotifyEvent OnTouchDownRepeat
+		{
+			add{
+				if (FOnTouchDownRepeat==null)	NativeEvent(true, "OnTouchDownRepeat", DoTouchDownRepeat);
+				FOnTouchDownRepeat+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDownRepeat", DoTouchDownRepeat);
+				FOnTouchDownRepeat -= value;
+			}
+		}
+
+
+		//OnTouchDragEnter event
+		protected void DoTouchDragEnter (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDragEnter, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDragEnter;
+		public event TNotifyEvent OnTouchDragEnter
+		{
+			add{
+				if (FOnTouchDragEnter==null)	NativeEvent(true, "OnTouchDragEnter", DoTouchDragEnter);
+				FOnTouchDragEnter+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDragEnter", DoTouchDragEnter);
+				FOnTouchDragEnter -= value;
+			}
+		}
+
+		//OnTouchDragExit event
+		protected void DoTouchDragExit (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDragExit, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDragExit;
+		public event TNotifyEvent OnTouchDragExit
+		{
+			add{
+				if (FOnTouchDragExit==null)	NativeEvent(true, "OnTouchDragExit", DoTouchDragExit);
+				FOnTouchDragExit+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDragExit", DoTouchDragExit);
+				FOnTouchDragExit -= value;
+			}
+		}
+
+		//OnTouchDragInside event
+		protected void DoTouchDragInside (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDragInside, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDragInside;
+		public event TNotifyEvent OnTouchDragInside
+		{
+			add{
+				if (FOnTouchDragInside==null)	NativeEvent(true, "OnTouchDragInside", DoTouchDragInside);
+				FOnTouchDragInside+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDragInside", DoTouchDragInside);
+				FOnTouchDragInside -= value;
+			}
+		}
+
+		//OnTouchDragOutside event
+		protected void DoTouchDragOutside (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchDragOutside, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchDragOutside;
+		public event TNotifyEvent OnTouchDragOutside
+		{
+			add{
+				if (FOnTouchDragOutside==null)	NativeEvent(true, "OnTouchDragOutside", DoTouchDragOutside);
+				FOnTouchDragOutside+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchDragOutside", DoTouchDragOutside);
+				FOnTouchDragOutside -= value;
+			}
+		}
+
+		//OnTouchUpInside event
+		protected void DoTouchUpInside (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchUpInside, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchUpInside;
+		public event TNotifyEvent OnTouchUpInside
+		{
+			add{
+				if (FOnTouchUpInside==null)	NativeEvent(true, "OnTouchUpInside", DoTouchUpInside);
+				FOnTouchUpInside+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchUpInside", DoTouchUpInside);
+				FOnTouchUpInside -= value;
+			}
+		}
+
+		//OnTouchUpOutside event
+		protected void DoTouchUpOutside (object sender, EventArgs e)
+		{
+			DoEvent (FOnTouchUpOutside, sender, e);
+		}
+
+		protected event TNotifyEvent FOnTouchUpOutside;
+		public event TNotifyEvent OnTouchUpOutside
+		{
+			add{
+				if (FOnTouchUpOutside==null)	NativeEvent(true, "OnTouchUpOutside", DoTouchUpOutside);
+				FOnTouchUpOutside+=value;
+			}
+			remove{
+				NativeEvent(false, "OnTouchUpOutside", DoTouchUpOutside);
+				FOnTouchUpOutside -= value;
 			}
 		}
 
@@ -275,6 +428,13 @@ namespace Xcl.Controls
 		public virtual void UpdateBounds()
 		{
 			NativeUpdateBounds ();
+		}
+
+		public TRect BoundsRect
+		{
+			get{
+				return(new TRect (Left, Top, Width, Height));	
+			}
 		}
 
 		/// <summary>

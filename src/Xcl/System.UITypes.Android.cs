@@ -31,6 +31,14 @@ using Android.Graphics;
 namespace System.UITypes
 {
 	#if __ANDROID__
+	public partial struct TRect
+	{
+		public RectF ToRectF()
+		{
+			return(new RectF(Left, Top, Left+Width, Top+Height));
+		}
+	}
+
 	public partial class TColor
 	{
 		/// <summary>

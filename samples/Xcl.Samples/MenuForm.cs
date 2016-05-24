@@ -14,6 +14,7 @@ namespace MenuForm
 		public TButton btnFontSizes;
 		public TButton btnLabelTest;
 		public TButton btnEditSamples;
+		public TButton btnTouchSamples;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -61,6 +62,21 @@ namespace MenuForm
 			btnEditSamples.Caption = "Edit Test";
 			btnEditSamples.OnClick +=  btnEditSamplesClick;
 
+			btnTouchSamples = TButton.Create (self);
+			btnTouchSamples.Parent = self;
+
+			btnTouchSamples.Top = 290;
+			btnTouchSamples.Left = 10;
+			btnTouchSamples.Height = 50;
+			btnTouchSamples.Width = Screen.Width - 20;
+			btnTouchSamples.Caption = "Touch Test";
+			btnTouchSamples.OnClick +=  btnTouchSamplesClick;
+
+		}
+
+		void btnTouchSamplesClick (object sender, EventArgs e)
+		{
+			App.TouchSamples.Show ();
 		}
 
 		void btnEditSamplesClick (object sender, EventArgs e)

@@ -50,11 +50,29 @@ namespace Xcl.Controls
 			{
 				if (EventName == "OnMouseDown") control.TouchDown += value;
 				else if (EventName == "OnClick") control.TouchUpInside += value;
+				else if (EventName == "OnTouchDown") control.TouchDown += value;
+				else if (EventName == "OnTouchDownRepeat") control.TouchDownRepeat += value;
+				else if (EventName == "OnTouchDragEnter") control.TouchDragEnter += value;
+				else if (EventName == "OnTouchDragExit") control.TouchDragExit += value;
+				else if (EventName == "OnTouchDragInside") control.TouchDragInside += value;
+				else if (EventName == "OnTouchDragOutside") control.TouchDragOutside += value;
+				else if (EventName == "OnTouchUpInside") control.TouchUpInside += value;
+				else if (EventName == "OnTouchUpOutside") control.TouchUpOutside += value;
+
 			} 
 			else 
 			{
 				if (EventName == "OnMouseDown") control.TouchDown -= value;
 				else if (EventName == "OnClick") control.TouchUpInside -= value;
+				else if (EventName == "OnTouchDown") control.TouchDown -= value;
+				else if (EventName == "OnTouchDownRepeat") control.TouchDownRepeat -= value;
+				else if (EventName == "OnTouchDragEnter") control.TouchDragEnter -= value;
+				else if (EventName == "OnTouchDragExit") control.TouchDragExit -= value;
+				else if (EventName == "OnTouchDragInside") control.TouchDragInside -= value;
+				else if (EventName == "OnTouchDragOutside") control.TouchDragOutside -= value;
+				else if (EventName == "OnTouchUpInside") control.TouchUpInside -= value;
+				else if (EventName == "OnTouchUpOutside") control.TouchUpOutside -= value;
+
 			}
 		}
 	}
