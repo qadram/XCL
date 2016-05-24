@@ -70,7 +70,7 @@ namespace Xcl.StdCtrls
 		}
 	}
 
-	public partial class TEdit: TCustomEdit
+	public partial class TCustomEdit: TFocusControl
 	{
 		public UITextField textfield;
 

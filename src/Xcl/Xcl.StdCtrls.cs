@@ -77,10 +77,6 @@ namespace Xcl.StdCtrls
 	/// </summary>
 	public partial class TCustomEdit:TFocusControl
 	{
-		public TCustomEdit(TComponent AOwner):base(AOwner)
-		{
-		}
-
 		#region Events
 		//OnChangeEvent event
 		protected void DoChange (object sender, EventArgs e)
@@ -103,48 +99,10 @@ namespace Xcl.StdCtrls
 
 		#endregion
 
-		/*
-		private void DoChange (object sender, EventArgs e)
-		{
-			DoEvent (FOnChange, sender, e);
-		}
-
-		private event EventHandler FOnChange;
-
-		public event EventHandler OnChange
-		{
-			add
-			{				
-				//DoClick is just added once to the native control
-				if (FOnChange==null)	{
-					NativeOnChangeAdd(DoChange);
-				}
-
-				//And the event is added internally, so it's fired along with the others
-				FOnChange+=value;
-			}
-			remove
-			{
-				NativeOnChangeRemove (DoChange);
-				FOnChange-=value;
-			}
-		}
-		*/	
-
-
-	}
-
 	/// <summary>
 	/// Edit control
 	/// </summary>
-	public partial class TEdit: TCustomEdit
-	{
-		public static TEdit Create(TComponent AOwner)
-		{
-			return(new TEdit (AOwner));
-		}
-
-		public TEdit(TComponent AOwner):base(AOwner)
+		public TCustomEdit(TComponent AOwner):base(AOwner)
 		{
 			FPlaceHolderColor = new TColor (TColors.clSilver);			
 			FLeft = 0;
@@ -211,6 +169,18 @@ namespace Xcl.StdCtrls
 				FPlaceHolder = value;
 				NativeSetPlaceHolder (FPlaceHolder);
 			}
+		}
+	}
+
+	public partial class TEdit: TCustomEdit
+	{
+		public static TEdit Create(TComponent AOwner)
+		{
+			return(new TEdit (AOwner));
+		}
+
+		public TEdit(TComponent AOwner):base(AOwner)
+		{
 		}
 	}
 
