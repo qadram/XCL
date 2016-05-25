@@ -48,6 +48,11 @@ namespace Xcl.StdCtrls
 	{
 		public TCustomButton(TComponent AOwner):base(AOwner)
 		{
+			FLeft = 0;
+			FTop = 0;
+			FWidth = 75;
+			FHeight = 36;
+			UpdateBounds ();
 		}	
 
 	}
@@ -63,11 +68,6 @@ namespace Xcl.StdCtrls
 		}
 		public TButton(TComponent AOwner):base(AOwner)
 		{
-			FLeft = 0;
-			FTop = 0;
-			FWidth = 75;
-			FHeight = 36;
-			UpdateBounds ();
 		}	
 	}
 
@@ -195,13 +195,8 @@ namespace Xcl.StdCtrls
 	/// <summary>
 	/// Label control
 	/// </summary>
-	public partial class TLabel:TGraphicControl
+	public partial class TCustomLabel:TGraphicControl
 	{
-		public static TLabel Create(TComponent AOwner)
-		{
-			return(new TLabel (AOwner));
-		}
-
 		private TAlignment FAlignment=TAlignment.taLeftJustify;
 
 		partial void NativeSetTextAlignment();
@@ -241,8 +236,28 @@ namespace Xcl.StdCtrls
 		}
 
 
+		public TCustomLabel(TComponent AOwner):base(AOwner)
+		{
+			FLeft = 0;
+			FTop = 0;
+			FWidth = 75;
+			FHeight = 36;
+			UpdateBounds ();
+		}
+	}
+
+	public partial class TLabel:TCustomLabel
+	{
 		public TLabel(TComponent AOwner):base(AOwner)
 		{
+			
 		}
+
+		public static TLabel Create(TComponent AOwner)
+		{
+			return(new TLabel (AOwner));
+		}
+
+
 	}
 }

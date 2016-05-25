@@ -143,7 +143,7 @@ namespace Xcl.StdCtrls
 	}
 
 
-	public partial class TLabel:TGraphicControl
+	public partial class TCustomLabel:TGraphicControl
 	{
 		public TextView textview;
 

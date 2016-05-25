@@ -35,7 +35,7 @@ using System.Drawing;
 namespace Xcl.StdCtrls
 {
 	#if __IOS__
-	public partial class TButton: TCustomButton
+	public partial class TCustomButton:TButtonControl
 	{
 		public UIKit.UIButton uibutton;
 
@@ -173,7 +173,7 @@ namespace Xcl.StdCtrls
 		}
 	}
 
-	public partial class TLabel:TGraphicControl
+	public partial class TCustomLabel:TGraphicControl
 	{
 		public Label handle;
 
