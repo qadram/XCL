@@ -103,34 +103,34 @@ namespace System.Base
 namespace System.SysUtils
 {
 
-/// <summary>
-/// Base class for all exceptions
-/// </summary>
-public class EException: Exception
-{
-	public EException()
+	/// <summary>
+	/// Base class for all exceptions
+	/// </summary>
+	public class EException: Exception
 	{
+		public EException()
+		{
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="System.SysUtils.EException"/> class.
+		/// </summary>
+		/// <param name="format">Format.</param>
+		/// <param name="args">Arguments.</param>
+		public EException(string format, params object[] args): base(String.Format(format, args))
+		{
+			
+		}
 	}
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="System.SysUtils.EException"/> class.
+	/// Exception raised when there is a conversion error
 	/// </summary>
-	/// <param name="format">Format.</param>
-	/// <param name="args">Arguments.</param>
-	public EException(string format, params object[] args): base(String.Format(format, args))
+	public class EConvertError: EException
 	{
-		
+		public EConvertError(string format, params object[] args): base(format, args)
+		{
+		}
 	}
-}
-
-/// <summary>
-/// Exception raised when there is a conversion error
-/// </summary>
-public class EConvertError: EException
-{
-	public EConvertError(string format, params object[] args): base(format, args)
-	{
-	}
-}
 
 }

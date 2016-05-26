@@ -271,6 +271,12 @@ namespace System.Classes
 			}
 		}
 
+		/// <summary>
+		/// Invokes an event using the invocation list
+		/// </summary>
+		/// <param name="AnEvent">An event with all the methods to call</param>
+		/// <param name="sender">Sender to be sent</param>
+		/// <param name="e">Arguments for the event</param>
 		protected void DoEvent(Delegate AnEvent, object sender, EventArgs e)
 		{
 			var eventList = AnEvent.GetInvocationList().ToList();
@@ -280,7 +286,9 @@ namespace System.Classes
 			}			
 		}
 
-
+		/// <summary>
+		/// Called to call the handle for Components, not for Controls
+		/// </summary>
 		protected virtual void CreateNonVisualHandle()
 		{
 		}
