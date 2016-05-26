@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Base;
+using System.Generics.Collections;
 using System.SysUtils;
 using System.Classes;
 using System.UITypes;
@@ -56,11 +57,37 @@ namespace Xcl.Controls
 	/// <summary>
 	/// Control State
 	/// </summary>
+	/*
 	public enum TControlState {csLButtonDown=1, csClicked=2, csPalette=4,
 		csReadingState=8, csAlignmentNeeded=16, csFocusing=32, csCreating=64,
 		csPaintCopy=128, csCustomPaint=256, csDestroyingHandle=512, csDocking=1024,
 		csDesignerHide=2048, csPanning=4096, csRecreating=8192, csAligning=16384, csGlassPaint=32768,
 		csPrintClient=65536};
+	*/
+
+	public class TControlState:TSet
+	{
+		public TControlState(int initialvalue):base(initialvalue)
+		{
+		}		
+		public static int csLButtonDown=1;
+		public static int csClicked=2;
+		public static int csPalette=4;
+		public static int csReadingState=8;
+		public static int csAlignmentNeeded=16;
+		public static int csFocusing=32;
+		public static int csCreating=64;
+		public static int csPaintCopy=128;
+		public static int csCustomPaint=256;
+		public static int csDestroyingHandle=512;
+		public static int csDocking=1024;
+		public static int csDesignerHide=2048;
+		public static int csPanning=4096;
+		public static int csRecreating=8192;
+		public static int csAligning=16384;
+		public static int csGlassPaint=32768;
+		public static int csPrintClient=65536;
+	}
 
 	/// <summary>
 	/// Set for control styles
@@ -134,7 +161,7 @@ namespace Xcl.Controls
 			if (Control != null) {
 				if (Aligning) {
 					Control.AnchorMove = true;
-					Control.ControlState = Control.ControlState | TControlState.csAligning;
+					Control.ControlState.include (TControlState.csAligning);
 				}
 			}
 			try
@@ -151,7 +178,7 @@ namespace Xcl.Controls
 			finally {
 				if (Aligning) {
 					Control.AnchorMove = false;
-					Control.ControlState = Control.ControlState & TControlState.csAligning;
+					Control.ControlState.exclude (TControlState.csAligning);
 				}
 			}
 		}
@@ -173,6 +200,18 @@ namespace Xcl.Controls
 
 	public enum TScalingFlags {sfLeft=1, sfTop=2, sfWidth=4, sfHeight=8, sfFont=16, sfDesignSize=32};
 	public enum THelpType {htKeyword=1, htContext=2};
+
+
+	public enum TAlign { alNone, alTop, alBottom, alLeft, alRight, alClient, alCustom};
+
+	public struct TAlignInfo
+	{
+		public TList<TControl> AlignList;
+		public int ControlIndex;
+		public TAlign Align;
+		public int Scratch;
+	}
+
 
 
 }

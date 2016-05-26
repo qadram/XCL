@@ -40,6 +40,7 @@ namespace Xcl.Controls
 		public TControl(TComponent AOwner):base(AOwner)
 		{
 			FControlStyle = new TControlStyle (0);
+			FControlState = new TControlState (0);
 			FFont = new TFont ();
 			FFont.Notifier = this;
 			FColor = new TColor (TColors.clNone);
@@ -433,7 +434,7 @@ namespace Xcl.Controls
 		public TRect BoundsRect
 		{
 			get{
-				return(new TRect (Left, Top, Width, Height));	
+				return(new TRect (Left, Top, Left+Width, Top+Height));	
 			}
 		}
 
@@ -453,10 +454,78 @@ namespace Xcl.Controls
 				FWidth = AWidth;
 				FHeight = AHeight;
 				UpdateAnchorRules ();
+				//UpdateExplicitBounds ();
+				Invalidate();
+				//Perform
+				RequestAlign();
 				//TODO:
 				Invalidate ();
 			}
 		}
+
+		private bool isLoading()
+		{
+			return(ComponentState.isin (TComponentState.csLoading));
+		}
+
+		private bool isDesigning()
+		{
+			return(ComponentState.isin (TComponentState.csDesigning));
+		}
+
+		private bool AlignIn(TAlign value, TAlign value1, TAlign value2)
+		{
+			return(((value == value1) || (value == value2)));
+		}
+
+		private TAlign FAlign = TAlign.alNone;
+		public TAlign Align
+		{
+			get{
+				return(FAlign);
+			}
+			set{
+				if (FAlign != value)
+				{
+					var OldAlign = FAlign;
+					FAlign = value;
+					// Anchors = AnchorAlign[Value];
+					if (
+						(!isLoading ()) && 
+						(!isDesigning () || (Parent != null)) && 
+						(value != TAlign.alCustom) && 
+						(OldAlign != TAlign.alCustom)
+					   ) 
+					{
+						if (
+							((AlignIn (OldAlign, TAlign.alTop, TAlign.alBottom)) == (AlignIn (value, TAlign.alRight, TAlign.alLeft))) &&
+							(!AlignIn (OldAlign, TAlign.alNone, TAlign.alClient)) &&
+							(!AlignIn (value, TAlign.alNone, TAlign.alClient))) {
+							SetBounds (Left, Top, Height, Width);
+						} else if ((OldAlign != TAlign.alNone) && (value == TAlign.alNone)) {
+							SetBounds (FExplicitLeft, FExplicitTop, FExplicitWidth, FExplicitHeight);
+						} else {
+							AdjustSize ();
+						}
+					}
+				}
+				RequestAlign();				
+			}
+		}
+
+		public virtual void RequestAlign()
+		{
+			if (Parent != null) {
+				Parent.AlignControl (this);
+			}
+		}
+
+		public void AdjustSize()
+		{
+			if (!isLoading ())
+				SetBounds (Left, Top, Width, Height);
+		}
+
 
 		/// <summary>
 		/// Gets or sets the state of the control.

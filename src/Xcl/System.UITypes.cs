@@ -34,19 +34,48 @@ namespace System.UITypes
 
 	public partial struct TRect
 	{
-		public TRect (float Left, float Top, float Width, float Height)
+		public TRect (float Left, float Top, float Right, float Bottom)
 		{
 			this.Left = Left;
 			this.Top = Top;
-			this.Width = Width;
-			this.Height = Height;
+			this.Right = Right;
+			this.Bottom = Bottom;
 		}
 
 		public float Left { get; set; }
 		public float Top { get; set; }
-		public float Width { get; set; }
-		public float Height { get; set; }
+		public float Right { get; set; }
+		public float Bottom { get; set; }
 
+		public float Width {
+			get{
+				return(Right - Left);
+			}
+			set{
+				this.Right = this.Left + value;
+			}
+		}
+
+		public float Height {
+			get{
+				return(Bottom - Top);
+			}
+			set{
+				this.Bottom = this.Top + value;
+			}
+		}
+	}
+
+	public partial struct TPoint
+	{
+		public TPoint(float X, float Y)
+		{
+			this.X=X;
+			this.Y=Y;
+		}
+
+		public float X { get; set; }
+		public float Y { get; set; }			
 	}
 
 

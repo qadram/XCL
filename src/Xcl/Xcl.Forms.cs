@@ -202,8 +202,8 @@ namespace Xcl.Forms
 		{
 			FLeft = 0;
 			FTop = 0;
-			FWidth = 200;
-			FHeight = 50;
+			FWidth = Screen.Width;
+			FHeight = Screen.Height;
 			UpdateBounds ();
 
 			Initialize ();
