@@ -59,8 +59,19 @@ namespace System.Base
 		/// <param name="flag">Flag.</param>
 		public void exclude(int flag)
 		{
-			value = value & flag;
+			value = value & ~flag;
 		}
+
+		public bool isequal(int flag)
+		{
+			return ((value & flag)==value);
+		}
+
+		public bool isequal(int flag1, int flag2)
+		{
+			return ((value & (flag1 | flag2))==value);
+		}
+
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="System.Base.TSet"/> class.
