@@ -71,6 +71,9 @@
     <Compile Include="..\Xcl.Samples\TouchSamples.cs">
       <Link>TouchSamples.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\AlignSamples.cs">
+      <Link>AlignSamples.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

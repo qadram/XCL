@@ -3,6 +3,7 @@ using System.Base;
 using System.Classes;
 using System.UITypes;
 using Xcl.StdCtrls;
+using Xcl.Controls;
 using Xcl.Forms;
 using Xcl.Samples;
 
@@ -15,6 +16,7 @@ namespace MenuForm
 		public TButton btnLabelTest;
 		public TButton btnEditSamples;
 		public TButton btnTouchSamples;
+		public TButton btnAlignSamples;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -72,7 +74,23 @@ namespace MenuForm
 			btnTouchSamples.Caption = "Touch Test";
 			btnTouchSamples.OnClick +=  btnTouchSamplesClick;
 
+			btnAlignSamples = TButton.Create (self);
+			btnAlignSamples.Parent = self;
+
+			btnAlignSamples.Top = 360;
+			btnAlignSamples.Left = 10;
+			btnAlignSamples.Height = 50;
+			btnAlignSamples.Width = Screen.Width - 20;
+			btnAlignSamples.Caption = "Align Test";
+			btnAlignSamples.OnClick +=  btnAlignSamplesClick;
+
 		}
+
+		void btnAlignSamplesClick (object sender, EventArgs e)
+		{
+			App.AlignSamples.Show ();
+		}
+
 
 		void btnTouchSamplesClick (object sender, EventArgs e)
 		{

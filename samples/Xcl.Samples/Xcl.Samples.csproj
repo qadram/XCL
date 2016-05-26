@@ -39,6 +39,7 @@
     <Compile Include="EditSamples.cs" />
     <Compile Include="SampleBaseForm.cs" />
     <Compile Include="TouchSamples.cs" />
+    <Compile Include="AlignSamples.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

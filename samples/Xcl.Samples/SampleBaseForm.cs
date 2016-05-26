@@ -25,6 +25,8 @@ namespace SampleBaseForm
 			toolbar.Width = Screen.Width;
 			toolbar.Height = 40;
 
+			toolbar.Align = Xcl.Controls.TAlign.alTop;
+
 			var button = TButton.Create (self);
 			button.Caption = "< Back";
 			button.Width = 100;

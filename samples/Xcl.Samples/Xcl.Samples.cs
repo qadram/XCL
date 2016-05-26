@@ -5,6 +5,7 @@ using FontSizeSamples;
 using LabelSamples;
 using EditSamples;
 using TouchSamples;
+using AlignSamples;
 
 namespace Xcl.Samples
 {
@@ -16,6 +17,7 @@ namespace Xcl.Samples
 		public static TLabelSamples LabelSamples;
 		public static TEditSamples EditSamples;
 		public static TTouchSamples TouchSamples;
+		public static TAlignSamples AlignSamples;
 
 		public static void Run(object param)
 		{
@@ -26,6 +28,7 @@ namespace Xcl.Samples
 			TApplication.CreateForm<TLabelSamples> (ref LabelSamples);
 			TApplication.CreateForm<TEditSamples> (ref EditSamples);
 			TApplication.CreateForm<TTouchSamples> (ref TouchSamples);
+			TApplication.CreateForm<TAlignSamples> (ref AlignSamples);
 			TApplication.Run ();
 		}
 	}
