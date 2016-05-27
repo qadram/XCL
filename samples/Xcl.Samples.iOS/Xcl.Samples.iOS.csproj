@@ -124,6 +124,9 @@
     <Compile Include="..\Xcl.Samples\AlignSamples.cs">
       <Link>AlignSamples.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\AnchorSamples.cs">
+      <Link>AnchorSamples.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

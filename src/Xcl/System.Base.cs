@@ -33,7 +33,7 @@ namespace System.Base
 	/// </summary>
 	public class TSet
 	{
-		private int value = 0;
+		public int value = 0;
 
 		/// <summary>
 		/// Check if the specified flag is included in the set
@@ -95,6 +95,10 @@ namespace System.Base
 		public static int Random(int ARange)
 		{
 			return(new Random ().Next (ARange));
+		}
+
+		public static int MulDiv(int number, int numerator, int denominator) {
+			return (int)(((long)number * numerator) / denominator);
 		}
 
 		/// <summary>

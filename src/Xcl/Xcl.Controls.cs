@@ -39,6 +39,7 @@ namespace Xcl.Controls
 	{
 		public TControl(TComponent AOwner):base(AOwner)
 		{
+			FAnchors = new TAnchors (TAnchors.akLeft, TAnchors.akTop);
 			FControlStyle = new TControlStyle (0);
 			FControlState = new TControlState (0);
 			FFont = new TFont ();
@@ -485,6 +486,23 @@ namespace Xcl.Controls
 			return(((value == value1) || (value == value2)));
 		}
 
+		public static TAnchors[] AnchorAlign = new TAnchors[] { 
+			//alNone
+			new TAnchors(TAnchors.akLeft,TAnchors.akTop),
+			//alTop
+			new TAnchors(TAnchors.akLeft,TAnchors.akTop, TAnchors.akRight),
+			//alBottom
+			new TAnchors(TAnchors.akLeft,TAnchors.akRight,TAnchors.akBottom),
+			//alLeft
+			new TAnchors(TAnchors.akLeft,TAnchors.akTop, TAnchors.akBottom),
+			//alRight
+			new TAnchors(TAnchors.akRight,TAnchors.akTop, TAnchors.akBottom),
+			//alClient
+			new TAnchors(TAnchors.akLeft,TAnchors.akTop, TAnchors.akRight,TAnchors.akBottom),
+			//alCustom
+			new TAnchors(TAnchors.akLeft,TAnchors.akTop)
+		};
+
 		private TAlign FAlign = TAlign.alNone;
 		public TAlign Align
 		{
@@ -496,7 +514,7 @@ namespace Xcl.Controls
 				{
 					var OldAlign = FAlign;
 					FAlign = value;
-					// Anchors = AnchorAlign[Value];
+					Anchors = AnchorAlign[(int)value];
 					if (
 						(!isLoading ()) && 
 						(!isDesigning () || (Parent != null)) && 
@@ -735,7 +753,34 @@ namespace Xcl.Controls
 		}
 
 		protected internal bool FAnchorMove;
-		private TAnchors FAnchors;
+		protected TAnchors FAnchors;
+		public TAnchors Anchors
+		{
+			get {
+				return(FAnchors);
+			}
+			set {
+				if (FAnchors.value != value.value) {
+					var OldAnchors = FAnchors;
+					FAnchors = value;
+					if (!(ComponentState.isin (TComponentState.csLoading))) {
+						if (
+							(!(OldAnchors.isequal(TAnchors.akLeft,TAnchors.akTop))) && (FAnchors.isequal(TAnchors.akLeft,TAnchors.akTop)) &&
+							(
+								(FExplicitLeft!=Left) || (FExplicitTop!=Top) || (FExplicitWidth!=Width) || (FExplicitHeight!=Height)
+							)
+						   )
+						{
+							SetBounds(FExplicitLeft,FExplicitTop, FExplicitWidth,FExplicitHeight);
+						}
+						else
+						{
+							UpdateAnchorRules();
+						}
+					}
+				}	
+			}
+		}
 
 		/// <summary>
 		/// Invalidates the control.
@@ -748,12 +793,67 @@ namespace Xcl.Controls
 		}
 
 
+		protected TPoint FAnchorOrigin;
+		protected TPoint FOriginalParentSize;
+		protected TPoint FAnchorRules;
+		public TPoint AnchorOrigin
+		{
+			get{
+				return(FAnchorOrigin);
+			}
+		}
+		public TPoint AnchorRules
+		{
+			get{
+				return(FAnchorRules);
+			}
+		}
+
+		public TPoint OriginalParentSize
+		{
+			get{
+				return(FOriginalParentSize);
+			}
+		}
+
 		private void UpdateAnchorRules()
 		{
 			if ((!FAnchorMove) && (!(ComponentState.isin(TComponentState.csLoading))))
 			{
-				TAnchors Anchors = FAnchors;
-				//TODO:
+				var Anchors = FAnchors;
+				FAnchorOrigin = new TPoint (
+					Margins.ControlLeft + Margins.ControlWidth / 2,
+					Margins.ControlTop + Margins.ControlHeight / 2					
+				);
+
+				if (Anchors.isequal (TAnchors.akLeft, TAnchors.akTop)) {
+					FOriginalParentSize.X = 0;
+					FOriginalParentSize.Y = 0;
+					return;
+				}
+
+				if (Anchors.isin (TAnchors.akRight)) {
+					if (Anchors.isin (TAnchors.akLeft)) {
+						FAnchorRules.X = Margins.ControlWidth;
+					} else {
+						FAnchorRules.X = Margins.ControlLeft;
+					}
+				} else {
+					FAnchorRules.X = Margins.ControlLeft + Margins.ControlWidth / 2;
+				}
+
+				if (Anchors.isin (TAnchors.akBottom)) {
+					if (Anchors.isin (TAnchors.akTop)) {
+						FAnchorRules.Y = Margins.ControlHeight;
+					} else {
+						FAnchorRules.X = Margins.ControlTop;
+					}
+				} else {
+					FAnchorRules.Y = Margins.ControlTop + Margins.ControlHeight / 2;
+				}
+
+				if (Parent != null)
+					Parent.UpdateControlOriginalParentSize(this, ref FOriginalParentSize);
 			}
 		}
 

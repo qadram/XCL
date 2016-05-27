@@ -30,7 +30,33 @@ namespace System.UITypes
 	/// <summary>
 	/// Anchor kind
 	/// </summary>
-	public enum TAnchors {akLeft=1, akTop=2, akRight=4, akBottom=8};
+	public enum TAnchorKind {akLeft=1, akTop=2, akRight=4, akBottom=8};
+
+	public class TAnchors:TSet
+	{
+		public TAnchors(int initialvalue):base(initialvalue)
+		{
+		}
+
+		private static int InitialValue(params int[] initialvalues)
+		{
+			int value = 0;
+			for (int i = 0; i < initialvalues.Length; i++) {
+				value += initialvalues [i];
+			}
+			return(value);
+		}
+
+		public TAnchors (params int[] initialvalues) : base (InitialValue (initialvalues))
+		{
+			
+		}
+
+		public static int akLeft=1;
+		public static int akTop=2;
+		public static int akRight=4;
+		public static int akBottom=8;
+	}
 
 	public partial struct TRect
 	{
@@ -40,6 +66,14 @@ namespace System.UITypes
 			this.Top = Top;
 			this.Right = Right;
 			this.Bottom = Bottom;
+		}
+
+		public TPoint BottomRight
+		{
+			get
+			{
+				return(new TPoint(Right,Bottom));
+			}
 		}
 
 		public float Left { get; set; }

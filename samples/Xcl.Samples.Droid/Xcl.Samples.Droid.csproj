@@ -74,6 +74,9 @@
     <Compile Include="..\Xcl.Samples\AlignSamples.cs">
       <Link>AlignSamples.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl.Samples\AnchorSamples.cs">
+      <Link>AnchorSamples.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

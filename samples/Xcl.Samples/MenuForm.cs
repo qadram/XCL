@@ -44,7 +44,14 @@ namespace MenuForm
 			CreateMenuItem ("Edit Test", btnEditSamplesClick);
 			CreateMenuItem ("Touch Test", btnTouchSamplesClick);
     		CreateMenuItem ("Align Test", btnAlignSamplesClick);
+			CreateMenuItem ("Anchor Test", btnAnchorSamplesClick);
 		}
+
+		void btnAnchorSamplesClick (object sender, EventArgs e)
+		{
+			App.AnchorSamples.Show ();
+		}
+
 
 		void btnAlignSamplesClick (object sender, EventArgs e)
 		{

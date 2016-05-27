@@ -75,6 +75,13 @@ namespace Xcl.Controls
 			return(new TRect (Left, Top, Left+Width, Top+Height));
 		}
 
+		public TRect ClientRect
+		{
+			get{
+				return(GetClientRect ());
+			}
+		}
+
 		private TList<TControl> FControls;
 
 		public TList<TControl> Controls
@@ -110,6 +117,23 @@ namespace Xcl.Controls
 		}
 		*/
 
+		private TPoint FDesignSize;
+
+		public void UpdateControlOriginalParentSize(TControl AControl, ref TPoint AOriginalParentSize)
+		{
+			if (ComponentState.isin (TComponentState.csReading)) {
+				if (!(AControl.ComponentState.isin (TComponentState.csDesigning))) {
+					AOriginalParentSize = FDesignSize;
+				}
+			} else if (HandleAllocated ()) {
+				AOriginalParentSize = ClientRect.BottomRight;
+			} else {
+				AOriginalParentSize.X = Width;
+				AOriginalParentSize.Y = Height;
+			}
+			//AOriginalParentSize.X -= (Padding.Left + Padding.Right);
+			//AOriginalParentSize.Y -= (Padding.Top + Padding.Bottom);
+		}
 
 		private bool AlignWork()
 		{
@@ -161,20 +185,50 @@ namespace Xcl.Controls
 			float NewHeight;
 
 			//TODO: Anchors here
-			if (AAlign==TAlign.alNone)
+			//TODO: TSet equality!!
+			if ((AAlign==TAlign.alNone) || (AControl.Anchors!=AnchorAlign[(int)AAlign]))
 			{
-				/*
-				if ((AControl.FOriginalParentSize.X != 0) && (AControl.FOriginalParentSize.Y != 0)) 
+				if ((AControl.OriginalParentSize.X != 0) && (AControl.OriginalParentSize.Y != 0)) 
 				{
-					//TODO: Margins here
-					NewLeft = AControl.Left;	
-					NewTop = AControl.Top;
-					NewWidth = AControl.Width;
-					NewHeight = AControl.Height;
+					NewLeft = AControl.Margins.ControlLeft;	
+					NewTop = AControl.Margins.ControlTop;
+					NewWidth = AControl.Margins.ControlWidth;
+					NewHeight = AControl.Margins.ControlHeight;
 
-					//TODO: Anchors here
+					if (AControl.Anchors.isin (TAnchors.akRight)) {
+						if (AControl.Anchors.isin (TAnchors.akLeft)) {
+							NewWidth = ParentSize.X - (AControl.OriginalParentSize.X - AControl.AnchorRules.X);
+						} else {
+							NewLeft = ParentSize.X - (AControl.OriginalParentSize.X - AControl.AnchorRules.X);
+						}
+					} else if (!(AControl.Anchors.isin(TAnchors.akLeft)))
+					{
+						NewLeft = _.MulDiv ((int)AControl.AnchorRules.X, (int)ParentSize.X, (int)AControl.OriginalParentSize.X) - NewWidth / 2;
+					}
+
+					if (AControl.Anchors.isin (TAnchors.akBottom)) {
+						if (AControl.Anchors.isin (TAnchors.akTop)) {
+							NewHeight = ParentSize.Y - (AControl.OriginalParentSize.Y - AControl.AnchorRules.Y);
+						} else {
+							NewTop = ParentSize.Y - (AControl.OriginalParentSize.Y - AControl.AnchorRules.Y);
+						}
+					} else if (!(AControl.Anchors.isin(TAnchors.akTop)))
+					{
+						NewTop = _.MulDiv ((int)AControl.AnchorRules.Y, (int)ParentSize.Y, (int)AControl.OriginalParentSize.Y) - NewHeight / 2;
+					}
+
+					if (UpdateAnchorOrigin) {
+						if (!AControl.Anchors.isequal (TAnchors.akLeft, TAnchors.akRight)) {
+							NewLeft = _.MulDiv ((int)AControl.AnchorOrigin.X, (int)ParentSize.X, (int)AControl.OriginalParentSize.X) - NewWidth / 2;
+						}
+
+						if (!AControl.Anchors.isequal (TAnchors.akTop, TAnchors.akBottom)) {
+							NewTop = _.MulDiv ((int)AControl.AnchorOrigin.Y, (int)ParentSize.Y, (int)AControl.OriginalParentSize.Y) - NewHeight / 2;
+						}
+					}
+					AControl.Margins.SetControlBounds(NewLeft, NewTop, NewWidth, NewHeight, true);
 				}
-				*/
+
 
 				if (AAlign == TAlign.alNone)
 					return;
@@ -183,14 +237,12 @@ namespace Xcl.Controls
 			NewWidth = Rect.Right - Rect.Left;
 			if ((NewWidth<0) || ((AAlign==TAlign.alLeft) || (AAlign==TAlign.alRight) || (AAlign==TAlign.alCustom)))
 			{
-				//TODO: Margins
 				NewWidth = AControl.Margins.ControlWidth;
 			}
 
 			NewHeight = Rect.Bottom - Rect.Top;
 			if ((NewHeight<0) || ((AAlign==TAlign.alTop) || (AAlign==TAlign.alBottom) || (AAlign==TAlign.alCustom)))
 			{
-				//TODO: Margins
 				NewHeight = AControl.Margins.ControlHeight;
 			}
 
@@ -216,10 +268,30 @@ namespace Xcl.Controls
 			//TODO: alCustom
 			}
 
-			//TODO: Margin
-			AControl.Margins.SetControlBounds(NewLeft, NewTop, NewWidth, NewHeight, true);
-			//AControl.SetBounds(NewLeft, NewTop, NewWidth, NewHeight);
 
+			AControl.Margins.SetControlBounds(NewLeft, NewTop, NewWidth, NewHeight, true);
+
+			if ((AControl.Margins.ControlWidth != NewWidth) || (AControl.Margins.ControlHeight != NewHeight))
+			{
+				switch (AAlign) {
+				case TAlign.alTop:
+					Rect.Top -= NewHeight - AControl.Margins.ControlHeight;
+					break;
+				case TAlign.alBottom:
+					Rect.Bottom += NewHeight - AControl.Margins.ControlHeight;
+					break;
+				case TAlign.alLeft:
+					Rect.Left -= NewWidth - AControl.Margins.ControlWidth;
+					break;
+				case TAlign.alRight:
+					Rect.Right += NewWidth - AControl.Margins.ControlWidth;
+					break;
+				case TAlign.alClient:			
+					Rect.Right += NewWidth - AControl.Margins.ControlWidth;
+					Rect.Bottom += NewHeight - AControl.Margins.ControlHeight;
+					break;
+				}
+			}
 			//TODO: Check margin dimensions
 		}
 
