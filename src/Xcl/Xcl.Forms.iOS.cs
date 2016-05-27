@@ -73,11 +73,19 @@ namespace Xcl.Forms
 
 	public class FormViewController: UIViewController
 	{
+		public TCustomForm Form = null;
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 			View.BackgroundColor = UIColor.White;
 		}	
+
+		public override void ViewWillTransitionToSize(CGSize toSize, IUIViewControllerTransitionCoordinator coordinator)
+		{
+			base.ViewWillTransitionToSize (toSize, coordinator);
+			Form.SetBounds(0,0,(float)toSize.Width, (float)toSize.Height);
+			Form.Realign();
+		}
 
 		public override bool PrefersStatusBarHidden()
 		{
@@ -93,6 +101,7 @@ namespace Xcl.Forms
 		{
 			handle = new FormViewController ();
 			Handle = handle.View;
+			handle.Form = this;
 		}
 
 

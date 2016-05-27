@@ -271,6 +271,25 @@ namespace Xcl.Controls
 			}
 		}
 
+		public void AlignControl(TControl AControl)
+		{
+			if ((!HandleAllocated ()) || (ComponentState.isin (TComponentState.csDestroying)))
+				return;
+
+			if (FAlignLevel != 0) {
+				ControlState.include (TControlState.csAlignmentNeeded);
+			} else {
+				DisableAlign ();
+				try{
+					var Rect=GetClientRect();
+					AlignControls(AControl, ref Rect);
+				}
+				finally{
+					ControlState.exclude (TControlState.csAlignmentNeeded);
+					EnableAlign ();
+				}
+			}
+		}
 
 		public void AlignControls(TControl AControl, ref TRect Rect)
 		{
@@ -340,28 +359,6 @@ namespace Xcl.Controls
 
 		public virtual void ControlsAligned()
 		{
-		}
-
-		public void AlignControl(TControl AControl)
-		{
-			if ((!HandleAllocated ()) || (ComponentState.isin (TComponentState.csDestroying)))
-				return;
-			if (FAlignLevel != 0)
-				ControlState.include (TControlState.csAlignmentNeeded);
-			else
-			{
-				DisableAlign();
-				try
-				{
-					var Rect = GetClientRect();
-					AlignControls(AControl, ref Rect);
-				}
-				finally {
-					ControlState.exclude (TControlState.csAlignmentNeeded);					
-					EnableAlign();
-				}
-			}
-
 		}
 
 		public override void RequestAlign()

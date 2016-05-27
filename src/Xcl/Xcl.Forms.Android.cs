@@ -36,6 +36,8 @@ using Android.Views;
 using Android.Widget;
 using Android.Graphics;
 using Android.Util;
+using Android.Content.Res;
+using Android.Content.PM;
 #endif
 
 namespace Xcl.Forms
@@ -88,7 +90,7 @@ namespace Xcl.Forms
 		}
 	}
 
-	[Activity (Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+	[Activity (Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen", ConfigurationChanges=ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
 	public class TFormActivity: Activity
 	{
 		public ViewGroup View;
@@ -108,6 +110,15 @@ namespace Xcl.Forms
 
 		public TFormActivity () : base ()
 		{
+		}
+
+		public override void OnConfigurationChanged (Configuration newConfig)
+		{
+			base.OnConfigurationChanged (newConfig);
+			var w = newConfig.ScreenWidthDp;
+			var h = newConfig.ScreenHeightDp;
+			Form.SetBounds(0,0,w,h);
+			Form.Realign();
 		}
 
 		protected override void OnCreate(Bundle bundle)

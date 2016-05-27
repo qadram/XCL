@@ -168,6 +168,11 @@ namespace Xcl.Forms
 	{
 		public TCustomForm(TComponent AOwner):base(AOwner)
 		{
+			FLeft = 0;
+			FTop = 0;
+			FWidth = Screen.Width;
+			FHeight = Screen.Height;
+			UpdateBounds ();
 		}	
 
 		public virtual void Close()
@@ -200,12 +205,6 @@ namespace Xcl.Forms
 
 		public TForm(TComponent AOwner):base(AOwner)
 		{
-			FLeft = 0;
-			FTop = 0;
-			FWidth = Screen.Width;
-			FHeight = Screen.Height;
-			UpdateBounds ();
-
 			Initialize ();
 		}	
 
