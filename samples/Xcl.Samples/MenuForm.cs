@@ -22,68 +22,28 @@ namespace MenuForm
 		{
 		}
 
+		public TButton CreateMenuItem(string Caption, TNotifyEvent Event)
+		{
+			TButton result = TButton.Create (self);
+
+			result.Parent = self;
+			result.Height = 50;
+			result.Top = Screen.Height;
+			result.Align = TAlign.alTop;
+			result.Caption = Caption;
+			result.OnClick += Event;
+
+			return(result);
+		}
+
 		public override void Loaded()
 		{
-			btnButtons = TButton.Create (self);
-			btnButtons.Parent = self;
-
-			btnButtons.Top = 20;
-			btnButtons.Left = 10;
-			btnButtons.Height = 50;
-			btnButtons.Width = Screen.Width - 20;
-			btnButtons.Caption = "Buttons";
-			btnButtons.OnClick += Button1Click;
-
-			btnFontSizes = TButton.Create (self);
-			btnFontSizes.Parent = self;
-
-			btnFontSizes.Top = 80;
-			btnFontSizes.Left = 10;
-			btnFontSizes.Height = 50;
-			btnFontSizes.Width = Screen.Width - 20;
-			btnFontSizes.Caption = "Font Sizes";
-			btnFontSizes.OnClick += btnFontSizesClick;
-
-			btnLabelTest = TButton.Create (self);
-			btnLabelTest.Parent = self;
-
-			btnLabelTest.Top = 150;
-			btnLabelTest.Left = 10;
-			btnLabelTest.Height = 50;
-			btnLabelTest.Width = Screen.Width - 20;
-			btnLabelTest.Caption = "Label Test";
-			btnLabelTest.OnClick += btnLabelTestClick;
-
-			btnEditSamples = TButton.Create (self);
-			btnEditSamples.Parent = self;
-
-			btnEditSamples.Top = 220;
-			btnEditSamples.Left = 10;
-			btnEditSamples.Height = 50;
-			btnEditSamples.Width = Screen.Width - 20;
-			btnEditSamples.Caption = "Edit Test";
-			btnEditSamples.OnClick +=  btnEditSamplesClick;
-
-			btnTouchSamples = TButton.Create (self);
-			btnTouchSamples.Parent = self;
-
-			btnTouchSamples.Top = 290;
-			btnTouchSamples.Left = 10;
-			btnTouchSamples.Height = 50;
-			btnTouchSamples.Width = Screen.Width - 20;
-			btnTouchSamples.Caption = "Touch Test";
-			btnTouchSamples.OnClick +=  btnTouchSamplesClick;
-
-			btnAlignSamples = TButton.Create (self);
-			btnAlignSamples.Parent = self;
-
-			btnAlignSamples.Top = 360;
-			btnAlignSamples.Left = 10;
-			btnAlignSamples.Height = 50;
-			btnAlignSamples.Width = Screen.Width - 20;
-			btnAlignSamples.Caption = "Align Test";
-			btnAlignSamples.OnClick +=  btnAlignSamplesClick;
-
+			CreateMenuItem ("Buttons", btnButtonsClick);
+			CreateMenuItem ("Font Sizes", btnFontSizesClick);
+			CreateMenuItem ("Label Test", btnLabelTestClick);
+			CreateMenuItem ("Edit Test", btnEditSamplesClick);
+			CreateMenuItem ("Touch Test", btnTouchSamplesClick);
+    		CreateMenuItem ("Align Test", btnAlignSamplesClick);
 		}
 
 		void btnAlignSamplesClick (object sender, EventArgs e)
@@ -112,7 +72,7 @@ namespace MenuForm
 			App.FontSizeSamples.Show ();	
 		}
 
-		void Button1Click (object sender, EventArgs e)
+		void btnButtonsClick (object sender, EventArgs e)
 		{
 			App.ButtonSamples.Show ();
 			
