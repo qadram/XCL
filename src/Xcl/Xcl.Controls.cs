@@ -44,7 +44,14 @@ namespace Xcl.Controls
 			FFont = new TFont ();
 			FFont.Notifier = this;
 			FColor = new TColor (TColors.clNone);
+			FMargins = new TMargins (this);
+			FMargins.OnChange += DoMarginChange;
 			CreateNativeHandle ();
+		}
+
+		public void DoMarginChange(object sender, EventArgs args)
+		{
+			RequestAlign ();
 		}
 
 		/// <summary>
@@ -554,6 +561,11 @@ namespace Xcl.Controls
 			}
 		}
 
+
+		private bool GetAlignWithMargins()
+		{
+			return((ControlStyle.isin(TControlStyle.csAlignWithMargins)));
+		}
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Xcl.Controls.TControl"/> align with margins.
 		/// </summary>
@@ -561,10 +573,29 @@ namespace Xcl.Controls
 		public bool AlignWithMargins
 		{
 			get {
-				return((ControlStyle.isin(TControlStyle.csAlignWithMargins)));
+				return(GetAlignWithMargins());
 			}
 			set{
+				if (value != GetAlignWithMargins()) {
+					if (value)
+						FControlStyle.include (TControlStyle.csAlignWithMargins);
+					else
+						FControlStyle.exclude (TControlStyle.csAlignWithMargins);
+					
+					RequestAlign();
+				}
 			
+			}
+		}
+
+		private TMargins FMargins;
+		public TMargins Margins
+		{
+			get{
+				return(FMargins);
+			}
+			set{
+				FMargins.Assign (value);
 			}
 		}
 

@@ -130,13 +130,13 @@ namespace Xcl.Controls
 			switch (AAlign) {
 			//TODO: Use Margins.ControlTop et al
 			case TAlign.alTop: 
-				return(C1.Top<C2.Top);
+				return(C1.Margins.ControlTop<C2.Margins.ControlTop);
 			case TAlign.alBottom:
-				return((C1.Top + C1.Height) >= (C2.Top + C2.Height));
+				return((C1.Margins.ControlTop + C1.Margins.ControlHeight) >= (C2.Margins.ControlTop + C2.Margins.ControlHeight));
 			case TAlign.alLeft: 
-				return(C1.Left<C2.Left);
+				return(C1.Margins.ControlLeft<C2.Margins.ControlLeft);
 			case TAlign.alRight:
-				return((C1.Left + C1.Width) >= (C2.Left + C2.Width));
+				return((C1.Margins.ControlLeft + C1.Margins.ControlWidth) >= (C2.Margins.ControlLeft + C2.Margins.ControlWidth));
 			//TODO: alCustom
 			default: return(false);
 			}
@@ -184,14 +184,14 @@ namespace Xcl.Controls
 			if ((NewWidth<0) || ((AAlign==TAlign.alLeft) || (AAlign==TAlign.alRight) || (AAlign==TAlign.alCustom)))
 			{
 				//TODO: Margins
-				NewWidth = AControl.Width;
+				NewWidth = AControl.Margins.ControlWidth;
 			}
 
 			NewHeight = Rect.Bottom - Rect.Top;
 			if ((NewHeight<0) || ((AAlign==TAlign.alTop) || (AAlign==TAlign.alBottom) || (AAlign==TAlign.alCustom)))
 			{
 				//TODO: Margins
-				NewHeight = AControl.Height;
+				NewHeight = AControl.Margins.ControlHeight;
 			}
 
 			NewLeft = Rect.Left;
@@ -217,7 +217,8 @@ namespace Xcl.Controls
 			}
 
 			//TODO: Margin
-			AControl.SetBounds(NewLeft, NewTop, NewWidth, NewHeight);
+			AControl.Margins.SetControlBounds(NewLeft, NewTop, NewWidth, NewHeight, true);
+			//AControl.SetBounds(NewLeft, NewTop, NewWidth, NewHeight);
 
 			//TODO: Check margin dimensions
 		}

@@ -39,6 +39,13 @@ namespace AlignSamples
 				SetupButton (btnAlign [i]);
 				btnAlign [i].OnClick += btnAlignClick;
 			}
+
+			//Set some margins
+			btnAlign [0].AlignWithMargins = true;
+			btnAlign [0].Margins.Left = 20;
+			btnAlign [0].Margins.Top = 20;
+			btnAlign [0].Margins.Bottom = 20;
+			btnAlign [0].Margins.Right = 20;
 		}
 
 		void btnAlignClick (object sender, EventArgs e)

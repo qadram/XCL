@@ -136,6 +136,8 @@ namespace Xcl.Controls
 		private float FRight;
 		private float FBottom;
 
+		public EventHandler OnChange = null;
+
 		protected TControl Control {get {return FControl; }}
 
 		/// <summary>
@@ -180,6 +182,160 @@ namespace Xcl.Controls
 					Control.AnchorMove = false;
 					Control.ControlState.exclude (TControlState.csAligning);
 				}
+			}
+		}
+
+		protected override void AssignTo (TPersistent Dest)
+		{
+			if (Dest is TMargins) {
+				(Dest as TMargins).Left = FLeft;
+				(Dest as TMargins).Top = FTop;
+				(Dest as TMargins).Right = FRight;
+				(Dest as TMargins).Bottom = FBottom;
+				Change ();
+			} else
+				base.AssignTo (Dest);
+		}
+
+		private void Change()
+		{
+			if (OnChange != null) {
+				OnChange.Invoke (this, EventArgs.Empty);
+			}
+		}
+
+
+
+		private void SetMargin(int Index, float value)
+		{
+			switch (Index) {
+			case 0:
+				if (value != FLeft) {
+					FLeft = value;
+					Change();
+				}
+				break;
+			case 1:
+				if (value != FTop) {
+					FTop = value;
+					Change();
+				}
+				break;
+			case 2:
+				if (value != FRight) {
+					FRight = value;
+					Change();
+				}
+				break;
+			case 3:
+				if (value != FBottom) {
+					FBottom = value;
+					Change();
+				}
+				break;
+			}
+		}
+
+		public float Left
+		{
+			get{
+				return(FLeft);
+			}
+			set{
+				SetMargin (0, value);
+			}
+		}
+
+		public float Top
+		{
+			get{
+				return(FTop);
+			}
+			set{
+				SetMargin (1, value);
+			}
+		}
+
+		public float Right
+		{
+			get{
+				return(FRight);
+			}
+			set{
+				SetMargin (2, value);
+			}
+		}
+
+		public float Bottom
+		{
+			get{
+				return(FBottom);
+			}
+			set{
+				SetMargin (3, value);
+			}
+		}
+
+		public float GetControlBound(int Index)
+		{
+			float Result = 0;
+			if (FControl != null) {
+				switch (Index) {
+				case 0:
+					if ((FControl.AlignWithMargins) && (FControl.Parent != null)) {
+						Result = FControl.Left - FLeft;
+					} else
+						Result = FControl.Left;
+					break;
+				case 1:
+					if ((FControl.AlignWithMargins) && (FControl.Parent != null)) {
+						Result = FControl.Top - FTop;
+					} else
+						Result = FControl.Top;
+					break;
+				case 2:
+					if ((FControl.AlignWithMargins) && (FControl.Parent != null)) {
+						Result = FControl.Width + FLeft + FRight;
+					} else
+						Result = FControl.Width;
+					break;
+				case 3:
+					if ((FControl.AlignWithMargins) && (FControl.Parent != null)) {
+						Result = FControl.Height + FTop + FBottom;
+					} else
+						Result = FControl.Height;
+					break;
+				}
+			}
+			return(Result);
+		}
+
+
+		public float ControlLeft
+		{
+			get {
+				return(GetControlBound (0));
+			}
+		}
+
+		public float ControlTop
+		{
+			get {
+				return(GetControlBound (1));
+			}
+		}
+
+		public float ControlWidth
+		{
+			get {
+				return(GetControlBound (2));
+			}
+		}
+
+		public float ControlHeight
+		{
+			get {
+				return(GetControlBound (3));
 			}
 		}
 
