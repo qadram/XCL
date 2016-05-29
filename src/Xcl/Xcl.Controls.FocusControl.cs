@@ -121,8 +121,8 @@ namespace Xcl.Controls
 
 		public void UpdateControlOriginalParentSize(TControl AControl, ref TPoint AOriginalParentSize)
 		{
-			if (ComponentState.isin (TComponentState.csReading)) {
-				if (!(AControl.ComponentState.isin (TComponentState.csDesigning))) {
+			if (ComponentState.In (TComponentState.csReading)) {
+				if (!(AControl.ComponentState.In (TComponentState.csDesigning))) {
 					AOriginalParentSize = FDesignSize;
 				}
 			} else if (HandleAllocated ()) {
@@ -195,34 +195,34 @@ namespace Xcl.Controls
 					NewWidth = AControl.Margins.ControlWidth;
 					NewHeight = AControl.Margins.ControlHeight;
 
-					if (AControl.Anchors.isin (TAnchors.akRight)) {
-						if (AControl.Anchors.isin (TAnchors.akLeft)) {
+					if (AControl.Anchors.In (TAnchors.akRight)) {
+						if (AControl.Anchors.In (TAnchors.akLeft)) {
 							NewWidth = ParentSize.X - (AControl.OriginalParentSize.X - AControl.AnchorRules.X);
 						} else {
 							NewLeft = ParentSize.X - (AControl.OriginalParentSize.X - AControl.AnchorRules.X);
 						}
-					} else if (!(AControl.Anchors.isin(TAnchors.akLeft)))
+					} else if (!(AControl.Anchors.In(TAnchors.akLeft)))
 					{
 						NewLeft = _.MulDiv ((int)AControl.AnchorRules.X, (int)ParentSize.X, (int)AControl.OriginalParentSize.X) - NewWidth / 2;
 					}
 
-					if (AControl.Anchors.isin (TAnchors.akBottom)) {
-						if (AControl.Anchors.isin (TAnchors.akTop)) {
+					if (AControl.Anchors.In (TAnchors.akBottom)) {
+						if (AControl.Anchors.In (TAnchors.akTop)) {
 							NewHeight = ParentSize.Y - (AControl.OriginalParentSize.Y - AControl.AnchorRules.Y);
 						} else {
 							NewTop = ParentSize.Y - (AControl.OriginalParentSize.Y - AControl.AnchorRules.Y);
 						}
-					} else if (!(AControl.Anchors.isin(TAnchors.akTop)))
+					} else if (!(AControl.Anchors.In(TAnchors.akTop)))
 					{
 						NewTop = _.MulDiv ((int)AControl.AnchorRules.Y, (int)ParentSize.Y, (int)AControl.OriginalParentSize.Y) - NewHeight / 2;
 					}
 
 					if (UpdateAnchorOrigin) {
-						if (!AControl.Anchors.isequal (TAnchors.akLeft, TAnchors.akRight)) {
+						if (!AControl.Anchors.Is(TAnchors.akLeft, TAnchors.akRight)) {
 							NewLeft = _.MulDiv ((int)AControl.AnchorOrigin.X, (int)ParentSize.X, (int)AControl.OriginalParentSize.X) - NewWidth / 2;
 						}
 
-						if (!AControl.Anchors.isequal (TAnchors.akTop, TAnchors.akBottom)) {
+						if (!AControl.Anchors.Is (TAnchors.akTop, TAnchors.akBottom)) {
 							NewTop = _.MulDiv ((int)AControl.AnchorOrigin.Y, (int)ParentSize.Y, (int)AControl.OriginalParentSize.Y) - NewHeight / 2;
 						}
 					}
@@ -301,7 +301,7 @@ namespace Xcl.Controls
 			AlignList.Clear();
 
 			if ((AControl!=null) && 
-				((AAlign == TAlign.alNone) || (AControl.Visible) || (AControl.ComponentState.isin(TComponentState.csDesigning)) && (!(AControl.ControlStyle.isin(TControlStyle.csNoDesignVisible)))) &&
+				((AAlign == TAlign.alNone) || (AControl.Visible) || (AControl.ComponentState.In(TComponentState.csDesigning)) && (!(AControl.ControlStyle.In(TControlStyle.csNoDesignVisible)))) &&
 				(AControl.Align == AAlign))
 			{
 				AlignList.Add (AControl);	
@@ -313,11 +313,11 @@ namespace Xcl.Controls
 				if ((Control.Align == AAlign) &&
 					(
 						(AAlign==TAlign.alNone) || 
-						((Control.Visible) || (Control.ControlStyle.isequal(TControlStyle.csAcceptsControls, TControlStyle.csNoDesignVisible)) ) ||
-						(Control.ComponentState.isin(TComponentState.csDesigning)) &&
-						(!Control.ControlStyle.isin(TControlStyle.csNoDesignVisible))
+						((Control.Visible) || (Control.ControlStyle.Is(TControlStyle.csAcceptsControls, TControlStyle.csNoDesignVisible)) ) ||
+						(Control.ComponentState.In(TComponentState.csDesigning)) &&
+						(!Control.ControlStyle.In(TControlStyle.csNoDesignVisible))
 					) &&
-					((!(Control is TCustomForm)) || (!Control.ComponentState.isin(TComponentState.csDesigning)))
+					((!(Control is TCustomForm)) || (!Control.ComponentState.In(TComponentState.csDesigning)))
 				  )
 				{
 					if (Control == AControl)
@@ -345,11 +345,11 @@ namespace Xcl.Controls
 
 		public void AlignControl(TControl AControl)
 		{
-			if ((!HandleAllocated ()) || (ComponentState.isin (TComponentState.csDestroying)))
+			if ((!HandleAllocated ()) || (ComponentState.In (TComponentState.csDestroying)))
 				return;
 
 			if (FAlignLevel != 0) {
-				ControlState.include (TControlState.csAlignmentNeeded);
+				ControlState.Include (TControlState.csAlignmentNeeded);
 			} else {
 				DisableAlign ();
 				try{
@@ -357,7 +357,7 @@ namespace Xcl.Controls
 					AlignControls(AControl, ref Rect);
 				}
 				finally{
-					ControlState.exclude (TControlState.csAlignmentNeeded);
+					ControlState.Exclude (TControlState.csAlignmentNeeded);
 					EnableAlign ();
 				}
 			}
@@ -466,7 +466,7 @@ namespace Xcl.Controls
 			FAlignLevel--;
 			if (FAlignLevel==0)
 			{
-				if (ControlState.isin (TControlState.csAlignmentNeeded))
+				if (ControlState.In (TControlState.csAlignmentNeeded))
 					Realign ();
 			}
 		}
@@ -619,7 +619,7 @@ namespace Xcl.Controls
 			ControlListChange (true, AControl);
 			Insert(AControl);
 
-			if (!(AControl.ComponentState.isin(TComponentState.csReading))) {
+			if (!(AControl.ComponentState.In(TComponentState.csReading))) {
 				if (AControl is TFocusControl) {
 					//TODO:
 					UpdateControlState ();

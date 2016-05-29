@@ -34,23 +34,14 @@ namespace System.UITypes
 
 	public class TAnchors:TSet
 	{
-		public TAnchors(int initialvalue):base(initialvalue)
+		public TAnchors(params int[] initialvalues)
 		{
-		}
-
-		private static int InitialValue(params int[] initialvalues)
-		{
-			int value = 0;
+			Value = 0;
 			for (int i = 0; i < initialvalues.Length; i++) {
-				value += initialvalues [i];
+				Value |= initialvalues [i];
 			}
-			return(value);
 		}
 
-		public TAnchors (params int[] initialvalues) : base (InitialValue (initialvalues))
-		{
-			
-		}
 
 		public static int akLeft=1;
 		public static int akTop=2;

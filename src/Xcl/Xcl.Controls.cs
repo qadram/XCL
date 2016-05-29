@@ -39,9 +39,10 @@ namespace Xcl.Controls
 	{
 		public TControl(TComponent AOwner):base(AOwner)
 		{
+			//AQUI!!!
 			FAnchors = new TAnchors (TAnchors.akLeft, TAnchors.akTop);
-			FControlStyle = new TControlStyle (0);
-			FControlState = new TControlState (0);
+			FControlStyle = new TControlStyle ();
+			FControlState = new TControlState ();
 			FFont = new TFont ();
 			FFont.Notifier = this;
 			FColor = new TColor (TColors.clNone);
@@ -368,12 +369,12 @@ namespace Xcl.Controls
 		public override void SetName(string NewName)
 		{
 			var ChangeText = (
-				(ControlStyle.isin(TControlStyle.csSetCaption)) &&
-				(!ComponentState.isin(TComponentState.csLoading)) && 
+				(ControlStyle.In(TControlStyle.csSetCaption)) &&
+				(!ComponentState.In(TComponentState.csLoading)) && 
 				(Name == FText) &&
 				(Owner == null) || 
 				(!(Owner is TControl)) ||
-				(!(((TControl)Owner).ComponentState.isin(TComponentState.csLoading)))
+				(!(((TControl)Owner).ComponentState.In(TComponentState.csLoading)))
 			    );
 			
 			base.SetName(NewName);
@@ -473,12 +474,12 @@ namespace Xcl.Controls
 
 		private bool isLoading()
 		{
-			return(ComponentState.isin (TComponentState.csLoading));
+			return(ComponentState.In (TComponentState.csLoading));
 		}
 
 		private bool isDesigning()
 		{
-			return(ComponentState.isin (TComponentState.csDesigning));
+			return(ComponentState.In (TComponentState.csDesigning));
 		}
 
 		private bool AlignIn(TAlign value, TAlign value1, TAlign value2)
@@ -582,7 +583,7 @@ namespace Xcl.Controls
 
 		private bool GetAlignWithMargins()
 		{
-			return((ControlStyle.isin(TControlStyle.csAlignWithMargins)));
+			return((ControlStyle.In(TControlStyle.csAlignWithMargins)));
 		}
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Xcl.Controls.TControl"/> align with margins.
@@ -596,9 +597,9 @@ namespace Xcl.Controls
 			set{
 				if (value != GetAlignWithMargins()) {
 					if (value)
-						FControlStyle.include (TControlStyle.csAlignWithMargins);
+						FControlStyle.Include (TControlStyle.csAlignWithMargins);
 					else
-						FControlStyle.exclude (TControlStyle.csAlignWithMargins);
+						FControlStyle.Exclude (TControlStyle.csAlignWithMargins);
 					
 					RequestAlign();
 				}
@@ -632,7 +633,7 @@ namespace Xcl.Controls
 				SetBounds (value, FTop, FWidth, FHeight);
 				FScalingFlags = FScalingFlags | TScalingFlags.sfLeft;
 
-				if (ComponentState.isin(TComponentState.csReading)) {
+				if (ComponentState.In(TComponentState.csReading)) {
 					FExplicitLeft = FLeft;
 				}
 			}
@@ -653,7 +654,7 @@ namespace Xcl.Controls
 				SetBounds (FLeft, value, FWidth, FHeight);
 				FScalingFlags = FScalingFlags | TScalingFlags.sfTop;
 
-				if (ComponentState.isin(TComponentState.csReading)) {
+				if (ComponentState.In(TComponentState.csReading)) {
 					FExplicitTop = FTop;
 				}
 			}
@@ -674,7 +675,7 @@ namespace Xcl.Controls
 				SetBounds (FLeft, FTop, value, FHeight);
 				FScalingFlags = FScalingFlags | TScalingFlags.sfWidth;
 
-				if (ComponentState.isin(TComponentState.csReading)) {
+				if (ComponentState.In(TComponentState.csReading)) {
 					FExplicitWidth = FWidth;
 				}
 			}
@@ -695,7 +696,7 @@ namespace Xcl.Controls
 				SetBounds (FLeft, FTop, FWidth, value);
 				FScalingFlags = FScalingFlags | TScalingFlags.sfHeight;
 
-				if (ComponentState.isin(TComponentState.csReading)) {
+				if (ComponentState.In(TComponentState.csReading)) {
 					FExplicitHeight = FHeight;
 				}
 			}
@@ -760,12 +761,12 @@ namespace Xcl.Controls
 				return(FAnchors);
 			}
 			set {
-				if (FAnchors.value != value.value) {
+				if (FAnchors != value) {
 					var OldAnchors = FAnchors;
 					FAnchors = value;
-					if (!(ComponentState.isin (TComponentState.csLoading))) {
+					if (!(ComponentState.In (TComponentState.csLoading))) {
 						if (
-							(!(OldAnchors.isequal(TAnchors.akLeft,TAnchors.akTop))) && (FAnchors.isequal(TAnchors.akLeft,TAnchors.akTop)) &&
+							(!(OldAnchors.Is(TAnchors.akLeft,TAnchors.akTop))) && (FAnchors.Is(TAnchors.akLeft,TAnchors.akTop)) &&
 							(
 								(FExplicitLeft!=Left) || (FExplicitTop!=Top) || (FExplicitWidth!=Width) || (FExplicitHeight!=Height)
 							)
@@ -818,7 +819,7 @@ namespace Xcl.Controls
 
 		private void UpdateAnchorRules()
 		{
-			if ((!FAnchorMove) && (!(ComponentState.isin(TComponentState.csLoading))))
+			if ((!FAnchorMove) && (!(ComponentState.In(TComponentState.csLoading))))
 			{
 				var Anchors = FAnchors;
 				FAnchorOrigin = new TPoint (
@@ -826,14 +827,14 @@ namespace Xcl.Controls
 					Margins.ControlTop + Margins.ControlHeight / 2					
 				);
 
-				if (Anchors.isequal (TAnchors.akLeft, TAnchors.akTop)) {
+				if (Anchors.Is (TAnchors.akLeft, TAnchors.akTop)) {
 					FOriginalParentSize.X = 0;
 					FOriginalParentSize.Y = 0;
 					return;
 				}
 
-				if (Anchors.isin (TAnchors.akRight)) {
-					if (Anchors.isin (TAnchors.akLeft)) {
+				if (Anchors.In (TAnchors.akRight)) {
+					if (Anchors.In (TAnchors.akLeft)) {
 						FAnchorRules.X = Margins.ControlWidth;
 					} else {
 						FAnchorRules.X = Margins.ControlLeft;
@@ -842,8 +843,8 @@ namespace Xcl.Controls
 					FAnchorRules.X = Margins.ControlLeft + Margins.ControlWidth / 2;
 				}
 
-				if (Anchors.isin (TAnchors.akBottom)) {
-					if (Anchors.isin (TAnchors.akTop)) {
+				if (Anchors.In (TAnchors.akBottom)) {
+					if (Anchors.In (TAnchors.akTop)) {
 						FAnchorRules.Y = Margins.ControlHeight;
 					} else {
 						FAnchorRules.X = Margins.ControlTop;
@@ -876,7 +877,7 @@ namespace Xcl.Controls
 		/// <value>The help keyword.</value>
 		public string HelpKeyword { get { return FHelpKeyword; }
 			set{
-				if (!(ComponentState.isin(TComponentState.csLoading)))
+				if (!(ComponentState.In(TComponentState.csLoading)))
 					HelpType = THelpType.htKeyword;
 
 					FHelpKeyword = value;
@@ -890,7 +891,7 @@ namespace Xcl.Controls
 		/// <value>The help context.</value>
 		public int HelpContext { get { return FHelpContext; }
 			set{
-				if (!(ComponentState.isin(TComponentState.csLoading)))
+				if (!(ComponentState.In(TComponentState.csLoading)))
 					HelpType = THelpType.htContext;
 
 				FHelpContext = value;
@@ -902,7 +903,7 @@ namespace Xcl.Controls
 		/// </summary>
 		public void Invalidate()
 		{
-			InvalidateControl(Visible, ((ControlStyle.isin(TControlStyle.csOpaque))));
+			InvalidateControl(Visible, ((ControlStyle.In(TControlStyle.csOpaque))));
 		}
 
 	}

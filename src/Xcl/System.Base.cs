@@ -28,61 +28,100 @@ using Xcl.Forms;
 
 namespace System.Base
 {
-	/// <summary>
-	/// Class to emulate sets
-	/// </summary>
 	public class TSet
 	{
-		public int value = 0;
+		public int Value=0;
 
-		/// <summary>
-		/// Check if the specified flag is included in the set
-		/// </summary>
-		/// <param name="flag">Flag.</param>
-		public bool isin(int flag)
+		public override int GetHashCode ()
 		{
-			return((value & flag)==flag);
+			return base.GetHashCode ();
 		}
 
-		/// <summary>
-		/// Include the specified flag.
-		/// </summary>
-		/// <param name="flag">Flag.</param>
-		public void include(int flag)
+		public override bool Equals (object obj)
 		{
-			value = value | flag;
+			// If parameter is null return false.
+			if (obj == null)
+			{
+				return false;
+			}
+
+			// If parameter cannot be cast to Point return false.
+			TSet p = obj as TSet;
+			if ((System.Object)p == null)
+			{
+				return false;
+			}
+
+			// Return true if the fields match:
+			return (Value == p.Value);
 		}
 
-		/// <summary>
-		/// Exclude the specified flag.
-		/// </summary>
-		/// <param name="flag">Flag.</param>
-		public void exclude(int flag)
+		public static bool operator ==(TSet c1, TSet c2)
 		{
-			value = value & ~flag;
+			if (System.Object.ReferenceEquals (c1, c2))
+				return true;
+
+			if (((object)c1 == null) || ((object)c2 == null))
+				return false;
+
+			return c1.Value == c2.Value;
 		}
 
-		public bool isequal(int flag)
+		public static bool operator !=(TSet c1, TSet c2)
 		{
-			return ((value & flag)==value);
+			return !(c1 == c2);
 		}
 
-		public bool isequal(int flag1, int flag2)
+		public static bool operator ==(TSet c1, int c2)
 		{
-			return ((value & (flag1 | flag2))==value);
+			if ((object)c1 == null)
+				return false;
+			return(c1.Value == c2);
+		}
+
+		public static bool operator !=(TSet c1, int c2)
+		{
+			return !(c1 == c2);
+		}
+
+		public bool In(params int[] values)
+		{
+			for (int i = 0; i < values.Length; i++) {
+				if ((Value & values [i]) != values[i])
+					return(false);
+			}
+			return(true);
+		}
+
+		public bool Is(params int[] values)
+		{
+			int flag = 0;
+			for (int i = 0; i < values.Length; i++) {
+				flag |= values [i];
+			}
+			return(Value==flag);
 		}
 
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="System.Base.TSet"/> class.
-		/// </summary>
-		/// <param name="initialvalue">Initialvalue.</param>
-		public TSet(int initialvalue)
+		public void Include(params int[] values)
 		{
-			value = initialvalue;
-
+			for (int i = 0; i < values.Length; i++) {
+				var flag = values [i];
+				Value = Value | flag;
+			}
 		}
-	}	
+
+		public void Exclude(params int[] values)
+		{
+			for (int i = 0; i < values.Length; i++) {
+				var flag = values [i];
+				Value = Value & ~flag;
+			}
+		}
+
+	}
+
+
 	/// <summary>
 	/// Class to hold all the global functions and variables
 	/// </summary>

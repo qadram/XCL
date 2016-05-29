@@ -67,9 +67,6 @@ namespace Xcl.Controls
 
 	public class TControlState:TSet
 	{
-		public TControlState(int initialvalue):base(initialvalue)
-		{
-		}		
 		public static int csLButtonDown=1;
 		public static int csClicked=2;
 		public static int csPalette=4;
@@ -94,9 +91,6 @@ namespace Xcl.Controls
 	/// </summary>
 	public class TControlStyle:TSet
 	{
-		public TControlStyle(int initialvalue):base(initialvalue)
-		{
-		}		
 		public static int csAcceptsControls=1;
 		public static int csCaptureMouse = 2;
 		public static int csDesignInteractive = 4;
@@ -163,7 +157,7 @@ namespace Xcl.Controls
 			if (Control != null) {
 				if (Aligning) {
 					Control.AnchorMove = true;
-					Control.ControlState.include (TControlState.csAligning);
+					Control.ControlState.Include (TControlState.csAligning);
 				}
 			}
 			try
@@ -180,7 +174,7 @@ namespace Xcl.Controls
 			finally {
 				if (Aligning) {
 					Control.AnchorMove = false;
-					Control.ControlState.exclude (TControlState.csAligning);
+					Control.ControlState.Exclude (TControlState.csAligning);
 				}
 			}
 		}

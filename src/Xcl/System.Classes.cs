@@ -192,10 +192,6 @@ namespace System.Classes
 	/// </summary>
 	public class TComponentState:TSet
 	{
-		public TComponentState (int initialvalue) : base (initialvalue)
-		{
-			
-		}		
 		public static int csLoading = 1;
 		public static int csReading = 2;
 		public static int csWriting = 4;
@@ -298,7 +294,7 @@ namespace System.Classes
 		{
 			CreateNonVisualHandle ();
 			FComparer = new TComponentComparer ();
-			FComponentState = new TComponentState (0);
+			FComponentState = new TComponentState ();
 			FComponentStyle = TComponentStyle.csInheritable;
 			if (AOwner != null) AOwner.InsertComponent(this);
 		}
@@ -348,7 +344,7 @@ namespace System.Classes
 					AComponent.FreeNotification (this);
 				}
 			}
-			FComponentState.include (TComponentState.csFreeNotification);
+			FComponentState.Include (TComponentState.csFreeNotification);
 		}
 
 		/// <summary>
@@ -494,7 +490,7 @@ namespace System.Classes
 				throw new EComponentError (RTLConsts.SDuplicateName,NewName);
 			}
 
-			if ((ComponentState.isin(TComponentState.csDesigning)) && (Owner!=null))
+			if ((ComponentState.In(TComponentState.csDesigning)) && (Owner!=null))
 			{
 				Owner.ValidateRename(AComponent, CurName, NewName);
 			}
@@ -527,7 +523,7 @@ namespace System.Classes
 			Insert (AComponent);
 
 			//TODO: SetReference
-			if ((ComponentState.isin(TComponentState.csDesigning))) {
+			if ((ComponentState.In(TComponentState.csDesigning))) {
 				AComponent.SetDesigning (true);
 			}
 			Notification(AComponent, TOperation.opInsert);
@@ -554,9 +550,9 @@ namespace System.Classes
 		protected void SetDesigning(bool Value, bool SetChildren = true)
 		{
 			if (Value)
-				FComponentState.include(TComponentState.csDesigning);
+				FComponentState.Include(TComponentState.csDesigning);
 			else
-				FComponentState.exclude(TComponentState.csDesigning);
+				FComponentState.Exclude(TComponentState.csDesigning);
 
 			if (SetChildren) {
 				for (int i = 0; i <= ComponentCount - 1; i++) {
