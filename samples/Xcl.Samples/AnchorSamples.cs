@@ -39,8 +39,8 @@ namespace AnchorSamples
 			btnRightBottom.Left = 10;
 			btnRightBottom.Width = Screen.Width-20;
 			btnRightBottom.Height = Screen.Height-340;
-			btnRightBottom.Caption = "TopBottom-anchored Button";
-			btnRightBottom.Anchors= new TAnchors(TAnchors.akTop,TAnchors.akRight);
+			btnRightBottom.Caption = "TopBottomRight-anchored Button";
+			btnRightBottom.Anchors= new TAnchors(TAnchors.akTop,TAnchors.akBottom, TAnchors.akRight);
 
 		}
 	}
