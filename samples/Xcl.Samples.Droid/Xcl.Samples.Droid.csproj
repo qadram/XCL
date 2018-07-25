@@ -15,7 +15,8 @@
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>Xcl.Samples.Droid</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,6 +77,15 @@
     </Compile>
     <Compile Include="..\Xcl.Samples\AnchorSamples.cs">
       <Link>AnchorSamples.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\ListViewSamples.cs">
+      <Link>ListViewSamples.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\RESTSample.cs">
+      <Link>RESTSample.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl.Samples\PanelSamples.cs">
+      <Link>PanelSamples.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>

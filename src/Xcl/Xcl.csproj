@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,6 +11,11 @@
     <AssemblyName>Xcl</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageId>RadX.Xcl.Common</PackageId>
+    <Authors>RadX Team</Authors>
+    <Description>Xcl common base</Description>
+    <PackageVersion>0.1</PackageVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,6 +69,17 @@
     <Compile Include="Xcl.Controls.ImageList.cs" />
     <Compile Include="Xcl.Controls.GraphicControl.cs" />
     <Compile Include="Xcl.Controls.FocusControl.cs" />
+    <Compile Include="System.Net.HttpClient.cs" />
+    <Compile Include="REST.Client.cs" />
+    <Compile Include="System.JSON.cs" />
+    <Compile Include="REST.Types.cs" />
+    <Compile Include="Data.BD.cs" />
+    <Compile Include="FireDAC.Comp.Client.cs" />
+    <Compile Include="FireDac.Stan.Intf.cs" />
+    <Compile Include="FireDAC.Phys.cs" />
+    <Compile Include="FireDac.Phys.Intf.cs" />
+    <Compile Include="FireDAC.Phys.SQLite.cs" />
+    <Compile Include="FireDac.Stan.Option.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -70,5 +87,12 @@
     <None Include="fonts\gillsans-light.ttf" />
     <None Include="fonts\gillsans.ttf" />
     <None Include="fonts\helvetica.ttf" />
+    <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.targets')" />
 </Project>

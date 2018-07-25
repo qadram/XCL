@@ -26,6 +26,7 @@ using System.Base;
 using System.SysUtils;
 using System.Classes;
 using System.UITypes;
+using System.Threading;
 using Xcl.Controls;
 using Xcl.Graphics;
 using Xcl.ImgList;
@@ -89,6 +90,124 @@ namespace Xcl.ExtCtrls
 			set{
 				FPicture.Assign (value);
 			}
+		}
+
+	}
+
+
+	//static void CheckStatus(Object state)
+	//{
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("Logged!!!!!!!!!!:" + TFacebook.IsUserLogged);
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//	Console.WriteLine("");
+	//}
+
+	//public override void Loaded()
+	//{
+	//	// Create the delegate that invokes methods for the timer.
+	//	TimerCallback timerDelegate = new TimerCallback(CheckStatus);
+
+	//	// Create a timer that waits one second, then invokes every second.
+	//	Timer timer = new Timer(timerDelegate, null, 1000, 1000);
+
+	public partial class TTimer : TComponent
+	{
+		private int FInterval = 1000;
+		public int Interval
+		{
+			get
+			{
+				return FInterval;
+			}
+
+			set
+			{
+				NativeSetInterval(value);
+				FInterval = value;
+			}
+			
+		}
+
+		private bool FEnabled = true;
+		public bool Enabled
+		{
+			get
+			{
+				return FEnabled;
+			}
+
+			set
+			{
+				NativeSetEnabled(value);
+				FEnabled = value;
+			}
+		}
+
+		static void DoTimer(Object state)
+		{
+			(state as TTimer).FOnTimer(state, EventArgs.Empty);
+
+		}
+
+		public static TTimer Create(TComponent AOwner)
+		{
+			return (new TTimer(AOwner));
+		}
+
+		public event TNotifyEvent FOnTimer;
+		public event TNotifyEvent OnTimer
+		{
+			add
+			{
+				FOnTimer += value;
+			}
+			remove
+			{
+				FOnTimer -= value;
+			}
+		}
+
+
+		partial void NativeCreateTimer();
+		partial void NativeSetInterval(int Value);
+		partial void NativeSetEnabled(bool value);
+
+		public TTimer(TComponent AOwner) : base(AOwner)
+		{
+			NativeCreateTimer();
+		}
+	}
+
+	public partial class TCustomPanel : TCustomControl
+	{
+		private TAlignment FAlignment;
+		private TAlignment FVerticalAlignment;
+
+		public TCustomPanel(TComponent AOWner) : base(AOWner)
+		{			
+		
+		}
+	}
+
+	public partial class TPanel : TCustomPanel
+	{
+		public TPanel(TComponent AOWner) : base(AOWner)
+		{
+			
+		}
+
+		public static TPanel Create(TComponent AOwner)
+		{
+			return (new TPanel(AOwner));
 		}
 
 	}

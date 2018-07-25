@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E8A215B-94A8-4C02-98C9-65393F787BEF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Xcl.Gtk</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>Xcl.Gtk.Design</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>__GTK__;DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType></DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>__GTK__;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Mono.Cairo" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Xcl\RTLConsts.Designer.cs">
+      <Link>RTLConsts.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Base.cs">
+      <Link>System.Base.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Classes.cs">
+      <Link>System.Classes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.Generics.Collections.cs">
+      <Link>System.Generics.Collections.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.ImageList.cs">
+      <Link>System.ImageList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.SysUtils.cs">
+      <Link>System.SysUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.UITypes.cs">
+      <Link>System.UITypes.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.cs">
+      <Link>Xcl.Controls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ExtCtrls.cs">
+      <Link>Xcl.ExtCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Forms.cs">
+      <Link>Xcl.Forms.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Graphics.cs">
+      <Link>Xcl.Graphics.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ImgList.cs">
+      <Link>Xcl.ImgList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.StdCtrls.cs">
+      <Link>Xcl.StdCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ComCtrls.cs">
+      <Link>Xcl.ComCtrls.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.ComCtrls.Android.cs">
+      <Link>Xcl.ComCtrls.Android.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.FocusControl.cs">
+      <Link>Xcl.Controls.FocusControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.GraphicControl.cs">
+      <Link>Xcl.Controls.GraphicControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.ImageList.cs">
+      <Link>Xcl.Controls.ImageList.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\Xcl.Controls.Types.cs">
+      <Link>Xcl.Controls.Types.cs</Link>
+    </Compile>
+    <Compile Include="Xcl.ExtCtrls.Gtk.cs" />
+    <Compile Include="Design\IRegisterComponent.cs" />
+    <Compile Include="Design\IdeComponents.cs" />
+    <Compile Include="Xcl.Forms.Gtk.cs" />
+    <Compile Include="Xcl.StdCtrls.Gtk.cs" />
+    <Compile Include="Xcl.Graphics.Gtk.cs" />
+    <Compile Include="System.UITypes.Gtk.cs" />
+    <Compile Include="Design\Xcl.Components.Register.cs" />
+    <Compile Include="Xcl.Forms.Gtk.Design.cs" />
+    <Compile Include="Xcl.StdCtrls.Gtk.Design.cs" />
+    <Compile Include="Xcl.Controls.Design.cs" />
+    <Compile Include="Xcl.Controls.Gtk.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
+  <ItemGroup>
+    <None Include="..\Xcl\RTLConsts.resx">
+      <Link>RTLConsts.resx</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Xcl\fonts\gillsans-light.ttf">
+      <Link>fonts\gillsans-light.ttf</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Xcl\fonts\gillsans.ttf">
+      <Link>fonts\gillsans.ttf</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Xcl\fonts\helvetica.ttf">
+      <Link>fonts\helvetica.ttf</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\image-x-generic.png" />
+  </ItemGroup>
+</Project>

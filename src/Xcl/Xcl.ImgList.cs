@@ -69,9 +69,34 @@ namespace Xcl.ImgList
 		public int Add(TPicture Image)
 		{
 			FImages.Add (Image);
-			return(FImages.Count);
+			return FImages.Count - 1;
 		}
 
+        private int FWidth = 16;
+        public int Width
+        {
+            get
+            {
+                return FWidth;
+            }
+            set
+            {
+                FWidth = value;
+            }
+        }   
+
+        private int FHeight = 16;
+        public int Height
+        {
+            get
+            {
+                return FHeight;
+            }
+            set
+            {
+                FHeight = value;
+            }
+        }
 	}
 }
 

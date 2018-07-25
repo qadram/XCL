@@ -55,6 +55,12 @@ namespace Xcl.Graphics
 
 		partial void NativeLoadFromResource(string ResourceName);
 
+		public void LoadFromFile(string FileName)
+		{
+			NativeLoadFromFile(FileName);
+		}
+
+		partial void NativeLoadFromFile(string FileName);
 	}
 
 	/// <summary>

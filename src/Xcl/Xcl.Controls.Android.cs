@@ -90,8 +90,10 @@ namespace Xcl.Controls
 
 		partial void NativeUpdateBounds()
 		{
-			//TODO: Review the type of parent layout
-			view.LayoutParameters = new AbsoluteLayout.LayoutParams((int)_.Screen.ToPixels(FWidth), (int)_.Screen.ToPixels(FHeight), (int)_.Screen.ToPixels(FLeft), (int)_.Screen.ToPixels(FTop));			
+            var LParams = new RelativeLayout.LayoutParams((int)_.Screen.ToPixels(FWidth), (int)_.Screen.ToPixels(FHeight));
+            LParams.TopMargin = (int)_.Screen.ToPixels(FTop);
+            LParams.LeftMargin = (int)_.Screen.ToPixels(FLeft);
+            view.LayoutParameters = LParams;
 		}
 	}
 
@@ -99,8 +101,8 @@ namespace Xcl.Controls
 
 		partial void NativeSetParent(TControl AControl)
 		{
-			viewgroup.AddView (AControl.view);
-		}
+            viewgroup.AddView (AControl.view);
+   		}
 
 		private bool inside = false;
 		private long lastdown=0;

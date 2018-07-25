@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Base;
 using System.SysUtils;
 using System.Classes;
+using System.Threading;
 using System.UITypes;
 using Xcl.Controls;
 #if __IOS__
@@ -33,7 +34,7 @@ using System.Drawing;
 #endif
 namespace Xcl.ExtCtrls
 {
-	#if __IOS__
+#if __IOS__
 	public partial class TImage:TGraphicControl
 	{
 		public UIImageView imageview;
@@ -69,6 +70,41 @@ namespace Xcl.ExtCtrls
 		}
 
 	}
-	#endif
-}
+
+	public partial class TTimer : TComponent
+	{
+		TimerCallback timerDelegate;
+		Timer timer;
+		partial void NativeCreateTimer()
+		{
+			timerDelegate = new TimerCallback(DoTimer);
+			timer = new Timer(timerDelegate, this, Timeout.Infinite, Timeout.Infinite);
+		}
+
+		partial void NativeSetEnabled(bool value)
+		{
+			if (value)
+				timer.Change(Interval, Interval);
+			else
+				timer.Change(Timeout.Infinite, Timeout.Infinite);
+		}
+
+		partial void NativeSetInterval(int Value)
+		{
+			if (Enabled)
+				timer.Change(Value, Value);
+		}
+	}
+
+	public partial class TPanel: TCustomPanel
+	{
+		private UIView FView;
+		protected override void CreateNativeHandle()
+		{
+			FView = new UIView();
+			Handle = FView;
+		}
+	}
+#endif
+	}
 

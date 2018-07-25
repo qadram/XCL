@@ -97,8 +97,14 @@ namespace Xcl.Graphics
 			Handle = bitmap;
 			NotifyChanged();
 		}
-	}
 
+		partial void NativeLoadFromFile(string FileName)
+		{
+			bitmap = BitmapFactory.DecodeFile(FileName);
+			Handle = bitmap;
+			NotifyChanged();
+		}
+	}
 
 	public partial class TFont:TGraphicsObject
 	{

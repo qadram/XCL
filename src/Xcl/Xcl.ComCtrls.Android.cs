@@ -32,6 +32,8 @@ using Xcl.Forms;
 using Android.Widget;
 using Android.Views;
 using Android.Graphics;
+using Android.Support.V7.Widget;
+using Android.Content;
 
 
 namespace Xcl.ComCtrls
@@ -56,7 +58,7 @@ namespace Xcl.ComCtrls
 			Handle = toolbar;
 		}
 	}
-	/*
+    /*
 	public partial class TToolButton: TComponent
 	{
 		public UIBarButtonItem barbuttonitem;
@@ -102,6 +104,164 @@ namespace Xcl.ComCtrls
 		}
 	}
 */
+
+    public class RecyclerHolder : RecyclerView.ViewHolder
+    {
+        public ImageView imImage;
+        public TextView lbCaption;
+        public TListItem liItem;
+        public TCustomListView lvView;
+
+        public RecyclerHolder(View ItemView) : base(ItemView)
+        {
+            //imImage = new ImageView(TApplication.context);
+            lbCaption = (TextView)ItemView.FindViewById(105);
+            imImage = (ImageView)ItemView.FindViewById(106);
+        }
+    }
+
+    public class RecyclerAdapter : RecyclerView.Adapter
+    {
+        private TCustomListView mOwner;
+
+        private View CreateCardView(Context AContext)
+        {
+            CardView LCard = new CardView(AContext);
+
+            // Set the CardView layoutParams
+            LinearLayout.LayoutParams LParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                        
+            LCard.LayoutParameters = LParams;
+
+			// Set CardView corner radius
+            LCard.Radius = 9;
+
+			// Set cardView content padding
+            LCard.SetContentPadding(15, 15, 15, 15);
+
+			// Set a background color for CardView
+			LCard.SetCardBackgroundColor(Color.ParseColor("#FFC6D6C3"));
+
+            // Set the CardView maximum elevation
+            LCard.MaxCardElevation = 15;
+
+			// Set CardView elevation
+			LCard.CardElevation = 9;
+
+            LinearLayout LItemLayout = new LinearLayout(AContext);
+            LItemLayout.Orientation = Orientation.Vertical;
+            LCard.AddView(LItemLayout);
+
+            // Initialize a new TextView to put in CardView
+            TextView tv = new TextView(AContext);
+            //tv.LayoutParameters = LParams;
+            tv.Left = 10;
+            tv.Top = 1;
+            tv.SetWidth(130);
+            tv.SetHeight(25);
+			tv.Text = "CardView\nProgrammatically";
+			//tv.SetTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
+            tv.SetTextColor(Color.Red);
+            tv.Id = 105;
+            tv.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent); 
+            tv.LayoutParameters.Height = 30;
+            tv.LayoutParameters.Width = 130;
+
+            ImageView im = new ImageView(AContext);
+            im.LayoutParameters = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+            im.LayoutParameters.Height = 160;
+            im.LayoutParameters.Width = 130;
+            im.Id = 106;
+
+			// Put the TextView in CardView
+			//LCard.AddView(tv);
+            LItemLayout.AddView(im);
+            LItemLayout.AddView(tv);
+
+            return LCard;
+        }
+
+        public override int ItemCount => mOwner.Items.Count;
+
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            RecyclerHolder LHolder = holder as RecyclerHolder;
+
+            LHolder.lbCaption.Text = mOwner.Items[position].Caption;
+            LHolder.imImage.SetImageBitmap(mOwner.LargeImages.Items[mOwner.Items[position].ImageIndex].bitmap);
+
+            LHolder.ItemView.SetOnClickListener(new ListViewClickListener());
+            LHolder.ItemView.Tag = LHolder;
+            LHolder.liItem = mOwner.Items[position];
+        }
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View LView = CreateCardView(parent.Context);
+            RecyclerHolder LHolder = new RecyclerHolder(LView);
+            LHolder.lvView = mOwner;
+
+            return LHolder;
+        }
+
+        public RecyclerAdapter(TCustomListView Owner)
+        {
+             mOwner = Owner;
+        }
+    }
+
+    internal class ListViewClickListener: Java.Lang.Object, View.IOnClickListener
+    {
+        void View.IOnClickListener.OnClick(View aView)
+        {
+            var LHolder = aView.Tag as RecyclerHolder;
+            var LItem = LHolder.liItem; 
+            LHolder.lvView.DoSelectItem(LItem, true);
+        }
+    }
+
+    public partial class TCustomListView : TCustomMultiSelectListControl
+	{
+        public RecyclerView mRecycler;
+        private GridLayoutManager mLayout;
+        private RecyclerAdapter mAdapter;
+
+        private RecyclerAdapter mColumnsAdapter;
+
+		protected override void CreateNativeHandle()
+		{
+            //Creates the native handle 
+            mRecycler = new RecyclerView(TApplication.context);
+
+            if (this.ViewStyle != TViewStyle.vsIcon && this.ViewStyle != TViewStyle.vsSmallIcon)
+			{
+                mLayout = new GridLayoutManager(TApplication.context, this.Columns.Count);
+                mRecycler.SetLayoutManager(mLayout);
+                mColumnsAdapter = new RecyclerAdapter(this);
+                mRecycler.SetAdapter(mColumnsAdapter);
+			}
+			else
+			{				
+                mLayout = new GridLayoutManager(TApplication.context, 4 /*2*/);
+				mRecycler.SetLayoutManager(mLayout);
+				mAdapter = new RecyclerAdapter(this);
+				mRecycler.SetAdapter(mAdapter);
+			}
+            NativeChanged();
+            Handle = mRecycler;
+		}
+
+		partial void NativeChangeViewStyle()
+		{
+			CreateNativeHandle();
+			ReloadData();
+		}
+
+		partial void ReloadData()
+		{            
+            
+		}
+	}
 
 }
 #endif

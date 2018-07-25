@@ -17,6 +17,9 @@ namespace MenuForm
 		public TButton btnEditSamples;
 		public TButton btnTouchSamples;
 		public TButton btnAlignSamples;
+		public TButton btnListViewSamples;
+		public TButton btnRestSamples;
+		public TButton btnPanelSamples;
 
 		public TMenuForm (TComponent AOwner):base(AOwner)
 		{
@@ -45,6 +48,9 @@ namespace MenuForm
 			CreateMenuItem ("Touch Test", btnTouchSamplesClick);
     		CreateMenuItem ("Align Test", btnAlignSamplesClick);
 			CreateMenuItem ("Anchor Test", btnAnchorSamplesClick);
+			CreateMenuItem ("ListView Test", btnListViewClick);
+			CreateMenuItem("Rest Test", btnRestClick);
+			CreateMenuItem("Panel Test", btnPanelSamplesClick);
 		}
 
 		void btnAnchorSamplesClick (object sender, EventArgs e)
@@ -83,6 +89,22 @@ namespace MenuForm
 		{
 			App.ButtonSamples.Show ();
 			
+		}
+
+		void btnListViewClick(object sender, EventArgs e)
+		{
+			App.ListViewSamples.Show();
+
+		}
+
+		void btnRestClick(object sender, EventArgs e)
+		{
+			App.RestSamples.Show();
+		}
+
+		void btnPanelSamplesClick(object sender, EventArgs e)
+		{
+			App.PanelSamples.Show();
 		}
 	}
 }

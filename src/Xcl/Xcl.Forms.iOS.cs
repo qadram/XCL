@@ -51,6 +51,7 @@ namespace Xcl.Forms
 			TApplication.LastViewController = _.Application.MainForm.handle;
 			Window.RootViewController = TApplication.LastViewController;
 			Window.MakeKeyAndVisible();
+			_.Application.MainForm.DoShow();
 		}
 	}
 
@@ -85,6 +86,7 @@ namespace Xcl.Forms
 			base.ViewWillTransitionToSize (toSize, coordinator);
 			Form.SetBounds(0,0,(float)toSize.Width, (float)toSize.Height);
 			Form.Realign();
+            Form.DoResize();
 		}
 
 		public override bool PrefersStatusBarHidden()
@@ -100,8 +102,9 @@ namespace Xcl.Forms
 		protected override void CreateNativeHandle()
 		{
 			handle = new FormViewController ();
-			Handle = handle.View;
 			handle.Form = this;
+			Handle = handle.View;
+
 		}
 
 
@@ -143,6 +146,7 @@ namespace Xcl.Forms
 			
 			ParentViewController.ShowViewController (handle, null);
 			TApplication.LastViewController = handle;
+			DoShow();
 		}
 	}
 	#endif

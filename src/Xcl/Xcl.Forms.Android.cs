@@ -56,6 +56,16 @@ namespace Xcl.Forms
 			TApplication.context = TApplication.MainActivity.BaseContext;
 		}
 
+        static partial void NativeAfterCreateForm(object Form)
+        {
+            //It forces a show call, but the activity will be finished, so the form won't be actually shown
+            //The goal is to force a loaded() call, so that way we have a form that we can manipulate after being created
+            //TODO: In any case, it's bot exactly right away after being created, but if it's created on the project, it will work as expected
+            //TODO: So it's still pending how to make work to call a TForm.create, and use the objects right away
+           (Form as TCustomForm).shouldfinish = true;
+           (Form as TCustomForm).Show();
+        }
+
 		partial void NativeRun()
 		{
 			MainForm.Show();
@@ -119,6 +129,7 @@ namespace Xcl.Forms
 			var h = newConfig.ScreenHeightDp;
 			Form.SetBounds(0,0,w,h);
 			Form.Realign();
+            Form.DoResize();
 		}
 
 		protected override void OnCreate(Bundle bundle)
@@ -140,10 +151,15 @@ namespace Xcl.Forms
 				(View.Parent as ViewGroup).RemoveView (View);
 				this.SetContentView (View);
 			} else {
-				View = new AbsoluteLayout (this);
+                View = new RelativeLayout (this);
 				this.SetContentView (View);
 				Form.Loaded ();
 			}
+            if (Form.shouldfinish)
+            {
+                Finish();
+                Form.shouldfinish = false;
+            }
 		}
 		
 	}
@@ -151,6 +167,9 @@ namespace Xcl.Forms
 	public partial class TCustomForm: TScrollingControl
 	{
 		public TFormActivity handle;
+        //Instructs the activity to be finished just right after being created
+        //Used to enable the form to be created properly in the asynchronous way Android requires
+        public Boolean shouldfinish = false;
 
 		protected override void CreateNativeHandle()
 		{
@@ -178,7 +197,7 @@ namespace Xcl.Forms
 	{
 		public override void Close()
 		{
-			handle.Finish ();
+            if (handle!=null) handle.Finish ();
 		}
 
 		public override void Show()
@@ -187,7 +206,6 @@ namespace Xcl.Forms
 			Intent intent = new Intent (TApplication.context, typeof(TFormActivity));
 			TApplication.MainActivity.StartActivity (intent);
 			TApplication.MainActivity.Finish ();
-
 		}	
 	}
 	#endif

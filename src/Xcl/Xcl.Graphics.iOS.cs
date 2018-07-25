@@ -70,6 +70,13 @@ namespace Xcl.Graphics
 			Handle = handle;
 			NotifyChanged();
 		}
+
+		partial void NativeLoadFromFile(string FileName)
+		{
+			handle = UIImage.FromFile(FileName);		
+			Handle = handle;
+            NotifyChanged();
+		}
 	}
 
 	public partial class TFont:TGraphicsObject

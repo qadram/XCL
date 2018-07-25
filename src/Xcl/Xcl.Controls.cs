@@ -907,4 +907,49 @@ namespace Xcl.Controls
 		}
 
 	}
+
+	public partial class TWinControl : TFocusControl
+	{
+		public TWinControl(TComponent AOwner):base(AOwner)
+		{
+		}
+	}
+
+	public partial class TCustomControl : TWinControl
+	{
+		// private TCanvas FCanvas;
+
+		public TCustomControl(TComponent AOWner) : base(AOWner)
+		{
+		}
+	}
+
+	public abstract partial class TCustomListControl : TWinControl
+	{
+		protected abstract int GetItemIndex();
+		protected abstract void SetItemIndex(int Index);
+
+		public int ItemIndex
+		{
+			get
+			{
+				return (GetItemIndex());
+			}
+			set
+			{
+				SetItemIndex(value);
+			}
+		}
+
+		public TCustomListControl(TComponent AOwner):base(AOwner)
+		{
+		}		
+	}
+
+	public abstract partial class TCustomMultiSelectListControl : TCustomListControl
+	{
+		public TCustomMultiSelectListControl(TComponent AOwner):base(AOwner)
+		{
+		}		
+	}
 }

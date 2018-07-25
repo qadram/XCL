@@ -29,6 +29,7 @@ using System.UITypes;
 using Xcl.Controls;
 using Xcl.Forms;
 using Xcl.Graphics;
+using System.Threading;
 #if __ANDROID__
 using Android.Graphics;
 using Android.Widget;
@@ -38,7 +39,7 @@ using Android.Graphics.Drawables;
 #endif
 namespace Xcl.ExtCtrls
 {
-	#if __ANDROID__
+#if __ANDROID__
 	public partial class TImage:TGraphicControl
 	{
 		public ImageView handle;
@@ -114,7 +115,43 @@ namespace Xcl.ExtCtrls
 
 
 	}
-	#endif
+
+	public partial class TTimer : TComponent
+	{
+		TimerCallback timerDelegate;
+		Timer timer;
+		partial void NativeCreateTimer()
+		{
+			timerDelegate = new TimerCallback(DoTimer);
+			timer = new Timer(timerDelegate, this, Timeout.Infinite, Timeout.Infinite);
+		}
+
+		partial void NativeSetEnabled(bool value)
+		{
+			if (value)
+				timer.Change(Interval, Interval);
+			else
+				timer.Change(Timeout.Infinite, Timeout.Infinite);
+		}
+
+		partial void NativeSetInterval(int Value)
+		{
+			if (Enabled)
+				timer.Change(Value, Value);
+
+		}
+	}
+
+	public partial class TPanel : TCustomPanel
+	{
+		private RelativeLayout FView;
+		protected override void CreateNativeHandle()
+		{
+			FView = new RelativeLayout(TApplication.context);
+			Handle = FView;
+		}
+	}
+#endif
 }
 
 

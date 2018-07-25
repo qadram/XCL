@@ -33,39 +33,58 @@ namespace System.Base
 {
 	using Xcl.Forms;
 
-	public partial class _
-	{
-		private static TApplication FApplication=null;
+    public partial class _
+    {
+        private static TApplication FApplication = null;
 
-		private static TScreen FScreen=null;
+        private static TScreen FScreen = null;
 
-		/// <summary>
-		/// The global application variable
-		/// </summary>
-		/// <value>The application.</value>
-		public static TApplication Application
-		{
-			get{
-				if (FApplication == null)
-					FApplication = new TApplication (null);
-				
-				return(FApplication);
-			}
-		}
+        /// <summary>
+        /// The global application variable
+        /// </summary>
+        /// <value>The application.</value>
+        public static TApplication Application
+        {
+            get
+            {
+                if (FApplication == null)
+                    FApplication = new TApplication(null);
 
-		/// <summary>
-		/// The global screen variable
-		/// </summary>
-		/// <value>The screen.</value>
-		public static TScreen Screen
-		{
-			get{
-				if (FScreen == null)
-					FScreen = new TScreen (null);
+                return (FApplication);
+            }
+        }
 
-				return(FScreen);
-			}
-		}
+        /// <summary>
+        /// The global screen variable
+        /// </summary>
+        /// <value>The screen.</value>
+        public static TScreen Screen
+        {
+            get
+            {
+                if (FScreen == null)
+                    FScreen = new TScreen(null);
+
+                return (FScreen);
+            }
+        }
+
+        private static TCustomForm GetRealParentForm(TControl Control, bool TopForm = true)
+        {
+            while ((TopForm || !(Control is TCustomForm)) && (Control.Parent != null))
+                   Control = Control.Parent;
+            if (Control is TCustomForm)
+                return (TCustomForm)Control;
+            else
+                return null;
+        }
+
+        public static TCustomForm GetParentForm(TControl Control, bool TopForm = true)
+        {
+            if (Control.ComponentState.In(TComponentState.csDesigning))
+                TopForm = false;
+            return GetRealParentForm(Control, TopForm);
+        }
 	}
 }
 namespace Xcl.Forms
@@ -78,15 +97,21 @@ namespace Xcl.Forms
 		public TCustomForm MainForm = null;
 		public static Assembly MainAssembly = null;
 
+
+        static partial void NativeAfterCreateForm(object Form);
+
 		public static void CreateForm<T>(ref T Form)
 		{
 			//TODO: Find out how to get the right call stack when exceptions happen on Loaded()
 			Form = (T)Activator.CreateInstance (typeof(T), _.Application);
 
-			//First form created is considered the main form
-			if (_.Application.MainForm == null) {
-				_.Application.MainForm = (Form as TCustomForm);
-			}
+            //First form created is considered the main form
+            if (_.Application.MainForm == null)
+            {
+                _.Application.MainForm = (Form as TCustomForm);
+            }
+            //Allow each platform to perform a process with the newly created form
+            NativeAfterCreateForm(Form);
 		}
 
 
@@ -187,6 +212,23 @@ namespace Xcl.Forms
 		{
 		}
 
+		public virtual void DoShow()
+		{
+			if (OnShow != null)
+			{
+				OnShow(self, EventArgs.Empty);
+			}
+		}
+
+		public event TNotifyEvent OnShow;
+
+        public virtual void DoResize()
+        {
+            if (OnResize != null)
+                OnResize(self, EventArgs.Empty);
+        }
+
+        public event TNotifyEvent OnResize; 
 	}
 
 	/// <summary>

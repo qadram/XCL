@@ -57,7 +57,7 @@ namespace EntryForm
 			btnSignup.Caption = "Sign Up";
 
 			lbSlogan = TLabel.Create (self);
-			lbSlogan.Caption = "CAR RENTAL\nTHE WAY IT SHOULD BE";
+			lbSlogan.Caption = "CAR RENTAL\nTHE WAY IT SHOULD BE!";
 			lbSlogan.Font.Size = 20;
 			lbSlogan.Font.Name = "GillSans";
 			lbSlogan.Font.Color = TColor.clWhite;

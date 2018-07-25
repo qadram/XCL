@@ -133,4 +133,7 @@ namespace System.SysUtils
 		}
 	}
 
+	public class TEncoding : TObject
+	{
+	}
 }

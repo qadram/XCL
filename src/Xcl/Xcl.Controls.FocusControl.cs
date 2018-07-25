@@ -72,7 +72,7 @@ namespace Xcl.Controls
 
 		public TRect GetClientRect()
 		{
-			return(new TRect (Left, Top, Left+Width, Top+Height));
+			return(new TRect (0, 0, Left+Width, Top+Height));
 		}
 
 		public TRect ClientRect
@@ -246,9 +246,9 @@ namespace Xcl.Controls
 				NewHeight = AControl.Margins.ControlHeight;
 			}
 
-			NewLeft = Rect.Left;
+            NewLeft = Rect.Left;
 
-			NewTop = Rect.Top;
+            NewTop = Rect.Top;
 
 			switch (AAlign) {
 			case TAlign.alTop:

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,6 +10,11 @@
     <RootNamespace>Xcl.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>Xcl.iOS</AssemblyName>
+    <PackageId>RadX.Xcl.iOS</PackageId>
+    <PackageVersion>0.1</PackageVersion>
+    <Authors>RadX Team</Authors>
+    <Description>Xcl for iOS</Description>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,12 +141,22 @@
     <Compile Include="..\Xcl\Xcl.Controls.Types.cs">
       <Link>Xcl.Controls.Types.cs</Link>
     </Compile>
+    <Compile Include="..\Xcl\REST.Client.cs">
+      <Link>REST.Client.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\System.JSON.cs">
+      <Link>System.JSON.cs</Link>
+    </Compile>
+    <Compile Include="..\Xcl\REST.Types.cs">
+      <Link>REST.Types.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <None Include="..\Xcl\RTLConsts.resx">
       <Link>RTLConsts.resx</Link>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\Xcl\fonts\gillsans-light.ttf">
@@ -153,4 +169,5 @@
       <Link>fonts\helvetica.ttf</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.1\build\NuGet.Build.Packaging.targets')" />
 </Project>

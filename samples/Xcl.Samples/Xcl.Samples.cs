@@ -7,6 +7,9 @@ using EditSamples;
 using TouchSamples;
 using AlignSamples;
 using AnchorSamples;
+using ListViewSamples;
+using RESTSamples;
+using PanelSamples;
 
 namespace Xcl.Samples
 {
@@ -20,6 +23,9 @@ namespace Xcl.Samples
 		public static TTouchSamples TouchSamples;
 		public static TAlignSamples AlignSamples;
 		public static TAnchorSamples AnchorSamples;
+		public static TListViewSamples ListViewSamples;
+		public static TRESTSamples RestSamples;
+		public static TPanelSamples PanelSamples;
 
 		public static void Run(object param)
 		{
@@ -32,7 +38,13 @@ namespace Xcl.Samples
 			TApplication.CreateForm<TTouchSamples> (ref TouchSamples);
 			TApplication.CreateForm<TAlignSamples> (ref AlignSamples);
 			TApplication.CreateForm<TAnchorSamples> (ref AnchorSamples);
-			TApplication.Run ();
+
+            //Commented, as it's not working properly, at least on this revision, will check after update
+			//TApplication.CreateForm<TListViewSamples> (ref ListViewSamples);
+
+			TApplication.CreateForm<TRESTSamples>(ref RestSamples);
+			TApplication.CreateForm<TPanelSamples>(ref PanelSamples);
+            TApplication.Run ();
 		}
 	}
 }

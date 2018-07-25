@@ -27,6 +27,7 @@ using System.SysUtils;
 using System.Classes;
 using System.UITypes;
 using Xcl.Controls;
+using Xcl.ImgList;
 
 namespace Xcl.StdCtrls
 {
@@ -35,10 +36,73 @@ namespace Xcl.StdCtrls
 	/// </summary>
 	public partial class TButtonControl: TFocusControl
 	{
+		private Boolean FClicksDisabled;
+		protected Boolean ClicksDisabled
+		{
+			get
+			{
+				return FClicksDisabled;
+			}
+			set
+			{
+				FClicksDisabled = value;
+			}
+		}
+
+		private Boolean FWordWrap;
+		protected Boolean WordWrap
+		{
+			get
+			{
+				return (FWordWrap);
+			}
+			set
+			{
+				if (FWordWrap != value)
+				{
+					FWordWrap = value;
+					// TODO repaint
+				}
+			}
+		}
+
+		protected virtual Boolean GetChecked()
+		{
+			return(false);
+		}
+		protected virtual void SetChecked(Boolean Value)
+		{
+		}
+
+		protected Boolean Checked
+		{
+			get
+			{
+				return (GetChecked());
+			}
+			set
+			{
+				SetChecked(value);
+			}
+		}
+/*
+		protected override void ActionChange(TObject Sender, Boolean CheckDefaults)
+		{
+		}
+
+		protected override TControlActionLinkClass GetActionLinkClass()
+		{
+		}
+
+		protected override void CreateParams(var TCreateParams CreateParams)
+		{
+		}
+*/		
+
 		public TButtonControl(TComponent AOwner):base(AOwner)
 		{
-		}	
-
+			
+		}
 	}
 
 	/// <summary>
@@ -54,6 +118,50 @@ namespace Xcl.StdCtrls
 			FHeight = 36;
 			UpdateBounds ();
 		}	
+
+		private TCustomImageList FImages = null;
+
+		/// <summary>
+		/// Gets or sets the images property, to be used when animating
+		/// </summary>
+		/// <value>The images.</value>
+		public TCustomImageList Images
+		{
+			get{
+				return(FImages);
+			}
+			set{
+				if (value != FImages) {
+					if (FImages != null) {
+						//FImages.UnRegisterChanges (FImageChangeLink);
+					}
+					FImages = value;
+					if (FImages != null) {
+						//Images.RegisterChanges (FImageChangeLink);
+						Images.FreeNotification (this);
+					}
+					UpdateImageList();
+				}
+			}
+		}
+
+		protected virtual void UpdateImageList()
+		{
+		}
+
+		private int FImageIndex=-1;
+		public int ImageIndex
+		{
+			get {
+				return(FImageIndex);
+			}
+			set{
+				FImageIndex = value;
+
+			}
+			
+		}
+
 
 	}
 
@@ -99,9 +207,9 @@ namespace Xcl.StdCtrls
 
 		#endregion
 
-	/// <summary>
-	/// Edit control
-	/// </summary>
+		/// <summary>
+		/// Edit control
+		/// </summary>
 		public TCustomEdit(TComponent AOwner):base(AOwner)
 		{
 			FPlaceHolderColor = new TColor (TColors.clSilver);			
@@ -184,13 +292,7 @@ namespace Xcl.StdCtrls
 		}
 	}
 
-	/// <summary>
-	/// Alignment for the label
-	/// </summary>
-	public enum TAlignment {taCenter, taLeftJustify, taRightJustify};
-
 	public enum TTextLayout {tlTop, tlCenter, tlBottom};
-
 
 	/// <summary>
 	/// Label control
@@ -257,7 +359,168 @@ namespace Xcl.StdCtrls
 		{
 			return(new TLabel (AOwner));
 		}
-
-
 	}
+
+    public abstract class TCustomComboBoxStrings: TStringList
+    {
+        protected TStringList FData;
+        protected TCustomComboBox FComboBox;
+
+        public TCustomComboBoxStrings(): base()
+        {
+            FData = new TStringList();    
+        }
+
+        public TCustomComboBox ComboBox
+        {
+            get
+            {
+                return FComboBox;
+            }
+            set
+            {
+                FComboBox = value;
+            }
+        }
+
+        protected override int GetCount()
+        {
+            return FData.Count;
+        }
+
+        protected override string Get(int Index)
+        {
+            return FData[Index];
+        }
+
+        public override TObject GetObject(int Index)
+        {
+            return FData.GetObject(Index);
+        }
+
+        public override void PutObject(int Index, TObject AObject)
+        {
+            FData.PutObject(Index, AObject);
+        }
+
+        protected override void SetUpdateState(bool Updating)
+        {
+            base.SetUpdateState(Updating);
+        }
+
+        public override void Clear()
+        {
+            FComboBox.NotifyClear();
+            FData.Clear();
+        }
+
+        public override void Delete(int Index)
+        {
+            FComboBox.NotifyDelete(Index);
+            FData.Delete(Index);
+        }
+
+        public override int IndexOf(string S)
+        {
+            return FData.IndexOf(S);
+        }
+    }
+
+    public class TComboBoxStrings: TCustomComboBoxStrings
+    {
+        public override int Add(string S)
+        {
+            ComboBox.NotifyAdd(S);
+            return FData.Add(S);
+        }
+
+        public override void Insert(int Index, string S)
+        {
+            ComboBox.NotifyInsert(Index, S);
+            FData.Insert(Index, S);
+        }       
+    }
+
+    public partial class TCustomCombo: TCustomListControl
+    {
+        public TCustomCombo(TComponent AOwner): base(AOwner)
+        {
+            
+        }
+
+        protected TStrings FItems;
+
+        protected override int GetItemIndex()
+        {
+            int LIndex = 0;
+            NativeGetItemIndex(ref LIndex);
+            return LIndex;
+        }
+
+        protected override void SetItemIndex(int Index)
+        {
+            NativeSetItemIndex(Index);
+        }
+
+        public TStrings Items
+        {
+            get
+            {
+                return FItems;
+            }
+            set
+            {
+                FItems = value;
+            }
+        }
+
+        partial void NativeSetItemIndex(int Index);
+
+        partial void NativeGetItemIndex(ref int Index);
+    }
+
+    public partial class TCustomComboBox: TCustomCombo
+    {
+        public TCustomComboBox(TComponent AOwner): base(AOwner)
+        {
+            FItems = new TComboBoxStrings();
+            (FItems as TCustomComboBoxStrings).ComboBox = this;
+        }
+
+        public void NotifyAdd(String NewItem)
+        {
+            NativeAdd(NewItem);
+        }
+
+        public void NotifyInsert(int Index, String NewItem)
+        {
+            NativeInsert(Index, NewItem);    
+        }
+
+        public void NotifyClear()
+        {
+            NativeClear();
+        }
+
+        public void NotifyDelete(int Index)
+        {
+            NativeDelete(Index);
+        }
+
+        partial void NativeAdd(String NewItem);
+
+        partial void NativeInsert(int Pos, String NewItem);
+
+        partial void NativeClear();
+
+        partial void NativeDelete(int Index);
+    }
+
+    public partial class TComboBox: TCustomComboBox
+    {
+        public TComboBox(TComponent AOwner): base(AOwner)
+        {
+
+        }
+    }
 }
