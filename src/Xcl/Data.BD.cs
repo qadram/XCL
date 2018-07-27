@@ -45,8 +45,6 @@ namespace Data.DB
 
         }
 
-        //protected virtual RegisterClient(Client: TObject; Event: TConnectChangeEvent = nil); virtual;
-
         protected virtual void SetConnected(bool Value)
         {
 
@@ -56,8 +54,6 @@ namespace Data.DB
         {
 
         }
-
-        //procedure UnRegisterClient(Client: TObject); virtual;
 
         public TCustomConnection(TComponent AOwner) : base(AOwner)
         {
@@ -77,9 +73,6 @@ namespace Data.DB
         }
 
         public bool Connected { get => GetConnected(); set => SetConnected(value); }
-
-        //property DataSets[Index: Integer]: TDataSet read GetDataSet;
-        //property DataSetCount: Integer read GetDataSetCount;
 
         public bool LoginPrompt { get => FLoginPrompt; set => FLoginPrompt = value; }
 

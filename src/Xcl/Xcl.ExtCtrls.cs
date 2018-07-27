@@ -95,30 +95,6 @@ namespace Xcl.ExtCtrls
 	}
 
 
-	//static void CheckStatus(Object state)
-	//{
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("Logged!!!!!!!!!!:" + TFacebook.IsUserLogged);
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//	Console.WriteLine("");
-	//}
-
-	//public override void Loaded()
-	//{
-	//	// Create the delegate that invokes methods for the timer.
-	//	TimerCallback timerDelegate = new TimerCallback(CheckStatus);
-
-	//	// Create a timer that waits one second, then invokes every second.
-	//	Timer timer = new Timer(timerDelegate, null, 1000, 1000);
-
 	public partial class TTimer : TComponent
 	{
 		private int FInterval = 1000;

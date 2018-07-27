@@ -431,10 +431,6 @@ namespace REST
 		{
 		}
 
-		//public void AddBody(<T: class, constructor>(AObject: T)
-
-		//public void AddBody(AObject: TJsonObject)
-
 		//public void AddBody(TStream ABodyContent, TRestContentType AContentType = TRestContentType.ctNone)
 
 		public void ClearBody()

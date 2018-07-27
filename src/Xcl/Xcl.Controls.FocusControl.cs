@@ -142,9 +142,6 @@ namespace Xcl.Controls
 				if (Controls [i].Align != TAlign.alNone) {
 					return(true);
 				}
-				//TODO: Anchors
-				//if (Controls[I].Align <> alNone) or
-				//	(Controls[I].Anchors <> [akLeft, akTop]) then Exit;
 			}
 			return(false);
 		}

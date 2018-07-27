@@ -362,17 +362,6 @@ namespace System.Classes
         {
         }
 
-        /*{ Design-time editor support
-		}
-		function GetAttrCount: Integer; dynamic;
-    	function GetAttr(Index: Integer): string; dynamic;
-    	function GetItemAttr(Index, ItemIndex: Integer): string; dynamic;
-    	*/
-
-        /*protected void Changed
-		{
-		}
-		*/
         protected TCollectionItem GetItem(int Index)
         {
             return FItems[Index];
@@ -645,8 +634,6 @@ namespace System.Classes
             return ""; // TODO
         }
 
-        //protected override void DefineProperties(TFIler Filer);
-
         protected void Error(string Msg, int Data)
         {
         }
@@ -761,8 +748,6 @@ namespace System.Classes
             BeginUpdate();
             try
             {
-                //for (int I = 0; I < Strings.Count; I++)
-                //AddObject(Strings.[I], Strings[I].Objects[I]);
             }
             finally
             {
@@ -798,7 +783,6 @@ namespace System.Classes
         }
 
         //public TStringsEnumerator GetEnumerator()
-        //function GetText: PChar; virtual;
 
         public virtual int IndexOf(string S)
         {
@@ -875,7 +859,6 @@ namespace System.Classes
 
         //pubic virtual void SaveToStream(TStream Stream)
         //public virtual void SaveToStream(TStream Stream; TEncoding Encoding)
-        //public virtual void SetText(Text: PChar)
         //public void TArray<string> ToStringArray()
         //public TArray<TObject> function ToObjectArray()
 
@@ -975,9 +958,6 @@ namespace System.Classes
             }
         }
 
-        //public property Names[Index: Integer]: string read GetName;
-        //property KeyNames[Index: Integer]: string read GetKeyName;
-        //property Objects[Index: Integer]: TObject read GetObject write PutObject;
         public Char QuoteChar
         {
             get
@@ -989,8 +969,6 @@ namespace System.Classes
                 FQuoteChar = value;
             }
         }
-        //property Values[const Name: string]: string read GetValue write SetValue;
-        //property ValueFromIndex[Index: Integer]: string read GetValueFromIndex write SetValueFromIndex;
         public Char NameValueSeparator
         {
             get
@@ -1014,7 +992,7 @@ namespace System.Classes
                 SetStrictDelimiter(value);
             }
         }
-        //property Strings[Index: Integer]: string read Get write Put; default;
+
         public string Text
         {
             get
@@ -1027,7 +1005,6 @@ namespace System.Classes
             }
         }
 
-        //property StringsAdapter: IStringsAdapter read FAdapter write SetStringsAdapter;
         public Boolean WriteBOM
         {
             get

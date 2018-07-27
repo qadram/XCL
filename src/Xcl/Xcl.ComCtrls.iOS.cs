@@ -141,13 +141,6 @@ namespace Xcl.ComCtrls
 
 		private int IndexPathToNItem(NSIndexPath AIndexPath)
 		{
-			/*if (FOwner.uiLayout.ScrollDirection == UICollectionViewScrollDirection.Horizontal)
-			{
-				return AIndexPath.
-			}
-			else
-			{
-			}*/
 			return 0;
 		}
 
